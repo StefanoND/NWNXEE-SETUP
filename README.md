@@ -1,7 +1,5 @@
 # NWNXEE-SETUP
-Thanks to mtijanic: https://github.com/mtijanic
-
-Thanks to orth: https://github.com/plenarius
+Thanks to mtijanic, orth, daz, Urothis, niv, clippy and all NWN/NWNX community
 
 Almost all content are modified/updated version of their guides
 
