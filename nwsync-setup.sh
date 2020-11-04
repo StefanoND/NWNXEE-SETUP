@@ -73,14 +73,15 @@ unzip nwsync_gui-linux.zip -d .
 #
 # Download the nwsync-update.sh and place it in your home folder
 # Make it usable
-chmod +x nwsync-update.sh
+chmod +x nwsync-*.sh
 #
 # Edit the "PATH=~/nwsync" if necessary
 # Go back to your home folder
 cd ~
 #
-# Run ./nwsync-update.sh
+# Run ./nwsync-update.sh or nwsync_GUI_update.sh if you want the GUI one
 sudo ./nwsync-update.sh
+sudo ./nwsync-GUI-update.sh
 # 
 # Click on "Choose Source" and select your module
 # Click on "Choose Destination" and select "nwsyncdata" inside your nwsync folder
