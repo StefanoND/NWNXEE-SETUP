@@ -51,6 +51,7 @@ mkdir /var/www/nwsync
 mkdir /var/www/nwsyc/nwsyncdata
 #
 # Download nwsync file in here and place it in /etc/nginx/sites-available and make a shortcut of it on sites-enabled
+# Open it and look for "server_name web.site.address;" change "web.site.address" to your own
 ln -s /etc/nginx/sites-available/nwsync /etc/nginx/sites-enabled/
 #
 # Make directory for nwsync and open it
