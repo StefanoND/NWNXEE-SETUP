@@ -43,6 +43,8 @@ Instructions on how to setup InfluxDB and Grafana for NWNX_PROFILER:
 
 - influxdb-setup.sh (This is not a runnable file)
 
+Files for Dashboards/Data Source creation
+
 | File Name               | Function                                |
 | ----------------------- | --------------------------------------- |
 | Activity.json           | File for Profiling Player's Activities  |
