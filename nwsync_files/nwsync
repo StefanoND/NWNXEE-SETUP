@@ -2,7 +2,7 @@ server {
        listen 80;
        listen [::]:80;
 
-       server_name wosee.ddns.net;
+       server_name web.site.address;
 
        root /var/www/nwsync;
        index index.html;
