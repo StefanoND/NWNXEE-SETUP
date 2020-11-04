@@ -1,5 +1,5 @@
 # NWNXEE-SETUP
-Thanks to mtijanic, orth, daz, Urothis, niv, clippy and all NWN/NWNX community
+Thanks to mtijanic, orth, daz, Urothis, niv and all NWN/NWNX community
 
 Almost all content are modified/updated version of their guides
 
@@ -8,6 +8,8 @@ Almost all content are modified/updated version of their guides
 Instructions on how to setup a NWNX Server:
 
 - nwnx-setup.sh (This is not a runnable file)
+
+Original Guide: https://github.com/mtijanic/nwn-misc/blob/master/nwnx-server-setup/nwnx-setup.sh
 
 Files to maintain the NWNX Server:
 
@@ -40,6 +42,8 @@ Files to use for setup/update nwsync files
 Instructions on how to setup InfluxDB and Grafana for NWNX_PROFILER:
 
 - influxdb-setup.sh (This is not a runnable file)
+
+Original Guide: https://gist.github.com/plenarius/8555685b71b42327f899c12fff960e89
 
 Files for Dashboards/Data Source creation
 
