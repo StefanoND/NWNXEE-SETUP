@@ -56,11 +56,14 @@ sudo apt update -y && sudo apt upgrade -y
 # Install tools needed to build NWNX
 sudo apt install g++-7 g++-7-multilib gcc-7 gcc-7-multilib cmake git make -y
 # Install stuff needed to build/run/use MySQL
-sudo apt install mysql-server  libmysqlclient20 libmysqlclient-dev -y
+sudo apt install mysql-server  libmysqlclient21 libmysqlclient-dev -y
 # Install SSL dependency for Webhook
 sudo apt install libssl1.1 -y && sudo apt install libssl-dev -y
 # Install this required lib
-sudo apt install libsndio6.1
+sudo apt install libsndio7.0 libsndio-dev -y
+#
+# Install UnZip just in case you don't have it
+sudo apt install unzip
 #
 # Download and build NWNX
 #
@@ -134,6 +137,17 @@ mysql> FLUSH PRIVILEGES;
 # Create a database for the module to use, typically named same as module, but can be anything.
 mysql> CREATE DATABASE mymodulename;
 mysql> exit;
+#
+#############################################################################################################################################
+##### THIS PART IS NOT NEEDED IF YOU HAVE A DESKTOP/GUI INSTALLED                                                                       #####
+#############################################################################################################################################
+##### Download all files from this repo                                                                                                         
+##### wget https://github.com/Ecsyend/NWNXEE-SETUP/archive/main.zip                                                                     
+##### Unzip them
+##### unzip main.zip
+##### Copy them into your /home/ folder
+##### cp -a ~/NWNXEE-SETUP-main/nwnx_files/. ~/
+#############################################################################################################################################
 #
 # Copy the scripts from this directory over onto ~/
 # mod-start.sh - starts the server unless already running
