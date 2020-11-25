@@ -69,9 +69,17 @@ writable = yes
 #
 # Save and exit
 #
+# Set it as Service and Run on Startup
+sudo systemctl enable smbd
+#
+# Restart the service
+sudo service smbd restart
+sudo service nmbd restart
+#
 # Now if you're on windows just pres WIN + R, the Run window will pop up.
 # You can check the ip address using "ip a" command it'll be on the "inet" line
 # In there you must type \\ip.address\shared
+# Done!
 #------------------------------------------------------------------------------
 #
 # Install necessary prereqs
