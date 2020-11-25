@@ -11,14 +11,15 @@ sudo sysctl -w net.core.rmem_default=26214400
 #Import GPG Key
 curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
 #
-source /etc/lsb-release
-#
 # Add repo to Ubuntu 18.08
 echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 #
 # Update apt index and install InfluxDB
 sudo apt update -y
 sudo apt-get install influxdb
+#
+# Set as system service
+sudo systemctl enable --now influxdb
 #
 # Configure "influxdb.conf"
 sudo nano /etc/influxdb/influxdb.conf
@@ -32,6 +33,7 @@ sudo nano /etc/influxdb/influxdb.conf
 # You can use whatever name you want in the "metrics"
 #
 # Set up database
+#
 influx
 #
 # This will open influx in terminal, type
