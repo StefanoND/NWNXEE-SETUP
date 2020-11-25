@@ -41,6 +41,38 @@ cd ~
 ls
 # If it is then congratulations! You successfully linked the directory within your vm with your host folder.
 #------------------------------------------------------------------------------
+# THIS PART IS ONLY NEEDED IF YOU'RE USING HETZNER'S CLOUD SERVER AND WANT SHARED FOLDERS
+#
+# Install Samba
+sudo apt install samba
+#
+# Set password to connect change USERNAME to the machine's username (usually root if you haven't messed with it)
+sudo smbpasswd -a USERNAME
+#
+# Create the shared folder, you can name it whatever you want
+mkdir /USERNAME/shared
+#
+# Configure samba settings
+sudo nano /etc/samba/smb.conf
+#
+# Paste the following at the bottom of the configuration file.
+# Note: The "[shared]" is the folder name you created earlier
+# Note 2: You can change the settings to your liking (no/yes)
+[shared]
+path = /USERNAME/shared
+available = yes
+valid users = USERNAME
+read only = no
+browsable = yes
+public = yes
+writable = yes
+#
+# Save and exit
+#
+# Now if you're on windows just pres WIN + R, the Run window will pop up.
+# You can check the ip address using "ip a" command it'll be on the "inet" line
+# In there you must type \\ip.address\shared
+#------------------------------------------------------------------------------
 #
 # Install necessary prereqs
 #
