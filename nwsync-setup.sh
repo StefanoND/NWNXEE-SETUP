@@ -4,6 +4,9 @@
 #------------------------------------------------------------------------------
 # Install NoIP
 #
+# Install gcc just in can you don't have it yet
+sudo apt install gcc
+#
 # Go to /src/ folder
 cd /usr/local/src/
 #
