@@ -28,6 +28,7 @@ sudo /usr/local/bin/noip2 -C
 # Insert e-mail
 # Insert password
 # Set the refresh interval (5 sec is good enough)
+# If you don't want anything runnig press N
 #
 # Done installing and configuring
 #
