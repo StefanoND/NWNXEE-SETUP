@@ -55,7 +55,7 @@ mkdir /var/www/nwsync
 #
 # Download and put the index.html file inside nwsync
 # Create a new file for nwsync to put stuff in. This is where nswync will put everything and will be available for people to download from
-mkdir /var/www/nwsyc/nwsyncdata
+mkdir ~/www/nwsyc/nwsyncdata
 #
 # Download nwsync file in here and place it in /etc/nginx/sites-available and make a shortcut of it on sites-enabled
 # Open it and look for "server_name web.site.address;" change "web.site.address" to your own
