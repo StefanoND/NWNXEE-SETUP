@@ -32,6 +32,9 @@ sudo /usr/local/bin/noip2 -C
 #
 # Done installing and configuring
 #
+# Use the code below to reconfigure
+#sudo /usr/local/bin/noip2 -C
+#
 # Make NoIP run at startup
 #
 sudo crontab -e
