@@ -26,8 +26,8 @@ sudo make install
 sudo /usr/local/bin/noip2 -C
 #
 ######################################################################
-# IF YOU'RE USING HETZNER IT'LL PROBABLY ASK WHICH
-# NETWORK INTERFACE YOU WANT TO USE: CHOSE "eth0" INSTEAD OF "enpXsX"
+# IF YOU'RE USING HETZNER IT'LL PROBABLY ASK WHICH NETWORK INTERFACE
+# YOU WANT TO USE: CHOOSE "eth0" INSTEAD OF "enpXsX"
 ######################################################################
 # Insert e-mail
 # Insert password
