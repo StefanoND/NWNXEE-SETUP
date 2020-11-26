@@ -25,6 +25,10 @@ sudo make install
 # Configure NoIP
 sudo /usr/local/bin/noip2 -C
 #
+######################################################################
+# IF YOU'RE USING HETZNER IT'LL PROBABLY ASK WHICH
+# NETWORK INTERFACE YOU WANT TO USE: CHOSE "eth0" INSTEAD OF "enpXsX"
+######################################################################
 # Insert e-mail
 # Insert password
 # Set the refresh interval (5 sec is good enough)
@@ -33,7 +37,7 @@ sudo /usr/local/bin/noip2 -C
 # Done installing and configuring
 #
 # Use the code below to reconfigure
-#sudo /usr/local/bin/noip2 -C
+sudo /usr/local/bin/noip2 -C
 #
 # Make NoIP run at startup
 #
