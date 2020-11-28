@@ -16,7 +16,7 @@ echo "deb https://repos.influxdata.com/ubuntu bionic stable" | sudo tee /etc/apt
 #
 # Update apt index and install InfluxDB
 sudo apt update -y
-sudo apt-get install influxdb
+sudo apt install influxdb
 #
 # Set as system service
 sudo systemctl enable --now influxdb
@@ -53,10 +53,10 @@ curl https://packages.grafana.com/gpg.key | sudo apt-key add -
 sudo add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
 #
 # Update
-sudo apt-get update -y
+sudo apt update -y
 #
 # Install Grafana
-sudo apt-get install grafana
+sudo apt install grafana -y
 #
 # Reload Daemon
 sudo /bin/systemctl daemon-reload
