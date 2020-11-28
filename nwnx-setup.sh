@@ -22,7 +22,7 @@ sudo apt install -y dkms build-essential linux-headers-generic linux-headers-$(u
 # sudo VBoxClient --clipboard
 #
 # Create cdrom folder in case it doesn't exist
-mkdir /media/cdrom
+sudo mkdir /media/cdrom
 #
 # Mount it
 sudo mount /dev/cdrom /media/cdrom
@@ -39,7 +39,7 @@ sudo su
 # Reboot VM
 shutdown -r now
 # Create "shared" directory in your home
-mkdir ~/shared
+sudo mkdir ~/shared
 # Mount the shared folder from the host to your ~/shared directory
 sudo mount -t vboxsf shared ~/shared
 # The host folder should now be accessible inside the VM
@@ -54,7 +54,7 @@ sudo nano /etc/modules
 # Add the following line to /etc/modules and press Ctro+O then ENTER to Save and Ctrl+X to leave
 vboxsf
 # Reboot the VM and log-in again
-shutdown -r now
+sudo shutdown -r now
 # Go to your home directory and check to see if the file is highlighted in green.
 cd ~
 ls
@@ -129,11 +129,11 @@ sudo apt install unzip
 # Get latest source from github
 git clone https://github.com/nwnxee/unified.git nwnx
 # Make a directory where the build system will initialize even though there's already a Build folder (with upper case B)
-mkdir nwnx/build && cd nwnx/build
+sudo mkdir nwnx/build && cd nwnx/build
 # Initialize the build system to use GCC version 7, for 64bit. Build release version of nwnx, with debug info
-CC="gcc-7 -m64" CXX="g++-7 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
+sudo CC="gcc-7 -m64" CXX="g++-7 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
 # Build NWNX, in 9 threads (8 CPU threads + 1). This will take a while
-make -j9
+sudo make -j9
 #
 #############################################################################################################################################
 ##### THIS PART IS NOT NEEDED IF YOU'RE FOLLOWING THIS TUTORIAL FOR THE FIRST TIME                                                      #####
@@ -144,11 +144,11 @@ make -j9
 #
 # Download NWN dedicated package
 # Make a directory to hold NWN data
-mkdir ~/nwn && cd ~/nwn
+sudo mkdir ~/nwn && cd ~/nwn
 # Fetch the NWN dedicated server package. The version here might be outdated, so replace "8193.16" with current NWN build version
-wget https://nwnx.io/nwnee-dedicated-8193.16.zip
+sudo wget https://nwnx.io/nwnee-dedicated-8193.16.zip
 # Unpack the server to current directory - ~/nwn
-unzip nwnee-dedicated-8193.16.zip -d .
+sudo unzip nwnee-dedicated-8193.16.zip -d .
 #
 #############################################################################################################################################
 ##### THIS PART IS NOT NEEDED IF YOU'RE FOLLOWING THIS TUTORIAL FOR THE FIRST TIME                                                      #####
@@ -167,7 +167,7 @@ unzip nwnee-dedicated-8193.16.zip -d .
 cd bin/linux-x86 && ./nwserver-linux
 # The user directory path is long and contains spaces, which is hard to type sometimes.
 # So we create a link (shortcut) to it as ~/nwn/userdir so it's easier to access
-ln -s ~/.local/share/Neverwinter\ Nights/ ~/nwn/userdir
+sudo ln -s ~/.local/share/Neverwinter\ Nights/ ~/nwn/userdir
 #
 # Set up your module:
 # Copy your module/hak/tlk/etc files to ~/nwn/userdir
@@ -187,20 +187,21 @@ git config --global user.email = "my@email.com"
 # Run mysql (as admin/sudo). The following commands are given in MySQL, not the regular terminal
 sudo mysql
 # We want to configure mysql itself.
-mysql> USE mysql;
+USE mysql;
 # Create a new user for nwserver to use. 'nwn' is username, 'pass' is password, you can change them if you want.
-mysql> CREATE USER 'nwn'@'localhost' IDENTIFIED BY 'pass';
+CREATE USER 'nwn'@'localhost' IDENTIFIED BY 'pass';
 # Give it full access
-mysql> GRANT ALL PRIVILEGES ON *.* TO 'nwn'@'localhost';
-mysql> FLUSH PRIVILEGES;
+GRANT ALL PRIVILEGES ON *.* TO 'nwn'@'localhost';
+FLUSH PRIVILEGES;
 # Create a database for the module to use, typically named same as module, but can be anything.
-mysql> CREATE DATABASE mymodulename;
-mysql> exit;
+CREATE DATABASE mymodulename;
+exit;
 #
 #############################################################################################################################################
 ##### THIS PART IS NOT NEEDED IF YOU HAVE A DESKTOP/GUI INSTALLED                                                                       #####
 #############################################################################################################################################
-##### Download all files from this repo                                                                                                         
+##### Download all files from this repo     
+##### cd ~/
 ##### wget https://github.com/Ecsyend/NWNXEE-SETUP/archive/main.zip                                                                     
 ##### Unzip them
 ##### unzip main.zip
