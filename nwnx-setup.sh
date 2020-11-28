@@ -13,10 +13,10 @@
 #8. Start your VM
 #9. Once your VM is up and running, go to Devices menu -> Insert Guest Additions CD image menu but don't run it, cancel if it asks
 # Install dependencias for VirtualBox guest additions
-sudo apt update -y
+sudo apt update -y && sudo apt upgrade -y
 #
 # Install necessary dependencies
-sudo apt-get install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
+sudo apt install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
 # Still testing this one
 # sudo apt install virtualbox-guest-x11
 # sudo VBoxClient --clipboard
