@@ -17,9 +17,9 @@ sudo apt update -y
 #
 # Install necessary dependencies
 sudo apt-get install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
-sudo VBoxClient --clipboard
 # Still testing this one
 # sudo apt install virtualbox-guest-x11
+# sudo VBoxClient --clipboard
 #
 # Create cdrom folder in case it doesn't exist
 mkdir /media/cdrom
@@ -37,7 +37,7 @@ sudo su
 ./VBoxLinuxAdditions.run
 #
 # Reboot VM
-sudo shutdown -r now
+shutdown -r now
 # Create "shared" directory in your home
 mkdir ~/shared
 # Mount the shared folder from the host to your ~/shared directory
