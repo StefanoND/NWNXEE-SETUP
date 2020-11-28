@@ -17,8 +17,9 @@ sudo apt update -y
 #
 # Install necessary dependencies
 sudo apt-get install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
-sudo apt install virtualbox-guest-x11
 sudo VBoxClient --clipboard
+# Still testing this one
+# sudo apt install virtualbox-guest-x11
 #
 # Create cdrom folder in case it doesn't exist
 mkdir /media/cdrom
