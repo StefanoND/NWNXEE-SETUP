@@ -14,9 +14,26 @@
 #9. Once your VM is up and running, go to Devices menu -> Insert Guest Additions CD image menu but don't run it, cancel if it asks
 # Install dependencias for VirtualBox guest additions
 sudo apt update -y
-sudo apt install build-essential linux-headers-`uname -r` -y
-# Run installation script for the guest additions:
-sudo /media/USERNAME/VBox_GAs_6.1.14/VBoxLinuxAdditions.run
+#
+# Install necessary dependencies
+sudo apt-get install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
+sudo apt install virtualbox-guest-x11
+#
+# Create cdrom folder in case it doesn't exist
+mkdir /media/cdrom
+#
+# Mount it
+sudo mount /dev/cdrom /media/cdrom
+#
+# Go into cdrom
+cd /media/cdrom
+#
+# Go into root user
+sudo su
+#
+# Install Guest Additions
+./VBoxLinuxAdditions.run
+#
 # Reboot VM
 sudo shutdown -r now
 # Create "shared" directory in your home
