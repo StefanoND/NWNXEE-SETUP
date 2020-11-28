@@ -46,7 +46,7 @@ sudo crontab -e
 @reboot su -l <username> && sudo noip2
 #------------------------------------------------------------------------------
 # Install nginx
-sudo apt install nginx
+sudo apt install nginx -y
 #
 # Make is as a service (and run automatically at boot)
 sudo systemctl enable nginx
@@ -55,21 +55,26 @@ sudo systemctl enable nginx
 ln -s /var/www/ ~/
 #
 # Create a folder inside /var/www for nwsync
-mkdir /var/www/nwsync
+sudo mkdir /var/www/nwsync
 #
 # Download and put the index.html file inside nwsync
+sudo cp -a ~/NWNXEE-SETUP-main/nwsync_files/index.html ~/www/nwsync
+#
 # Create a new file for nwsync to put stuff in. This is where nswync will put everything and will be available for people to download from
-mkdir ~/www/nwsyc/nwsyncdata
+sudo mkdir ~/www/nwsyc/nwsyncdata
 #
 # Download nwsync file in here and place it in /etc/nginx/sites-available and make a shortcut of it on sites-enabled
+sudo cp -a ~/NWNXEE-SETUP-main/nwsync_files/nwsync /etc/nginx/sites-available
+#
 # Open it and look for "server_name web.site.address;" change "web.site.address" to your own
-ln -s /etc/nginx/sites-available/nwsync /etc/nginx/sites-enabled/
+sudo nano /etc/nginx/sites-available/nwsync
+sudo ln -s /etc/nginx/sites-available/nwsync /etc/nginx/sites-enabled/
 #
 # Make directory for nwsync and open it
 mkdir ~/nwsync && cd ~/nwsync
 #
 # Download nwsync (Version may be different)
-wget https://github.com/Beamdog/nwsync/releases/download/0.2.6/nwsync.linux.amd64.zip
+wget https://github.com/Beamdog/nwsync/releases/download/0.3.0/nwsync.linux.amd64.zip
 #
 # Unzip it
 unzip nwsync.linux.amd64.zip -d .
@@ -84,6 +89,7 @@ wget https://github.com/WilliamDraco/nwsync_gui/releases/download/v1.1.0/nwsync_
 unzip nwsync_gui-linux.zip -d .
 #
 # Download the nwsync-update.sh and place it in your home folder
+cp -a ~/NWNXEE-SETUP-main/nwsync_files/nwsync-update.sh ~/
 # Make it usable
 chmod +x nwsync-*.sh
 #
