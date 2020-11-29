@@ -23,7 +23,6 @@ cd noip-2.1.9-1/
 sudo make install
 #
 # Configure NoIP
-sudo /usr/local/bin/noip2 -C
 #
 ######################################################################
 # IF YOU'RE USING HETZNER IT'LL PROBABLY ASK WHICH NETWORK INTERFACE
@@ -44,6 +43,9 @@ sudo /usr/local/bin/noip2 -C
 sudo crontab -e
 # Type it in the last line
 @reboot su -l <username> && sudo noip2
+#
+# Go back to root folder if you're going to do the steps below
+cd ~
 #------------------------------------------------------------------------------
 # Install nginx
 sudo apt install nginx -y
@@ -61,7 +63,7 @@ sudo mkdir /var/www/nwsync
 sudo cp -a ~/NWNXEE-SETUP-main/nwsync_files/index.html ~/www/nwsync
 #
 # Create a new file for nwsync to put stuff in. This is where nswync will put everything and will be available for people to download from
-sudo mkdir ~/www/nwsyc/nwsyncdata
+sudo mkdir ~/www/nwsync/nwsyncdata
 #
 # Download nwsync file in here and place it in /etc/nginx/sites-available and make a shortcut of it on sites-enabled
 sudo cp -a ~/NWNXEE-SETUP-main/nwsync_files/nwsync /etc/nginx/sites-available
@@ -78,9 +80,6 @@ wget https://github.com/Beamdog/nwsync/releases/download/0.3.0/nwsync.linux.amd6
 #
 # Unzip it
 unzip nwsync.linux.amd64.zip -d .
-#
-# Create a nwsyncdata folder
-mkdir ~/nwsync/nwsyncdata
 #
 # Download nwsync_gui
 wget https://github.com/WilliamDraco/nwsync_gui/releases/download/v1.1.0/nwsync_gui-linux.zip
