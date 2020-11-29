@@ -16,7 +16,7 @@ echo "deb https://repos.influxdata.com/ubuntu bionic stable" | sudo tee /etc/apt
 #
 # Update apt index and install InfluxDB
 sudo apt update -y
-sudo apt install influxdb
+sudo apt install influxdb -y
 #
 # Set as system service
 sudo systemctl enable --now influxdb
@@ -82,7 +82,7 @@ URL: http://localhost:8086
 Access: Server (Default)
 Database: metrics
 User: nwn
-Password: password
+Password: pass
 #
 # Now let's add the dashboards
 Visit: http://localhost:3000/dashboard/import
