@@ -51,6 +51,9 @@ sudo systemctl start noip2
 # Go back to root folder if you're going to do the steps below
 cd ~
 #------------------------------------------------------------------------------
+# Install nim to prevent some errors during nwsync
+sudo pacman -S nim --noconfirm
+#
 # Install nginx
 sudo pacman -S nginx --noconfirm
 #
