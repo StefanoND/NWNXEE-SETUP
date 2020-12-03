@@ -60,6 +60,9 @@ sudo pacman -S nginx --noconfirm
 # Make is as a service (and run automatically at boot)
 sudo systemctl enable nginx
 #
+# Replace it's config file with the one you downloaded here
+sudo cp -a ~/NWNXEE-SETUP-main/nwsync_files/nginx.conf /etc/nginx
+#
 # Create a shortcut from /var/www/ to ~/wwww
 sudo mkdir /var/www
 ln -s /var/www/ ~/www
