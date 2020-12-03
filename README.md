@@ -1,4 +1,6 @@
 # NWNXEE-SETUP
+Keep in mind that the Manjaro Section is still work in progress, I'll let you guys know when it's ready
+
 Thanks to mtijanic, orth, daz, Urothis, niv and all NWN/NWNX community
 
 Almost all content are modified/updated version of their guides
