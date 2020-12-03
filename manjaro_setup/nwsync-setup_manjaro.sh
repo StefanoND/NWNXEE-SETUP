@@ -61,25 +61,67 @@ sudo pacman -S nginx --noconfirm
 sudo systemctl enable nginx
 #
 # Create a shortcut from /var/www/ to ~/wwww
-ln -s /srv/http/ ~/
+sudo mkdir /var/www
+ln -s /var/www/ ~/www
 #
 # Create a folder inside /var/www for nwsync
-sudo mkdir /srv/http/nwsync
+sudo mkdir /var/www/nwsync
 #
 # Download and put the index.html file inside nwsync
-sudo cp -a ~/NWNXEE-SETUP-main/nwsync_files/index.html ~/http/nwsync
+sudo cp -a ~/NWNXEE-SETUP-main/nwsync_files/index.html ~/www/nwsync
 #
 # Create a new file for nwsync to put stuff in. This is where nswync will put everything and will be available for people to download from
-sudo mkdir ~/http/nwsync/nwsyncdata
+sudo mkdir ~/www/nwsync/nwsyncdata
 #
 # Download nwsync file in here and place it in /etc/nginx/sites-available and make a shortcut of it on sites-enabled
 sudo mkdir /etc/nginx/sites-available
-sudo cp -a ~/NWNXEE-SETUP-main/nwsync_files/nwsync /etc/nginx/sites-available
+sudo cp -a ~/NWNXEE-SETUP-main/nwsync_files/nwsync.conf /etc/nginx/sites-available
 #
 # Open it and look for "server_name web.site.address;" change "web.site.address" to your own
-sudo nano /etc/nginx/sites-available/nwsync
+sudo nano /etc/nginx/sites-available/nwsync.conf
 sudo mkdir /etc/nginx/sites-enabled
-sudo ln -s /etc/nginx/sites-available/nwsync /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/nwsync.conf /etc/nginx/sites-enabled/
+#
+# Now open nginx.conf and on the server { listen 80; part replace with the info from nwsync.conf
+sudo nano /etc/nginx/nginx.conf
+#
+#------------------------------------------------------------
+#                          REPLACE
+#------------------------------------------------------------
+#    server {
+#        listen 80;
+#        listen [::]:80;
+#        server_name  localhost;
+#
+#        #charset koi8-r;
+#
+#        #access_log  logs/host.access.log  main;
+#
+#        location / {
+#            root   /usr/share/nginx/html;
+#            index  index.html index.htm;
+#        }
+#------------------------------------------------------------
+#                          WITH
+#------------------------------------------------------------
+#    server {
+#        listen 80;
+#        listen [::]:80;
+#        server_name  localhost;
+#
+#        root /var/www/nwsync;
+#        index index.html;
+#
+#        location / {
+#            root   /var/www/nwsync;
+#            index  index.html;
+#            autoindex on;
+#            autoindex_exact_size off;
+#            try_files $uri $uri/ =404;
+#        }
+#------------------------------------------------------------
+# Ctrl + O and Y to save and Ctrl + X to quit
+#------------------------------------------------------------
 #
 # Make directory for nwsync and open it
 mkdir ~/nwsync && cd ~/nwsync
