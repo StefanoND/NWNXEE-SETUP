@@ -30,6 +30,9 @@ sudo make install
 ######################################################################
 # Insert e-mail
 # Insert password
+# If you have more than one host name, you usually don't want both of them on
+# Press "N" for "[...] "all updated" and for all [host.name] that you don't want
+#
 # Set the refresh interval (5 sec is good enough)
 # If you don't want anything runnig press N
 #
@@ -51,9 +54,6 @@ sudo systemctl start noip2
 # Go back to root folder if you're going to do the steps below
 cd ~
 #------------------------------------------------------------------------------
-# Install nim to prevent some errors during nwsync
-sudo pacman -S nim --noconfirm
-#
 # Install nginx
 sudo pacman -S nginx --noconfirm
 #
@@ -85,46 +85,8 @@ sudo nano /etc/nginx/sites-available/nwsync.conf
 sudo mkdir /etc/nginx/sites-enabled
 sudo ln -s /etc/nginx/sites-available/nwsync.conf /etc/nginx/sites-enabled/
 #
-# Now open nginx.conf and on the server { listen 80; part replace with the info from nwsync.conf
-sudo nano /etc/nginx/nginx.conf
-#
-#------------------------------------------------------------
-#                          REPLACE
-#------------------------------------------------------------
-#    server {
-#        listen 80;
-#        listen [::]:80;
-#        server_name  localhost;
-#
-#        #charset koi8-r;
-#
-#        #access_log  logs/host.access.log  main;
-#
-#        location / {
-#            root   /usr/share/nginx/html;
-#            index  index.html index.htm;
-#        }
-#------------------------------------------------------------
-#                          WITH
-#------------------------------------------------------------
-#    server {
-#        listen 80;
-#        listen [::]:80;
-#        server_name  localhost;
-#
-#        root /var/www/nwsync;
-#        index index.html;
-#
-#        location / {
-#            root   /var/www/nwsync;
-#            index  index.html;
-#            autoindex on;
-#            autoindex_exact_size off;
-#            try_files $uri $uri/ =404;
-#        }
-#------------------------------------------------------------
-# Ctrl + O and Y to save and Ctrl + X to quit
-#------------------------------------------------------------
+# Restart nginx
+sudo systemctl restart nginx
 #
 # Make directory for nwsync and open it
 mkdir ~/nwsync && cd ~/nwsync
@@ -135,20 +97,23 @@ wget https://github.com/Beamdog/nwsync/releases/download/0.3.0/nwsync.linux.amd6
 # Unzip it
 unzip nwsync.linux.amd64.zip -d .
 #
-# Download nwsync_gui
+#---------------------------------------------------------------------------------------------
+# OPTIONAL
+#---------------------------------------------------------------------------------------------
+# Download nwsync_gui if you want
 wget https://github.com/WilliamDraco/nwsync_gui/releases/download/v1.1.0/nwsync_gui-linux.zip
 #
 # Unzip it
 unzip nwsync_gui-linux.zip -d .
+#---------------------------------------------------------------------------------------------
 #
-# Download the nwsync-update.sh and place it in your home folder
+# Download the nwsync-update.sh and place it in your home folder and make it usable
 cp -a ~/NWNXEE-SETUP-main/nwsync_files/nwsync-update.sh ~/
-# Make it usable
+cd ~/
 chmod +x nwsync-*.sh
 #
 # Edit the "PATH=~/nwsync" if necessary
-# Go back to your home folder
-cd ~
+nano nwsync-update.sh
 #
 # Run ./nwsync-update.sh or nwsync_GUI_update.sh if you want the GUI one
 sudo ./nwsync-update.sh
