@@ -42,13 +42,13 @@ quit
 sudo pacman -S grafana --noconfirm
 #
 # Reload Daemon
-sudo /bin/systemctl daemon-reload
+sudo systemctl daemon-reload
 #
 # Enable grafana to be run as a service
-sudo /bin/systemctl enable grafana.service
+sudo systemctl enable grafana.service
 #
 # Start grafana as service
-sudo /bin/systemctl start grafana.service
+sudo systemctl start grafana.service
 #
 # Visit Grafana, change "localhost" to your site
 http://localhost:3000
@@ -57,7 +57,7 @@ Password: admin
 Change your password
 #
 # Create a new Datasource (InfluxDB)
-Visit: http://localhost:3000/datasources/new
+http://localhost:3000/datasources/new
 Select InfluxDB
 # Change these parts
 Name: NWN
@@ -68,7 +68,7 @@ User: nwn
 Password: pass
 #
 # Now let's add the dashboards
-Visit: http://localhost:3000/dashboard/import
+http://localhost:3000/dashboard/import
 #
 # Use the .json files from the website below or from the folder in here
 https://github.com/urothis/nwnxee-docker-template/tree/master/grafana-provisioning/dashboards
