@@ -13,7 +13,7 @@
 #8. Start your VM
 #9. Once your VM is up and running, go to Devices menu -> Insert Guest Additions CD image menu but don't run it, cancel if it asks
 # Install dependencias for VirtualBox guest additions
-sudo pacman -Syy && sudo pacman -Syu
+sudo pacman -Syy && sudo pacman -Syu --noconfirm
 #
 # Install necessary dependencies
 # NOTE: Here you'll have to put "linuxXX-headers" where the XX stands for your Kernel Number
@@ -34,8 +34,10 @@ sudo su
 # Install Guest Additions
 ./VBoxLinuxAdditions.run
 #
+# Type "yes" without quotes during instalation
+#
 # Reboot VM
-reboot
+reboot now
 # Create "shared" directory in your home
 sudo mkdir ~/shared
 # Mount the shared folder from the host to your ~/shared directory
@@ -52,7 +54,7 @@ sudo nano /etc/modules-load.d/modules.conf
 # Add the following line to /etc/modules and press Ctro+O then ENTER to Save and Ctrl+X to leave
 vboxsf
 # Reboot the VM and log-in again
-sudo shutdown -r now
+sudo reboot now
 # Go to your home directory and check to see if the file is highlighted in green.
 cd ~
 ls
@@ -71,7 +73,7 @@ sudo mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
 #
 # Run this program and answer like I show bellow
 sudo systemctl start mysqld && sudo mysql_secure_installation
-#
+# Type your password if you have any and do the following for the prompts
 #|------------------------------------------------------|
 #|                    PROMPT                    | ANSER |
 #|----------------------------------------------|-------|
@@ -88,8 +90,9 @@ sudo systemctl enable mysqld
 #
 # Install SSL dependency for Webhook
 sudo pacman -S openssl lib32-openssl --noconfirm
-# Install this required lib
-sudo pacman -S libsndio --noconfirm
+#
+# Install this audio lib (it's required for some reason)
+sudo pacman -S sndio --noconfirm
 #
 # Install UnZip just in case you don't have it
 sudo pacman -S unzip --noconfirm
@@ -135,6 +138,10 @@ sudo unzip nwnee-dedicated-8193.16.zip -d .
 # Run it once to create the user directory.
 # nwserver must be run with current directory the same as the executable, so we need to `cd` into it first
 cd bin/linux-x86 && ./nwserver-linux
+#
+# Close the server
+quit
+#
 # The user directory path is long and contains spaces, which is hard to type sometimes.
 # So we create a link (shortcut) to it as ~/nwn/userdir so it's easier to access
 sudo ln -s ~/.local/share/Neverwinter\ Nights/ ~/nwn/userdir
