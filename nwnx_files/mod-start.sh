@@ -247,8 +247,8 @@ export NWNX_TWEAKS_PRESERVE_DEPLETED_ITEMS=true
 # Fix some intel crashes by disabling some shadows on areas
 export NWNX_TWEAKS_DISABLE_SHADOWS=false
 #
-# Hide DMs from Character Selection Window
-export NWNX_TWEAKS_HIDE_DMS_ON_CHAR_LIST=true
+# 1: DMs are hidden on Char List; 2: PCs are hidden on Char List; 3: Both PCs and DMs are hidden on char list.
+export NWNX_TWEAKS_HIDE_PLAYERS_ON_CHAR_LIST=1
 #
 # Disable monk abilities when polymorphed
 export NWNX_TWEAKS_DISABLE_MONK_ABILITIES_WHEN_POLYMORPHED=false
