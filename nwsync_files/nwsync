@@ -1,20 +1,8 @@
 server {
-    listen 80;
-    listen [::]:80;
+    listen 80 backlog=4096;
+    listen [::]:80 backlog=4096;
 
     server_name 192.168.1.1;
-
-    location / {
-    set $backend http://noip.ddns.net:80;
-    proxy_pass $backend;
-    }
-}
-
-server {
-    listen 80;
-    listen [::]:80;
-
-    server_name noip.ddns.net;
 
     root /var/www/nwsync;
     index index.html;
@@ -22,6 +10,9 @@ server {
     location / {
         root /var/www/nwsync;
         index index.html;
+        sendfile on;
+        tcp_nopush on;
+        tcp_nodelay on;
         autoindex on;
         autoindex_exact_size off;
         try_files $uri $uri/ =404;
