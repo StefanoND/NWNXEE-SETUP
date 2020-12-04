@@ -83,6 +83,13 @@ sudo cp -a ~/NWNXEE-SETUP-main/nwsync_files/nwsync.conf /etc/nginx/sites-availab
 # Open it and look for "server_name 192.168.1.1;" change "192.168.1.1" to your internal IP you can use "ip a" in terminal to find out
 # Also look for "proxy_pass no.ip.address;" and change the "no.ip.address" with your own No-Ip hostname
 # Save overwritting everything (Ctrl + O and yes) and quit (Ctrl + X)
+#-----------------------------------------------------------------------------
+#                                  NOTE
+#-----------------------------------------------------------------------------
+# If you're using a paid server (with static public IP) you must comment
+# the "proxy_pass" line and use your no-ip hostname in the "server_name"
+# instead of the interal IP
+#-----------------------------------------------------------------------------
 sudo nano /etc/nginx/sites-available/nwsync.conf
 sudo mkdir /etc/nginx/sites-enabled
 sudo ln -s /etc/nginx/sites-available/nwsync.conf /etc/nginx/sites-enabled/
