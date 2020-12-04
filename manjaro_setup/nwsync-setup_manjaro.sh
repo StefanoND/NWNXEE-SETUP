@@ -80,7 +80,9 @@ sudo mkdir ~/www/nwsync/nwsyncdata
 sudo mkdir /etc/nginx/sites-available
 sudo cp -a ~/NWNXEE-SETUP-main/nwsync_files/nwsync.conf /etc/nginx/sites-available
 #
-# Open it and look for "server_name web.site.address;" change "web.site.address" to your own
+# Open it and look for "server_name 192.168.1.1;" change "192.168.1.1" to your internal IP you can use "ip a" in terminal to find out
+# Also look for "proxy_pass no.ip.address;" and change the "no.ip.address" with your own No-Ip hostname
+# Save overwritting everything (Ctrl + O and yes) and quit (Ctrl + X)
 sudo nano /etc/nginx/sites-available/nwsync.conf
 sudo mkdir /etc/nginx/sites-enabled
 sudo ln -s /etc/nginx/sites-available/nwsync.conf /etc/nginx/sites-enabled/
