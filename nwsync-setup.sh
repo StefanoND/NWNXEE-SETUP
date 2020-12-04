@@ -23,11 +23,11 @@ sudo mkdir ~/www/nwsync/nwsyncdata
 # Download nwsync file in here and place it in /etc/nginx/sites-available and make a shortcut of it on sites-enabled
 sudo cp -a ~/NWNXEE-SETUP-main/nwsync_files/nwsync /etc/nginx/sites-available
 #
-# Edit the nwsync file with your configs:
-sudo nano /etc/nginx/sites-available/nwsync
-#
 # Tune the OS to support bursts of download
 sudo sysctl -w net.core.somaxconn=4096
+#
+# Edit the nwsync file with your configs:
+sudo nano /etc/nginx/sites-available/nwsync
 #
 #-----------------------------------------------------------------------------
 #                                  NOTE
@@ -36,7 +36,9 @@ sudo sysctl -w net.core.somaxconn=4096
 #     listen 80 backlog=4096;
 #     listen [::]:80 backlog=4096;
 #
-#     server_name 192.168.1.1; # CHANGE THIS PART WITH YOUR IP ADDRESS
+#     # CHANGE THE "192.168.1.1" WITH YOUR PUBLIC IP ADDRESS
+#     # GO TO https://www.whatismyip.com/ TO FIND OUT YOUR PUBLIC IP
+#     server_name 192.168.1.1; 
 #
 #     root /var/www/nwsync;
 #     index index.html;
@@ -66,14 +68,9 @@ wget https://github.com/Beamdog/nwsync/releases/download/0.3.0/nwsync.linux.amd6
 # Unzip it
 unzip nwsync.linux.amd64.zip -d .
 #
-# Download nwsync_gui
-wget https://github.com/WilliamDraco/nwsync_gui/releases/download/v1.1.0/nwsync_gui-linux.zip
-#
-# Unzip it
-unzip nwsync_gui-linux.zip -d .
-#
 # Download the nwsync-update.sh and place it in your home folder
 cp -a ~/NWNXEE-SETUP-main/nwsync_files/nwsync-update.sh ~/
+#
 # Make it usable
 chmod +x nwsync-*.sh
 #
@@ -83,12 +80,7 @@ cd ~
 #
 # Run ./nwsync-update.sh or nwsync_GUI_update.sh if you want the GUI one
 sudo ./nwsync-update.sh
-sudo ./nwsync-gui-update.sh
 # 
-# Click on "Choose Source" and select your module
-# Click on "Choose Destination" and select "nwsyncdata" inside your nwsync folder
-# Click on the big "RUN NWSYNC WRITE" button
-# You may close this now
 # If need permission use
 chown -R $USER:$USER /path/to/folder
 chown -R 755 /path/to/file
