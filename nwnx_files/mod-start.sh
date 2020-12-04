@@ -32,6 +32,7 @@ export NWNX_COMBATMODES_SKIP=y
 export NWNX_CREATURE_SKIP=y
 export NWNX_DAMAGE_SKIP=y
 export NWNX_DATA_SKIP=y
+#export NWNX_DIAGNOSTICS_SKIP=y
 export NWNX_DIALOG_SKIP=y
 export NWNX_DOTNET_SKIP=y
 export NWNX_ELC_SKIP=y
@@ -39,6 +40,7 @@ export NWNX_EFFECT_SKIP=y
 export NWNX_ENCOUNTER_SKIP=y
 export NWNX_EVENTS_SKIP=y
 export NWNX_EXPERIMENTAL_SKIP=y
+export NWNX_FEAT_SKIP=y
 export NWNX_FEEDBACK_SKIP=y
 export NWNX_ITEM_SKIP=y
 export NWNX_ITEMPROPERTY_SKIP=y
@@ -62,6 +64,7 @@ export NWNX_SERVERLOGREDIRECTOR_SKIP=y
 export NWNX_SKILLRANKS_SKIP=y
 export NWNX_SPELLCHECKER_SKIP=y
 export NWNX_THREADWATCHDOG_SKIP=y
+export NWNX_TILESET_SKIP=y
 export NWNX_TIME_SKIP=y
 export NWNX_TRACKING_SKIP=y
 export NWNX_TWEAKS_SKIP=y
@@ -104,6 +107,10 @@ export NWNX_CORE_LOG_ASYNC=1
 # Sets the nwscript that the plugin will look for
 export NWNX_CHAT_CHAT_SCRIPT="nwnx_chat"
 
+# NWNX DIAGNOSTICS
+# Catches a few classes of memory corruptions in NWN and NWNX
+export NWNX_DIAGNOSTICS_MEMORY_SANITIZER=true
+
 # NWNX_ELC
 # Sets the nwscript that the plugin will look for
 export NWNX_ELC_ELC_SCRIPT="nwnx_elc"
@@ -116,6 +123,10 @@ export NWNX_ELC_ENFORCE_DEFAULT_EVENT_SCRIPTS=false
 #
 # If enabled, resets a character's dialog resref to empty. Requires ELC to be enabled.
 export NWNX_ELC_ENFORCE_EMPTY_DIALOG_RESREF=false
+
+# NWNX_FEAT
+# Shows the effect's icon (the red and green squares)
+export NWNX_FEAT_SHOW_EFFECT_ICON=true
 
 # NWNX_MAXLEVEL
 # Sets the max level 41-60
@@ -288,7 +299,7 @@ echo "Starting $MODNAME. Log is $LOGFILE"
 # Set game options below
 
 export NWNX_CORE_LOAD_PATH=~/nwnx/Binaries
-LD_PRELOAD=~/nwnx/Binaries/NWNX_Core.so \
+LD_PRELOAD=~/nwnx/Binaries/NWNX_Core.so:~/nwnx/Binaries/NWNX_Diagnostics.so \
  ./nwserver-linux \
   -module "$MODNAME" \
   -maxclients 20 \
