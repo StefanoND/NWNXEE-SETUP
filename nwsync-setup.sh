@@ -2,51 +2,6 @@
 # Take some time to understand what each command does.
 # These steps were tested on a clean Ubuntu 18.04 Desktop install:
 #------------------------------------------------------------------------------
-# Install NoIP
-#
-# Install gcc just in can you don't have it yet
-sudo apt install gcc
-#
-# Go to /src/ folder
-cd /usr/local/src/
-#
-# Get latest version of NoIP
-sudo wget http://www.noip.com/client/linux/noip-duc-linux.tar.gz
-#
-# Decompress it
-sudo tar xf noip-duc-linux.tar.gz
-#
-# Go into NoIP's folder (version might be different)
-cd noip-2.1.9-1/
-#
-# Install it
-sudo make install
-#
-# Configure NoIP
-#
-######################################################################
-# IF YOU'RE USING HETZNER IT'LL PROBABLY ASK WHICH NETWORK INTERFACE
-# YOU WANT TO USE: CHOOSE "eth0" INSTEAD OF "enpXsX"
-######################################################################
-# Insert e-mail
-# Insert password
-# Set the refresh interval (5 sec is good enough)
-# If you don't want anything runnig press N
-#
-# Done installing and configuring
-#
-# Use the code below to reconfigure
-sudo /usr/local/bin/noip2 -C
-#
-# Make NoIP run at startup
-#
-sudo crontab -e
-# Type it in the last line
-@reboot su -l <username> && sudo noip2
-#
-# Go back to root folder if you're going to do the steps below
-cd ~
-#------------------------------------------------------------------------------
 # Install nginx
 sudo apt install nginx -y
 #
@@ -68,17 +23,38 @@ sudo mkdir ~/www/nwsync/nwsyncdata
 # Download nwsync file in here and place it in /etc/nginx/sites-available and make a shortcut of it on sites-enabled
 sudo cp -a ~/NWNXEE-SETUP-main/nwsync_files/nwsync /etc/nginx/sites-available
 #
-# Open it and look for "server_name 192.168.1.1;" change "192.168.1.1" to your internal IP you can use "ip a" in terminal to find out
-# Also look for "proxy_pass no.ip.address;" and change the "no.ip.address" with your own No-Ip hostname
-# Save overwritting everything (Ctrl + O and yes) and quit (Ctrl + X)
+# Edit the nwsync file with your configs:
+sudo nano /etc/nginx/sites-available/nwsync
+#
+# Tune the OS to support bursts of download
+sudo sysctl -w net.core.somaxconn=4096
+#
 #-----------------------------------------------------------------------------
 #                                  NOTE
 #-----------------------------------------------------------------------------
-# If you're using a paid server (with static public IP) you must comment
-# the "proxy_pass" line and use your no-ip hostname in the "server_name"
-# instead of the interal IP
+# server {
+#     listen 80 backlog=4096;
+#     listen [::]:80 backlog=4096;
+#
+#     server_name 192.168.1.1; # CHANGE THIS PART WITH YOUR IP ADDRESS
+#
+#     root /var/www/nwsync;
+#     index index.html;
+#
+#     location / {
+#         root /var/www/nwsync;
+#         index index.html;
+#         sendfile on;
+#         tcp_nopush on;
+#         tcp_nodelay on;
+#         autoindex on;
+#         autoindex_exact_size off;
+#         try_files $uri $uri/ =404;
+#     }
+# }
 #-----------------------------------------------------------------------------
-sudo nano /etc/nginx/sites-available/nwsync
+#
+# Make a link of it in .../sites-enabled/
 sudo ln -s /etc/nginx/sites-available/nwsync /etc/nginx/sites-enabled/
 #
 # Make directory for nwsync and open it
