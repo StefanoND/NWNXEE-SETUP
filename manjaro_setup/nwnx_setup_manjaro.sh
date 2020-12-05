@@ -17,7 +17,7 @@ sudo pacman -Syy && sudo pacman -Syu --noconfirm
 #
 # Install necessary dependencies
 # NOTE: Here you'll have to put "linuxXX-headers" where the XX stands for your Kernel Number
-sudo pacman -S dkms linux58-headers --noconfirm
+sudo pacman -S dkms linux59-headers --noconfirm
 #
 # Create cdrom folder in case it doesn't exist
 sudo mkdir /media/cdrom
