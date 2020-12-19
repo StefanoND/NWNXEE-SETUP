@@ -5,6 +5,8 @@ Thanks to mtijanic, orth, daz, Urothis, niv and all NWN/NWNX community
 
 Almost all content are modified/updated version of their guides
 
+NWNXEE Repo: https://github.com/nwnxee/unified
+
 ## NWNX Server setup
 
 Instructions on how to setup a NWNX Server:
