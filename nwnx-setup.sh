@@ -99,7 +99,7 @@ sudo make -j9
 ##### THIS PART IS NOT NEEDED IF YOU'RE FOLLOWING THIS TUTORIAL FOR THE FIRST TIME                                                      #####
 #############################################################################################################################################
 ##### Update nwnx from older version                                                                                                    #####
-##### delete nwnx folder and redo the above steps (from line 68 through 74)                                                             #####
+##### delete nwnx folder and redo the above steps (from line 90 through 96)                                                             #####
 #############################################################################################################################################
 #
 # Download NWN dedicated package
