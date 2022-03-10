@@ -41,6 +41,12 @@ Files to use for setup/update nwsync files
 | index.html           | File for NGINX (Lines 49-51) |
 | nwsync               | File for NGINX (Lines 53-55) |
 
+## NOIP Setup
+
+Instructions on how to setup No-ip2 for static IP address:
+
+- noip-setup.sh
+
 ## NWNX_PROFILER Setup
 
 Instructions on how to setup InfluxDB and Grafana for NWNX_PROFILER:
