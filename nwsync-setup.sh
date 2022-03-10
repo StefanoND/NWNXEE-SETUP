@@ -1,6 +1,6 @@
 # NOTE: This is not a runnable file - you need to manually paste the lines one by one
 # Take some time to understand what each command does.
-# These steps were tested on a clean Ubuntu 18.04 Desktop install:
+# These steps were tested on a clean Ubuntu 20.04 Desktop install:
 #------------------------------------------------------------------------------
 # Install nginx
 sudo apt install nginx -y
@@ -63,7 +63,7 @@ sudo ln -s /etc/nginx/sites-available/nwsync /etc/nginx/sites-enabled/
 mkdir ~/nwsync && cd ~/nwsync
 #
 # Download nwsync (Version may be different)
-wget https://github.com/Beamdog/nwsync/releases/download/0.3.0/nwsync.linux.amd64.zip
+wget https://github.com/Beamdog/nwsync/releases/download/0.4.3/nwsync.linux.amd64.zip
 #
 # Unzip it
 unzip nwsync.linux.amd64.zip -d .
@@ -71,12 +71,12 @@ unzip nwsync.linux.amd64.zip -d .
 # Download the nwsync-update.sh and place it in your home folder
 cp -a ~/NWNXEE-SETUP-main/nwsync_files/nwsync-update.sh ~/
 #
-# Make it usable
-chmod +x nwsync-*.sh
-#
 # Edit the "PATH=~/nwsync" if necessary
 # Go back to your home folder
 cd ~
+#
+# Make it usable
+chmod +x nwsync-*.sh
 #
 # Run ./nwsync-update.sh or nwsync_GUI_update.sh if you want the GUI one
 sudo ./nwsync-update.sh
