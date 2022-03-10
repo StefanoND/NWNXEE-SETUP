@@ -1,12 +1,12 @@
 # NOTE: This is not a runnable file - you need to manually paste the lines one by one
 # Take some time to understand what each command does.
-# These steps were tested on a clean Ubuntu 18.04 Desktop install:
+# These steps were tested on a clean Ubuntu 20.04 Desktop install:
 #------------------------------------------------------------------------------
 # THIS PART IS ONLY NEEDED IF YOU'RE USING ORACLE'S VM AND WANT SHARED FOLDERS (Using Windows as Host and Ubuntu as VM)
 #1. Open VirtualBox
 #2. Right-click your VM, then click Settings
 #3. Go to Shared Folders section
-#4. Add a new shared folder
+#4. Add a new shared folder and name it "sharedf" without quotes
 #5. On Add Share prompt, select the Folder Path in your host that you want to be accessible inside your VM.
 #6. In the Folder Name field, type shared
 #7. Uncheck Read-only and Auto-mount, and check Make Permanent
@@ -48,7 +48,7 @@ cd ~/shared
 # Edit fstab file in /etc directory
 sudo nano /etc/fstab
 # Add the following line to fstab (sparated by tabs) and press Ctro+O then ENTER to Save and Ctrl+X to leave
-shared	/home/<username>/shared	vboxsf	defaults	0	0
+sharedf	/home/<username>/shared	vboxsf	defaults	0	0
 # Edit modules
 sudo nano /etc/modules
 # Add the following line to /etc/modules and press Ctro+O then ENTER to Save and Ctrl+X to leave
@@ -68,21 +68,24 @@ ls
 # On 64bit systems, we need to manually add support for 32bit architecture
 # sudo dpkg --add-architecture i386
 #------------------------------------------------------------------------------
+# Install UnZip just in case you don't have it
+sudo apt install unzip
+#
 # We use a new compiler which may not be available by default, so add an extra place to download packages from
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 # Redownload manifests for the newly added architecture and repository so we can use them (and upgrade existing ones)
 sudo apt update -y && sudo apt upgrade -y
 # Install tools needed to build NWNX
-sudo apt install g++-7 g++-7-multilib gcc-7 gcc-7-multilib cmake git make -y
+sudo apt install g++-7 g++-7-multilib gcc-7 gcc-7-multilib cmake git make unzip -y
 # Install stuff needed to build/run/use MySQL
 sudo apt install mysql-server  libmysqlclient21 libmysqlclient-dev -y
-# Install SSL dependency for Webhook
-sudo apt install libssl1.1 -y && sudo apt install libssl-dev -y
+# Install SSL dependency for Webhook just in case they're not already
+sudo apt install libssl1.1 libssl-dev -y
 # Install this required lib
 sudo apt install libsndio7.0 libsndio-dev -y
 #
-# Install UnZip just in case you don't have it
-sudo apt install unzip
+# Reboot the VM and log-in again (also this is a good time to create a snapshot)
+shutdown -r now
 #
 # Download and build NWNX
 #
@@ -92,21 +95,22 @@ git clone https://github.com/nwnxee/unified.git nwnx
 sudo mkdir nwnx/build && cd nwnx/build
 # Initialize the build system to use GCC version 7, for 64bit. Build release version of nwnx, with debug info
 sudo CC="gcc-7 -m64" CXX="g++-7 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
-# Build NWNX, in 9 threads (8 CPU threads + 1). This will take a while
+# Build NWNX, in X threads (Where X is your CPU thread count + 1). This will take a while
 sudo make -j9
 #
 #############################################################################################################################################
 ##### THIS PART IS NOT NEEDED IF YOU'RE FOLLOWING THIS TUTORIAL FOR THE FIRST TIME                                                      #####
 #############################################################################################################################################
 ##### Update nwnx from older version                                                                                                    #####
-##### delete nwnx folder and redo the above steps (from line 90 through 96)                                                             #####
+##### delete nwnx folder and redo the above steps (from line 90 through 99)                                                             #####
 #############################################################################################################################################
 #
 # Download NWN dedicated package
 # Make a directory to hold NWN data
 sudo mkdir ~/nwn && cd ~/nwn
-# Fetch the NWN dedicated server package. The version here might be outdated, so replace "8193.16" with current NWN build version
-sudo wget https://nwnx.io/nwnee-dedicated-8193.16.zip
+# Fetch the NWN dedicated server package. The version here might be outdated, so replace "8193.34" with current NWN build version
+# You can check the latest STABLE version here: https://forums.beamdog.com/discussion/67157/server-download-packages-and-docker-support
+sudo wget https://nwn.beamdog.net/downloads/nwnee-dedicated-8193.34.zip
 # Unpack the server to current directory - ~/nwn
 sudo unzip nwnee-dedicated-8193.16.zip -d .
 #
@@ -204,6 +208,6 @@ crontab -e
     * * * * * sleep 55; ~/mod-start.sh
     * * * * * sleep 60; ~/mod-start.sh
 #
-# Start the server. If it goes down, the cron job will restart it again within 1 minute.
+# Start the server. If it goes down, the cron job will restart it again within 5 seconds.
 #
 ./mod-start.sh
