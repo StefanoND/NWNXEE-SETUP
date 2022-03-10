@@ -45,7 +45,7 @@ Files to use for setup/update nwsync files
 
 Instructions on how to setup No-ip2 for static IP address:
 
-- noip-setup.sh
+- noip-setup.sh (This is not a runnable file)
 
 ## NWNX_PROFILER Setup
 
