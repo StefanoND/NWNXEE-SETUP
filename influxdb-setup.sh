@@ -1,8 +1,15 @@
+###########################################################################################################
+################################################ IMPORTANT ################################################
+###########################################################################################################
+## NOTE: YOU MUST ENABLE NWNX_TRACKING, NWNX_DIAGNOSTICS, NWNX_METRICS_INFLUXDB AND NWNX_OBJECT PLUGINS  ##
+##       ALSO, YOU MUST CREATE THEIR RESPECTIVE SCRIPTS IN THE MODULE AND THEIR DEPENDENCIES OR ELSE     ##
+##       YOUR GRAFANA WILL RETURN "No Data"                                                              ##
+###########################################################################################################
 # NOTE: This is not a runnable file - you need to manually paste the lines one by one
 # Take some time to understand what each command does.
 # These steps were tested on a clean Ubuntu 20.04 Desktop install:
 #------------------------------------------------------------------------------
-# Open ports 8086(TCP) 8088(TCP) 8089(UDP)
+# Open ports 8086(TCP) 8088(TCP) 8089(UDP) and 3000 (TCP/UDP)
 #
 # Increase UDP Buffer to 25MB (or higher)
 sudo sysctl -w net.core.rmem_max=26214400
