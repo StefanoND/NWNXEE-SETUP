@@ -12,7 +12,7 @@ sudo sysctl -w net.core.rmem_default=26214400
 curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
 #
 # Add repo to Ubuntu 20.04
-echo "deb https://repos.influxdata.com/ubuntu bionic stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 #
 # Update apt index and install InfluxDB
 sudo apt update -y && sudo apt upgrade -y
@@ -41,6 +41,9 @@ CREATE DATABASE metrics
 #
 # If you want to check if it was created type
 SHOW DATABASES
+#
+# Now let's use it
+USE metrics
 #
 # And quit
 quit
