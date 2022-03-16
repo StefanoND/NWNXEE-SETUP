@@ -1,6 +1,6 @@
 # NOTE: This is not a runnable file - you need to manually paste the lines one by one
 # Take some time to understand what each command does.
-# These steps were tested on a clean Ubuntu 18.04 Desktop install:
+# These steps were tested on a clean Ubuntu 20.04 Desktop install:
 #------------------------------------------------------------------------------
 # Open ports 8086(TCP) 8088(TCP) 8089(UDP)
 #
@@ -11,11 +11,11 @@ sudo sysctl -w net.core.rmem_default=26214400
 #Import GPG Key
 curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
 #
-# Add repo to Ubuntu 18.08
+# Add repo to Ubuntu 20.04
 echo "deb https://repos.influxdata.com/ubuntu bionic stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
 #
 # Update apt index and install InfluxDB
-sudo apt update -y
+sudo apt update -y && sudo apt upgrade -y
 sudo apt install influxdb -y
 #
 # Set as system service
@@ -66,6 +66,25 @@ sudo /bin/systemctl enable grafana-server
 #
 # Start grafana as service
 sudo /bin/systemctl start grafana-server
+#
+####################################################################################
+## For this part you probably will need a GUI if you don't have a way to acces it ##
+####################################################################################
+## Install tasksel
+# sudo apt install tasksel
+#
+## Install Desktop environment, you can check which desktops are available
+## with "tasksel --list-tasks" without quotes I chose the default minimal
+# sudo tasksel install ubuntu-desktop-minimal
+#
+## Wait for it to finish (around 10 mins depending on your system)
+## Reboot
+# shutdown -r now
+#
+## At this point, GUI should be working without any problem if not, make sure
+## your system is booting into the graphical.target
+# sudo systemctl set-default graphical.target
+####################################################################################
 #
 # Visit Grafana, change "localhost" to your site
 http://localhost:3000
