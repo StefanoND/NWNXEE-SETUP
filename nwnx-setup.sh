@@ -112,17 +112,17 @@ sudo mkdir ~/nwn && cd ~/nwn
 # You can check the latest STABLE version here: https://forums.beamdog.com/discussion/67157/server-download-packages-and-docker-support
 sudo wget https://nwn.beamdog.net/downloads/nwnee-dedicated-8193.34.zip
 # Unpack the server to current directory - ~/nwn
-sudo unzip nwnee-dedicated-8193.16.zip -d .
+sudo unzip nwnee-dedicated-8193.34.zip -d .
 #
 #############################################################################################################################################
 ##### THIS PART IS NOT NEEDED IF YOU'RE FOLLOWING THIS TUTORIAL FOR THE FIRST TIME                                                      #####
 #############################################################################################################################################
 ##### Update from older version                                                                                                         #####
 ##### cd ~/nwn                                                                                                                          #####
-##### Fetch the NWN dedicated server package. The version here might be outdated, so replace 8193.10 with current NWN build version     #####
-##### wget https://nwnx.io/nwnee-dedicated-8193.16.zip                                                                                  #####
+##### Fetch the NWN dedicated server package. The version here might be outdated, so replace 8193.34 with current NWN build version     #####
+##### wget https://nwnx.io/nwnee-dedicated-8193.34.zip                                                                                  #####
 ##### Unpack the server to current directory - ~/nwn                                                                                    #####
-##### unzip nwnee-dedicated-8193.16.zip -d .                                                                                            #####
+##### unzip nwnee-dedicated-8193.34.zip -d .                                                                                            #####
 ##### Press A to overwrite everything                                                                                                   #####
 #############################################################################################################################################
 #
