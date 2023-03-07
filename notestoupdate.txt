@@ -1,0 +1,6 @@
+# INFLUXDB
+# Disable telemetry
+# Telemetry reporting is enabled by default.
+# However, we’ve made it as easy as possible to ‘opt-out’ of the reporting.
+# Simply start the InfluxDB process with the --reporting-disabled flag.
+--reporting-disabled
