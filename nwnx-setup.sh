@@ -27,6 +27,22 @@ sudo systemctl restart console-setup.service
 # Enable copy-paste to-from host-vm
 # ---------------------------------------
 #
+# Install ssh server in guest VM
+sudo apt install -y openssh-server
+#
+# Install putty in host machine
+#
+# In your guest machine, check your ip addres
+ip addr
+#
+# Your IP address will be under "enp1s0" or similarly named network interface and it should look like "192.168.xxx.xxx"
+#
+# Now in putty paste the ip address you got earlier and connect (leave everything else unchanged)
+#
+# You can automatically put the login username under "Connections->Data" and in "Auto-login username" you put the Guest's username
+# Remember to save your changes in "Session" tab
+#
+# Done, you can now copy text from host (CTRL + C or CTRL + SHIFT + C) and paste in Putty with SHIFT + INSERT
 #------------------------------------------------------------------------------
 # THIS PART IS ONLY NEEDED IF YOU'RE USING ORACLE'S VM AND WANT SHARED FOLDERS (Using Windows as Host and Ubuntu as VM)
 #1. Open VirtualBox
@@ -94,8 +110,6 @@ ls
 # On 64bit systems, we need to manually add support for 32bit architecture
 # sudo dpkg --add-architecture i386
 #------------------------------------------------------------------------------
-# Install UnZip just in case you don't have it
-sudo apt install unzip
 #
 # We use a new compiler which may not be available by default, so add an extra place to download packages from
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
