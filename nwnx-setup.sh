@@ -5,6 +5,9 @@
 # Misc setup
 # ---------------------------------------
 #
+# If using libvirt/qemu with spice install spice-vdagent
+sudo apt install spice-vdagent -y
+#
 # Increase font size
 #
 # Change console-setup file
@@ -116,11 +119,11 @@ sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 # Redownload manifests for the newly added architecture and repository so we can use them (and upgrade existing ones)
 sudo apt update -y && sudo apt upgrade -y
 # Install tools needed to build NWNX
-sudo apt install g++-12 g++-12-multilib gcc-12 gcc-12-multilib cmake git make unzip -y
+sudo apt install g++-11 g++-11-multilib gcc-11 gcc-11-multilib cmake git make unzip -y
 # Install stuff needed to build/run/use MySQL
 sudo apt install mysql-server  libmysqlclient21 libmysqlclient-dev -y
 # Install SSL dependency for Webhook just in case they're not already
-sudo apt install libssl3 libssl-dev -y
+sudo apt install libssl1.1 libssl-dev -y
 # Install this required lib
 sudo apt install libsndio7.0 libsndio-dev -y
 #
@@ -134,7 +137,8 @@ git clone https://github.com/nwnxee/unified.git nwnx
 # Make a directory where the build system will initialize even though there's already a Build folder (with upper case B)
 mkdir nwnx/build && cd nwnx/build
 # Initialize the build system to use GCC version 7, for 64bit. Build release version of nwnx, with debug info
-CC="gcc-12 -m64" CXX="g++-12 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
+# Ignore PostgreSQL, SWIG and HUNSPELL errors, you don't have them and you (probably) don't need them
+CC="gcc-11 -m64" CXX="g++-11 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
 # Build NWNX, in X threads (Where X is your CPU thread count + 1). This will take a while
 make -j5
 #
@@ -142,17 +146,17 @@ make -j5
 ##### THIS PART IS NOT NEEDED IF YOU'RE FOLLOWING THIS TUTORIAL FOR THE FIRST TIME                                                      #####
 #############################################################################################################################################
 ##### Update nwnx from older version                                                                                                    #####
-##### delete nwnx folder and redo the above steps (from line 90 through 99)                                                             #####
+##### delete nwnx folder and redo the above steps (from line 136 through 142)                                                           #####
 #############################################################################################################################################
 #
 # Download NWN dedicated package
 # Make a directory to hold NWN data
-sudo mkdir ~/nwn && cd ~/nwn
+mkdir ~/nwn && cd ~/nwn
 # Fetch the NWN dedicated server package. The version here might be outdated, so replace "8193.34" with current NWN build version
 # You can check the latest STABLE version here: https://forums.beamdog.com/discussion/67157/server-download-packages-and-docker-support
-sudo wget https://nwn.beamdog.net/downloads/nwnee-dedicated-8193.34.zip
+wget https://nwn.beamdog.net/downloads/nwnee-dedicated-8193.34.zip
 # Unpack the server to current directory - ~/nwn
-sudo unzip nwnee-dedicated-8193.34.zip -d .
+unzip nwnee-dedicated-8193.34.zip -d .
 #
 #############################################################################################################################################
 ##### THIS PART IS NOT NEEDED IF YOU'RE FOLLOWING THIS TUTORIAL FOR THE FIRST TIME                                                      #####
@@ -171,8 +175,33 @@ sudo unzip nwnee-dedicated-8193.34.zip -d .
 cd bin/linux-x86 && ./nwserver-linux
 # The user directory path is long and contains spaces, which is hard to type sometimes.
 # So we create a link (shortcut) to it as ~/nwn/userdir so it's easier to access
-sudo ln -s ~/.local/share/Neverwinter\ Nights/ ~/nwn/userdir
+ln -s ~/.local/share/Neverwinter\ Nights/ ~/nwn/userdir
 #
+# -------------------------------------------------------------------------------
+#
+# To transfer files between your PC and the Server (or Host Machine and VM Guest without folder sharing) you can use SCP
+#
+# To transfer files from the Host to the Server you type "scp /path/to/file name@address:/path/to/destination" example:
+scp ~/downloads/image.png vm@192.168.100.100:~/downloads
+#
+# This will copy the "image.png" from the host machine to the ~/downloads folder of the server folder
+#
+# If you want to transfer a folder instead, you use -r before the paths like so
+scp -r ~/downloads/images vm@192.168.100.100:~/downloads
+#
+# This will copy the "images" folder and all its contents into the server's downloads folder
+#
+# If you're inside your server and want to get a file or folder from the host machine you do the inverse
+scp host@192.168.200.200:~/downloads/image.png ~/downloads
+#
+# Note: The first time you run these commands you'll be prompted to trust (or not) the connection
+# Note2: You'll need to type the password to be able to finish the commands, those are the login passwords of each respective machine
+# So if in your vm your login is: vm and the password is: 123, you'll have to input "123" when it asks for the password
+# The same applies if you're trying to use from the vm to the host, if the login of host is: host and the password is: 321, you'll have to input "321"
+# So if you don't know the password of any of the machines you won't be able to run the above commands, unless the owner/administrator of each machine
+# Set up an alternate althentitation that will let you run those commands without problems
+#
+# -------------------------------------------------------------------------------
 # Set up your module:
 # Copy your module/hak/tlk/etc files to ~/nwn/userdir
 # Edit ~/nwn/userdir/nwnplayer.ini to your preference
@@ -204,16 +233,17 @@ exit;
 #############################################################################################################################################
 ##### THIS PART IS NOT NEEDED IF YOU HAVE A DESKTOP/GUI INSTALLED                                                                       #####
 #############################################################################################################################################
-##### Download all files from this repo     
+##### For simplicity sake download this repo in the user's home folder
 ##### cd ~/
-##### wget https://github.com/Ecsyend/NWNXEE-SETUP/archive/main.zip                                                                     
-##### Unzip them
-##### unzip main.zip
+#####
+##### Download all files from this repo and cd into it
+##### git clone https://github.com/StefanoND/NWNXEE-SETUP.git && cd NWNXEE-SETUP
+#####
 ##### Copy them into your /home/ folder
-##### cp -a ~/NWNXEE-SETUP-main/nwnx_files/. ~/
+##### cp nwnx_files/* ~/
 #############################################################################################################################################
 #
-# Copy the scripts from this directory over onto ~/
+# Copy the scripts from this directory over into your home directory
 # mod-start.sh - starts the server unless already running
 # mod-stop.sh - kills the server
 # mod-disable.sh - disables server auto restart
@@ -221,14 +251,17 @@ exit;
 # mod-savechars.sh - saves servervault/ to git
 # mod-status.sh - returns 1 if server is running, 0 if not
 #
-# Need to mark them as executable
+# cd to your home directory if you haven't already
+cd ~
+#
+# Need to mark the scripts above as executable
 chmod +x mod-*.sh
 #
 # Create a place where logs will be stored
-mkdir ~/logs
+mkdir logs
 #
 # Edit the mod-start.sh script to further customize. You can use any other text editor instead.
-nano ~/mod-start.sh
+nano mod-start.sh
 #
 # Set up cronjob for auto server restart every minute
 #
