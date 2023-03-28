@@ -136,7 +136,7 @@ sudo reboot now
 git clone https://github.com/nwnxee/unified.git nwnx
 # Make a directory where the build system will initialize even though there's already a Build folder (with upper case B)
 mkdir nwnx/build && cd nwnx/build
-# Initialize the build system to use GCC version 7, for 64bit. Build release version of nwnx, with debug info
+# Initialize the build system to use GCC version 11, for 64bit. Build release version of nwnx, with debug info
 # Ignore PostgreSQL, SWIG and HUNSPELL errors, you don't have them and you (probably) don't need them
 CC="gcc-11 -m64" CXX="g++-11 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
 # Build NWNX, in X threads (Where X is your CPU thread count + 1). This will take a while
@@ -154,9 +154,9 @@ make -j5
 mkdir ~/nwn && cd ~/nwn
 # Fetch the NWN dedicated server package. The version here might be outdated, so replace "8193.34" with current NWN build version
 # You can check the latest STABLE version here: https://forums.beamdog.com/discussion/67157/server-download-packages-and-docker-support
-wget https://nwn.beamdog.net/downloads/nwnee-dedicated-8193.34.zip
+wget https://nwn.beamdog.net/downloads/nwnee-dedicated-8193.35-36.zip
 # Unpack the server to current directory - ~/nwn
-unzip nwnee-dedicated-8193.34.zip -d .
+unzip nwnee-dedicated-8193.35-36.zip -d .
 #
 #############################################################################################################################################
 ##### THIS PART IS NOT NEEDED IF YOU'RE FOLLOWING THIS TUTORIAL FOR THE FIRST TIME                                                      #####
@@ -164,9 +164,9 @@ unzip nwnee-dedicated-8193.34.zip -d .
 ##### Update from older version                                                                                                         #####
 ##### cd ~/nwn                                                                                                                          #####
 ##### Fetch the NWN dedicated server package. The version here might be outdated, so replace 8193.34 with current NWN build version     #####
-##### wget https://nwnx.io/nwnee-dedicated-8193.34.zip                                                                                  #####
+##### wget https://nwnx.io/nwnee-dedicated-8193.35-36.zip                                                                               #####
 ##### Unpack the server to current directory - ~/nwn                                                                                    #####
-##### unzip nwnee-dedicated-8193.34.zip -d .                                                                                            #####
+##### unzip nwnee-dedicated-8193.35-36.zip -d .                                                                                         #####
 ##### Press A to overwrite everything                                                                                                   #####
 #############################################################################################################################################
 #
