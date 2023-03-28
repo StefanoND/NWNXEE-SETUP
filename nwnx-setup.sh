@@ -3,8 +3,9 @@
 # These steps were tested on a clean Ubuntu 20.04 Server install:
 #------------------------------------------------------------------------------
 # Misc setup
+# ---------------------------------------
 #
-# Increase font size and nable copy-paste to-from host-vm
+# Increase font size
 #
 # Change console-setup file
 sudo nano /etc/default/console-setup
@@ -21,6 +22,11 @@ sudo setupcon
 #
 # Apply changes now system wide (without reboot)
 sudo systemctl restart console-setup
+#
+# ---------------------------------------
+# Enable copy-paste to-from host-vm
+# ---------------------------------------
+#
 #------------------------------------------------------------------------------
 # THIS PART IS ONLY NEEDED IF YOU'RE USING ORACLE'S VM AND WANT SHARED FOLDERS (Using Windows as Host and Ubuntu as VM)
 #1. Open VirtualBox
