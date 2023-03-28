@@ -116,27 +116,27 @@ sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 # Redownload manifests for the newly added architecture and repository so we can use them (and upgrade existing ones)
 sudo apt update -y && sudo apt upgrade -y
 # Install tools needed to build NWNX
-sudo apt install g++-7 g++-7-multilib gcc-7 gcc-7-multilib cmake git make unzip -y
+sudo apt install g++-12 g++-12-multilib gcc-12 gcc-12-multilib cmake git make unzip -y
 # Install stuff needed to build/run/use MySQL
 sudo apt install mysql-server  libmysqlclient21 libmysqlclient-dev -y
 # Install SSL dependency for Webhook just in case they're not already
-sudo apt install libssl1.1 libssl-dev -y
+sudo apt install libssl3 libssl-dev -y
 # Install this required lib
 sudo apt install libsndio7.0 libsndio-dev -y
 #
 # Reboot the VM and log-in again (also this is a good time to create a snapshot)
-shutdown -r now
+sudo reboot now
 #
 # Download and build NWNX
 #
 # Get latest source from github
 git clone https://github.com/nwnxee/unified.git nwnx
 # Make a directory where the build system will initialize even though there's already a Build folder (with upper case B)
-sudo mkdir nwnx/build && cd nwnx/build
+mkdir nwnx/build && cd nwnx/build
 # Initialize the build system to use GCC version 7, for 64bit. Build release version of nwnx, with debug info
-sudo CC="gcc-7 -m64" CXX="g++-7 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
+CC="gcc-12 -m64" CXX="g++-12 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
 # Build NWNX, in X threads (Where X is your CPU thread count + 1). This will take a while
-sudo make -j9
+make -j5
 #
 #############################################################################################################################################
 ##### THIS PART IS NOT NEEDED IF YOU'RE FOLLOWING THIS TUTORIAL FOR THE FIRST TIME                                                      #####
