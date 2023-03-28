@@ -21,7 +21,7 @@ sudo update-initramfs -u
 sudo setupcon
 #
 # Apply changes now system wide (without reboot)
-sudo systemctl restart console-setup
+sudo systemctl restart console-setup.service
 #
 # ---------------------------------------
 # Enable copy-paste to-from host-vm
