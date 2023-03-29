@@ -1,8 +1,9 @@
 #!/bin/bash
 
-export PATH=/home/USER/nwsync
+# Change USER to your username
+export PATH=/home/USER
 
-pushd /home/USER/nwsync
+pushd $PATH/nwsync
 
-# Example ./nwsync_write --description="Download" /home/ecsyend/www/nwsync/nwsyncdata /home/ecsyend/nwn/modules/module.mod
-./nwsync_write --description="Module's Required Files" /home/USER/www/nwsync/nwsyncdata ~/nwn/userdir/modules/module.mod
+# Example ./nwsync_write --description="Download" $PATH/www/nwsync/nwsyncdata $PATH/nwn/modules/module.mod
+./nwsync_write --description="Module's Required Files" $PATH/www/nwsync/nwsyncdata $PATH/nwn/userdir/modules/module.mod
