@@ -110,6 +110,35 @@ export NWNX_CORE_LOG_ASYNC=1
 # Sets the nwscript that the plugin will look for
 export NWNX_CHAT_CHAT_SCRIPT="nwnx_chat"
 
+# NWNX_COMPILER
+#
+# The directory containing the source .nss files.
+export NWNX_COMPILER_SRC_DIR=""
+#
+# The directory to output the compiled .ncs files.
+export NWNX_COMPILER_OUT_DIR=""
+#
+# Cleans all .ncs files from the output directory.
+export NWNX_COMPILER_CLEAN_COMPILE=false
+#
+# Continue processing scripts after a compiler error.
+export NWNX_COMPILER_CONTINUE_ON_ERROR=false
+#
+# After completing compilation, shuts down the server.
+export NWNX_COMPILER_EXIT_ON_COMPLETE=true
+#
+# CScriptCompiler->SetCompileDebugLevel()
+export NWNX_COMPILER_DEBUG_LEVEL=0
+#
+# CScriptCompiler->SetCompileSymbolicOutput()
+export NWNX_COMPILER_SYMBOLIC_OUTPUT=0
+#
+# CScriptCompiler->SetGenerateDebuggerOutput()
+export NWNX_COMPILER_GENERATE_DEBUGGER_OUTPUT=0
+#
+# CScriptCompiler->SetOptimizeBinaryCodeLength()
+export NWNX_COMPILER_OPTIMIZE_BINARY_CODE_LENGTH=true
+
 # NWNX DIAGNOSTICS
 # Catches a few classes of memory corruptions in NWN and NWNX
 export NWNX_DIAGNOSTICS_MEMORY_SANITIZER=true
@@ -155,6 +184,50 @@ export INFLUXDB_USER_PASSWORD=password
 export INFLUXDB_UDP_ENABLED=true
 export INFLUXDB_UDP_BIND_ADDRESS=:8089
 export INFLUXDB_UDP_DATABASE=metrics
+
+# NWNX_NOSTACK
+# The four variables below have a range of 0-4
+# 0: Default value, vanilla behaviour
+# 1: No stack, only highest effect will be used
+# 2: Stacks both the highest spell AND item effect
+# 3: No stack from items, spells will stack as vanilla
+# 4: Custom, needs to be set in NWScript
+#
+# Controls whether ability scores should stack or not
+export NWNX_NOSTACK_ABILITY=0
+#
+# Controls whether skill bonuses should stack or not
+export NWNX_NOSTACK_SKILL=0
+#
+# Controls whether saving throw bonuses should stack or not
+export NWNX_NOSTACK_SAVINGTHROW=0
+#
+# Controls whether attack bonuses should stack or not
+export NWNX_NOSTACK_ATTACKBONUS=0
+#
+# Controls whether penalties should stack or not
+export NWNX_NOSTACK_ALWAYS_STACK_PENALTIES=false
+#
+# Controls whether separate "OBJECT_INVALID" effects should stack or not
+export NWNX_NOSTACK_SEPARATE_INVALID_OID_EFFECTS=false
+#
+# The two variables below have a range of 0 to 20
+# 0: Enhancement Bonus (Default for Items)
+# 1: Circumstance bonus (stacks) (Default for Spells)
+# 2: Competence bonus
+# 3: Insight Bonus
+# 4: Luck Bonus
+# 5: Morale Bonus
+# 6: Profane Bonus
+# 7: Resistance Bonus
+# 8: Sacred Bonus
+# 9-20: Custom
+#
+# Assigns all spells effects to desired type
+export NWNX_NOSTACK_SPELL_DEFAULT_TYPE=1
+#
+# Assigns all items effects to desired type
+export NWNX_NOSTACK_ITEM_DEFAULT_TYPE=0
 
 # NWNX_OPTIMIZATIONS
 # Flushes the game log on an async thread, potentially improving performance
