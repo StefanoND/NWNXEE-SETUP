@@ -9,9 +9,10 @@ Changelog
 
     Manjaro Section removed (it's not meant for server use)
     Currently updating repo where it needs
+    Added links to the people I've credited
 #
 
-Thanks to mtijanic, orth, daz, Urothis, niv and all NWN/NWNX community
+Thanks to [mtijanic](https://github.com/mtijanic), [orth](https://github.com/plenarius), [daz](https://github.com/Daztek), [Urothis](https://github.com/urothis), [niv](https://github.com/niv) and all NWN/NWNX community
 
 Almost all content are modified/updated version of their guides
 
