@@ -1,5 +1,11 @@
 # NWNXEE-SETUP
-Keep in mind that the Manjaro Section is still work in progress, I'll let you guys know when it's ready
+Tutorial for Ubuntu Server 20.04 LTS
+#
+Changelog
+
+    Manjaro Section removed (it's not meant for server use)
+    Currently updating repo where it needs
+#
 
 Thanks to mtijanic, orth, daz, Urothis, niv and all NWN/NWNX community
 
