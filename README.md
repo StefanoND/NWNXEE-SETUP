@@ -1,5 +1,5 @@
 # NWNXEE-SETUP
-Tutorial for Ubuntu Server 20.04 LTS
+Tutorial for Ubuntu Server 22.04 LTS
 
 Clone this repo with:
 
