@@ -4,6 +4,14 @@ Tutorial for Ubuntu Server 22.04 LTS
 Clone this repo with:
 
     git clone https://github.com/StefanoND/NWNXEE-SETUP.git
+
+#
+Install order
+1. virtualbox-setup.sh
+2. noip-setup.sh
+3. nwnx-setup.sh
+4. nwsync-setup.sh
+5. influxdb-setup.sh
 #
 Changelog
 
