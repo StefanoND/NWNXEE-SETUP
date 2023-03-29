@@ -7,9 +7,12 @@ Clone this repo with:
 #
 Changelog
 
-    Manjaro Section removed (it's not meant for server use)
     Currently updating repo where it needs
+    Updated noip setup
+    Updated nwsync setup
+    Updated nwnx setup
     Added links to the people I've credited
+    Manjaro Section removed (it's not meant for server use)
 #
 
 Thanks to [mtijanic](https://github.com/mtijanic), [orth](https://github.com/plenarius), [daz](https://github.com/Daztek), [Urothis](https://github.com/urothis), [niv](https://github.com/niv) and all NWN/NWNX community
