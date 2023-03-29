@@ -25,7 +25,7 @@ sudo pacman -S virtualbox virtualbox-ext-oracle --noconfirm --needed
 # Open "Hardware" dropdown, base memory should be between 2GB-8GB (2GB bare minimum, 4GB for nwnxee, 6GB for huge servers, 8GB for overkill)
 # Processors: 2 CPU is enough, you can give more if you want, but it's unnecessary
 #
-# Open "Hard Disk" dropdown, choose size. (32GB should be enough, even with huge hakpaks)
+# Open "Hard Disk" dropdown, choose size. (32GB should be enough, even with huge hakpaks, the OS size is ~6.5GB)
 # Int "Hard Disk Type and Variant" Section, "VDI (VirtualBox Disk Image)" is good enough, enable "Pre-allocate Full Size"
 #
 # Click on "Finish"
