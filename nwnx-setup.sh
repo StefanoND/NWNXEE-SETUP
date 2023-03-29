@@ -2,41 +2,19 @@
 # Take some time to understand what each command does.
 # These steps were tested on a clean Ubuntu 20.04 Server install:
 #------------------------------------------------------------------------------
-# Misc setup
-# ---------------------------------------
+# 
+# I recommend using PuTTY for copy-paste capabilities and better terminal aesthetic
 #
-# Increase font size
+# Install bash-completion (So you can auto complete with "TAB") and reboot
+sudo apt install -y bash-completion
+reboot now
 #
-# Change console-setup file
-sudo nano /etc/default/console-setup
-#
-# Change its contents so it looks like show below
-FONTFACE="TER"
-FONTSIZE="16x32"
-#
-# Apply changes
-sudo update-initramfs -u
-#
-# Apply changes now (without reboot)
-sudo setupcon
-#
-# Apply changes now system wide (without reboot)
-sudo systemctl restart console-setup.service
-#
-# Done, you can now copy text from host (CTRL + C or CTRL + SHIFT + C) and paste in Putty with SHIFT + INSERT
-#------------------------------------------------------------------------------
-# THIS PART IS ONLY NEEDED IF YOU'RE USING ORACLE'S VM AND WANT SHARED FOLDERS (Using Windows as Host and Ubuntu as VM)
 #1. Open VirtualBox
-#2. Right-click your VM, then click Settings
-#3. Go to Shared Folders section
-#4. Add a new shared folder and name it "sharedf" without quotes (can't be just "shared")
-#5. On Add Share prompt, select the Folder Path in your host that you want to be accessible inside your VM.
-#6. In the Folder Name field, type shared
-#7. Uncheck Read-only and Auto-mount, and check Make Permanent
 #8. Start your VM
 #9. Once your VM is up and running, go to Devices menu -> Insert Guest Additions CD image menu but don't run it, cancel if it asks
 # Install dependencias for VirtualBox guest additions
 sudo apt update -y && sudo apt upgrade -y
+#
 #
 # Install necessary dependencies
 sudo apt install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
@@ -62,28 +40,23 @@ sudo su
 ./VBoxLinuxAdditions.run
 #
 # Reboot VM
-reboot now
-# Create "shared" directory in your home
-mkdir ~/shared
-# Mount the shared folder from the host to your ~/shared directory
-sudo mount -t vboxsf sharedf ~/shared
-# The host folder should now be accessible inside the VM
-cd ~/shared
-# Make the folder persistent
-# Edit fstab file in /etc directory
-sudo nano /etc/fstab
-# Add the following line to fstab (sparated by tabs) and press Ctro+O then ENTER to Save and Ctrl+X to leave
-sharedf	/home/<username>/shared	vboxsf	defaults	0	0
-# Edit modules
-sudo nano /etc/modules
-# Add the following line to /etc/modules and press Ctro+O then ENTER to Save and Ctrl+X to leave
-vboxsf
-# Reboot the VM and log-in again
-sudo shutdown -r now
-# Go to your home directory and check to see if the file is highlighted in green.
-cd ~
-ls
-# If it is then congratulations! You successfully linked the directory within your vm with your host folder.
+shutdown now
+#
+# Right-click your VM, then click Settings
+# Go to Shared Folders section
+# Click to add a new shared folder
+# Select Folder Path, Folder Name is not necessary
+# Mount point should be some place easy (like /home/USERNAME/shared)
+# Enable "Auto-mount" and click "Ok"
+#
+# Start your VM, once it's started go to "Settings" again and go to "Shared Folders" again
+# Select the Shared Folder you just created and edit it, enable "Make Permanent" and click "Ok" and "Ok"
+#
+# Done
+#
+# If you have any permission issues you can try
+sudo chown -R $(logname):$(logname) shared
+sudo chmod 755 shared
 #------------------------------------------------------------------------------
 #
 # Install necessary prereqs
@@ -99,11 +72,24 @@ sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 # Redownload manifests for the newly added architecture and repository so we can use them (and upgrade existing ones)
 sudo apt update -y && sudo apt upgrade -y
 # Install tools needed to build NWNX
-sudo apt install g++-11 g++-11-multilib gcc-11 gcc-11-multilib cmake git make unzip -y
+sudo apt install g++-12 g++-12-multilib gcc-12 gcc-12-multilib cmake git make unzip -y
+#
+#------------------------------------------------------------------------------
+# Choose one (or not, you know better)
+#
+# MYSQL
 # Install stuff needed to build/run/use MySQL
 sudo apt install mysql-server  libmysqlclient21 libmysqlclient-dev -y
+#
+# SQLITE
+sudo apt install sqlite3 sqlitebrowser -y
+#
+# POSTGRESQL
+sudo apt install postgresql postgresql-contrib postgresql-client-common -y
+#------------------------------------------------------------------------------
+#
 # Install SSL dependency for Webhook just in case they're not already
-sudo apt install libssl1.1 libssl-dev -y
+sudo apt install libssl3 libssl-dev -y
 # Install this required lib
 sudo apt install libsndio7.0 libsndio-dev -y
 #
@@ -118,7 +104,7 @@ git clone https://github.com/nwnxee/unified.git nwnx
 mkdir nwnx/build && cd nwnx/build
 # Initialize the build system to use GCC version 11, for 64bit. Build release version of nwnx, with debug info
 # Ignore PostgreSQL, SWIG and HUNSPELL errors, you don't have them and you (probably) don't need them
-CC="gcc-11 -m64" CXX="g++-11 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
+CC="gcc-12 -m64" CXX="g++-12 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
 # Build NWNX, in X threads (Where X is your CPU thread count + 1). This will take a while
 make -j5
 #
@@ -197,6 +183,8 @@ git config --global user.email = "my@email.com"
 #
 # Set up the Database
 #
+#------------------------------------------------------------------------------
+# MYSQL
 # Run mysql (as admin/sudo). The following commands are given in MySQL, not the regular terminal
 sudo mysql
 # We want to configure mysql itself.
@@ -209,6 +197,16 @@ FLUSH PRIVILEGES;
 # Create a database for the module to use, typically named same as module, but can be anything.
 CREATE DATABASE mymodulename;
 exit;
+#
+# SQLITE
+#
+# WIP
+#
+# POSTGRESQL
+#
+# WIP
+#
+#------------------------------------------------------------------------------
 #
 #############################################################################################################################################
 ##### THIS PART IS NOT NEEDED IF YOU HAVE A DESKTOP/GUI INSTALLED                                                                       #####
@@ -239,6 +237,9 @@ chmod +x mod-*.sh
 #
 # Create a place where logs will be stored
 mkdir logs
+#
+# Edit the mod-savechars.sh script if you have you setup your servervault somewhere else
+nano mod-savechars.sh
 #
 # Edit the mod-start.sh script to further customize. You can use any other text editor instead.
 nano mod-start.sh
