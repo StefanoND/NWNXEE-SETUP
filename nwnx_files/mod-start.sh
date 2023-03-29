@@ -76,14 +76,6 @@ export NWNX_VISIBILITY_SKIP=y
 export NWNX_WEAPON_SKIP=y
 export NWNX_WEBHOOK_SKIP=y
 
-# Set you DB connection info here
-export NWNX_SQL_TYPE=mysql
-export NWNX_SQL_HOST=localhost
-export NWNX_SQL_USERNAME=user
-export NWNX_SQL_PASSWORD=password
-export NWNX_SQL_DATABASE=nwn
-export NWNX_SQL_QUERY_METRICS=true
-
 # NWNX_CORE
 # Log levels go from 2 (only fatal errors) to 7 (very verbose). 6 is recommended
 export NWNX_CORE_LOG_LEVEL=6
@@ -155,10 +147,36 @@ export NWNX_ELC_ENFORCE_DEFAULT_EVENT_SCRIPTS=false
 #
 # If enabled, resets a character's dialog resref to empty. Requires ELC to be enabled.
 export NWNX_ELC_ENFORCE_EMPTY_DIALOG_RESREF=false
+#
+# If enabled, check when a character's first level class is a spellcaster, if their primary casting stat is >= 11.
+export NWNX_ELC_ENFORCE_CASTER_PRIMARY_STAT_IS_11=false
+
+# NWNX_EXPERIMENTAL
+# Enables NWNX_EXPERIMENTAL
+export NWNX_CORE_LOAD_EXPERIMENTAL_PLUGIN=n
+#
+# Suppresses the playerlist and player login/logout messages for all players except DMs.
+# This functionality is not compatible with NWNX_Rename.
+export NWNX_EXPERIMENTAL_SUPPRESS_PLAYER_LOGIN_INFO=false
+#
+# Attempts to correct a crash involving faction/reputations.
+export NWNX_EXPERIMENTAL_ADJUST_REPUTATION_FIX=false
+#
+# Disable LevelUp Validation
+export NWNX_EXPERIMENTAL_DISABLE_LEVELUP_VALIDATION=false
+#
+# Removes the hardcoded effects of the Ranger's Dual-wield feat.
+export NWNX_EXPERIMENTAL_UNHARDCODE_RANGER_DUALWIELD=false
+#
+# Ignore the module's version when loading.
+export NWNX_EXPERIMENTAL_IGNORE_MODULE_VERSION=false
 
 # NWNX_FEAT
 # Shows the effect's icon (the red and green squares)
 export NWNX_FEAT_SHOW_EFFECT_ICON=true
+#
+# A custom spell id given to all effects created by this plugin.
+#export NWNX_FEAT_CUSTOM_SPELL_ID=
 
 # NWNX_MAXLEVEL
 # Sets the max level 41-60
@@ -236,8 +254,25 @@ export NWNX_OPTIMIZATIONS_ASYNC_LOG_FLUSH=true
 # Optimizes object lookup code, improving performance
 export NWNX_OPTIMIZATIONS_GAME_OBJECT_LOOKUP=true
 #
-# Optimizes GetObjectByTag() lookup code, improving performance
-export NWNX_OPTIMIZATIONS_OBJECT_TAG_LOOKUP=true
+# Optimizes Player client lookup from object IDs, improving performance
+export NWNX_OPTIMIZATIONS_PLAYER_LOOKUP=true
+#
+# Optimizes LastUpdateObject lookup code, improving performance
+export NWNX_OPTIMIZATIONS_LUO_LOOKUP=true
+#
+# Uses an experimental alternative update mechanism. Requires LUO_LOOKUP
+# Breaks all of NWNX_Appearance
+# Breaks the following NWNX_Player functions: SetObjectVisualTransformOverride,
+# ApplyLoopingVisualEffectToObject, SetPlaceableNameOverride, SetCreatureNameOverride,
+# SetObjectMouseCursorOverride and SetObjectHiliteColorOverride
+# Breaks forcing object to be always visible from NWNX_Visibility 
+export NWNX_OPTIMIZATIONS_ALTERNATE_GAME_OBJECT_UPDATE=false
+#
+# Caches all script chunks, improving performance
+export NWNX_OPTIMIZATIONS_CACHE_SCRIPT_CHUNKS=true
+#
+# Caches all nwscript debugger instances, improving GetScriptBacktrace() performance
+export NWNX_OPTIMIZATIONS_CACHE_DEBUGGER_INSTANCES=true
 
 # NWNX_PROFILER
 export NWNX_PROFILER_ENABLE_OVERHEAD_COMPENSATION=$PROFILER_ENABLE
@@ -262,25 +297,85 @@ export NWNX_PROFILER_ENABLE_TICKRATE=$PROFILER_ENABLE
 # Shows the effect's icon (the red and green squares)
 export NWNX_RACE_SHOW_EFFECT_ICON=true
 
+# NWNX_REDIS
+#
+# Address to use
+export NWNX_REDIS_HOST=""
+#
+# Port to use
+export NWNX_REDIS_PORT=6379
+#
+# NWScript NWNX_REDIS will subcribe to
+export NWNX_REDIS_PUBSUB_SCRIPT="on_pubsub"
+#
+# Channels it'll listen to
+export NWNX_REDIS_PUBSUB_CHANNELS=""
+
 # NWNX_RENAME
 # This is the listing of players from the character selection screen before entering the server. Setting the value to 1 overrides their names if a global rename has been set, 2 also hides class information, 3 hides class information but keeps names as their original.
-export NWNX_RENAME_ON_MODULE_CHAR_LIST=1
+export NWNX_RENAME_ON_MODULE_CHAR_LIST=false
 #
 # Renames the player name on the player list as well.
 export NWNX_RENAME_ON_PLAYER_LIST=true 
 #
 # DM observers will see global or personal overrides as well as being able to have their own name overridden for other observers.
-export NWNX_RENAME_ALLOW_DM=true
+export NWNX_RENAME_ALLOW_DM=false
 #
 # When using NWNX_Rename_SetPCNameOverride with NWNX_RENAME_PLAYERNAME_ANONYMOUS this is the string used for the <PlayerName>
 export NWNX_RENAME_ANONYMOUS_NAME="Someone"
 #
 # When set to true, global overrides change the display name globally - scripts and DMs included. When set to false, then name is only changed for players. Scripts and DMs see the original names (unless NWNX_RENAME_ALLOW_DM is set).
-export NWNX_RENAME_OVERWRITE_DISPLAY_NAME=true
+export NWNX_RENAME_OVERWRITE_DISPLAY_NAME=false
+
+# NWNX_SQL
+#
+# Types are: MYSQL, POSTGRESQL, SQLITE
+export NWNX_SQL_TYPE=MYSQL
+#
+# Host name where the database resides. Typically localhost but can be any valid host name or IP address.
+# Not used if using SQLITE
+export NWNX_SQL_HOST=localhost
+#
+# The port for the database connection. If left unset it will use the default port.
+# Only used by MYSQL
+export NWNX_SQL_PORT=3307
+#
+# Database username used for the connection.
+# Not used if using SQLITE
+export NWNX_SQL_USERNAME=user
+#
+# Password for the database connection.
+# Not used if using SQLITE
+export NWNX_SQL_PASSWORD=password
+#
+# The database to connect to.
+# The filename of the database when using SQLite, it is stored in the UserDirectory/database folder. 
+export NWNX_SQL_DATABASE=mymodulename
+#
+# Export query execution metrics.
+# The Metrics_InfluxDB plugin and a visualizer like Grafana are required to view these metrics.
+export NWNX_SQL_QUERY_METRICS=true
+#
+# Convert all strings going between the database and game to/from UTF8
+# This takes into account the core locale as well.
+#export NWNX_SQL_USE_UTF8=true
+#
+# Set the connection's character set to be used.
+# Only supported on mysql and pgsql. For sqlite this can be achieved with a query.
+# For supported MYSQL character sets check: https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html
+# For supported POSTGRESQL character sets check: https://www.postgresql.org/docs/current/multibyte.html
+#export NWNX_SQL_CHARACTER_SET=utf8mb3
 
 # NWNX_SERVERLOGREDIRECTOR
-# When true, *** ValidateGFFResource sent by user. messages are not written to the NWNX log
+# When true, "*** ValidateGFFResource sent by user." messages are not written to the NWNX log
 export NWNX_SERVERLOGREDIRECTOR_HIDE_VALIDATEGFFRESOURCE_MESSAGES=false
+
+# NWNX_SPELLCHECKER
+# Path to the aff file
+export NWNX_SPELL_PATH_AFF=/usr/share/hunspell/en_US.aff
+#
+# Path to the dic file
+export NWNX_SPELL_PATH_DIC=/usr/share/hunspell/en_US.dic
 
 # NWNX_THREADWATCHDOG
 # Set the period at which the watchdog fires, in seconds
@@ -303,10 +398,10 @@ export NWNX_TWEAKS_HIDE_CLASSES_ON_CHAR_LIST=false
 export NWNX_TWEAKS_PLAYER_DYING_HP_LIMIT=-10
 #
 # Disable pausing by players and DMs
-export NWNX_TWEAKS_DISABLE_PAUSE=true
+export NWNX_TWEAKS_DISABLE_PAUSE=false
 #
 # Disable DM quicksave ability
-export NWNX_TWEAKS_DISABLE_QUICKSAVE=true
+export NWNX_TWEAKS_DISABLE_QUICKSAVE=false
 #
 # Stackable items can only be merged if all local variables are the same
 export NWNX_TWEAKS_COMPARE_VARIABLES_WHEN_MERGING=true
@@ -319,9 +414,6 @@ export NWNX_TWEAKS_SNEAK_ATTACK_IGNORE_CRIT_IMMUNITY=true
 #
 # Items are not destroyed when they reach 0 charges
 export NWNX_TWEAKS_PRESERVE_DEPLETED_ITEMS=true
-#
-# Fix some intel crashes by disabling some shadows on areas
-export NWNX_TWEAKS_DISABLE_SHADOWS=false
 #
 # 1: DMs are hidden on Char List; 2: PCs are hidden on Char List; 3: Both PCs and DMs are hidden on char list.
 export NWNX_TWEAKS_HIDE_PLAYERS_ON_CHAR_LIST=1
@@ -353,13 +445,98 @@ export NWNX_TWEAKS_FIX_DISPEL_EFFECT_LEVELS=true
 export NWNX_TWEAKS_ADD_PRESTIGECLASS_CASTER_LEVELS=true
 #
 # Fix Unlimited Potions Bug
-#export NWNX_TWEAKS_FIX_UNLIMITED_POTIONS_BUG=true
+export NWNX_TWEAKS_FIX_UNLIMITED_POTIONS_BUG=true
 #
 # Remove hardcode from shields
 export NWNX_TWEAKS_UNHARDCODE_SHIELDS=true
 #
 # Stops DMs from spawning items
 export NWNX_TWEAKS_BLOCK_DM_SPAWNITEM=false
+#
+# Allows armor with a max DEX bonus of under 1.
+export NWNX_TWEAKS_FIX_ARMOR_DEX_BONUS_UNDER_ONE=true
+#
+# Fixes a (rare?) inventory crash bug.
+export NWNX_TWEAKS_FIX_ITEM_NULLPTR_IN_CITEMREPOSITORY=true
+#
+# Effects on logged out player characters will be removed when a caster rests.
+export NWNX_TWEAKS_CLEAR_SPELL_EFFECTS_ON_TURDS=true
+#
+# Creatures will always have their full dex states, even when immobilized/entangled.
+export NWNX_TWEAKS_ALWAYS_RETURN_FULL_DEX_STAT=false
+#
+# The number of attacks per round overridden by SetBaseAttackBonus() will show on the character sheet.
+export NWNX_TWEAKS_DISPLAY_NUM_ATTACKS_OVERRIDE_IN_CHARACTER_SHEET=true
+#
+# TURDs are associated by CDKey/CharacterName instead of PlayerName/CharacterName. Pass the CDKey instead of PlayerName when calling NWNX_Administration_DeleteTURD()
+export NWNX_TWEAKS_TURD_BY_CDKEY=true
+#
+# 1: French
+# 2: German
+# 3: Italian
+# 4: Spanish
+# 5: Polish
+# 6: Italian
+# 128: Korean
+# 129: Chinese Traditional
+# 130: Chinese Simplified
+# 131: Japanese
+#export NWNX_TWEAKS_LANGUAGE_OVERRIDE=
+#
+# TlkTable entries overridden by SetTlkOverride() will be sent before Character Generation.
+export NWNX_TWEAKS_SEND_TLK_OVERRIDE_BEFORE_CHARGEN=true
+#
+# When splitting an item, local variables will be copied.
+export NWNX_TWEAKS_RETAIN_LOCAL_VARIABLES_ON_ITEM_SPLIT=true
+#
+# Prevents attack bonus effects from bypassing damage reductions.
+export NWNX_TWEAKS_PREVENT_ATTACK_BONUS_BYPASSING_REDUCTION=false
+#
+# Makes SetMaterialShaderParamXxx() functions take sMaterial="" to mean all materials.
+export NWNX_TWEAKS_MATERIAL_NAME_NULL_IS_ALL=false
+#
+# 1: Manual VFX (ItemPropertyVisualEffect)
+# 2: (Elemental) DamageBonus
+# 4: (Elemental) DamageBonusVSAlignmentGroup)
+# 8: (Elemental) DamageBonusVSRacialGroup
+# 16: (Elemental) DamageBonusVSSpecificAlignment
+# 32: HolyAvenger
+# 64: VampiricRegeneration
+# 128: OnHitLevelDrain
+# 256: OnHitVorpal
+# 512: OnHitWounding
+# 1024: (Good/Evil) DamageBonusVSAlignmentGroup)
+# 2048: (Good/Evil) AttackBonusVSAlignmentGroup
+# 4096: (Good/Evil) EnhancementBonusVSAlignmentGroup
+# 8192: (Good/Evil) DamageBonusVSSpecificAlignment
+# 16384: (Good/Evil) AttackBonusVSSpecificAlignment
+# 32768: (Good/Evil) EnhancementBonusVSSpecificAlignment
+#
+# Some values for convenience
+# 30: All Elemental Damage Bonus
+# 896: All OnHit properties
+# 7168: All Good/Evil vs AlignmentGroup
+# 57344: All Good/Evil vs SpecificAlignment
+# 65535: Hide all VFX
+#
+# This is good in case you want to manually apply VFX on items through NWScript
+# Instead of toolset automatically applying VFX depending on the property you added to them
+#export NWNX_TWEAKS_HIDE_HARDCODED_ITEM_VFX=
+#
+# The CNWSCreature::CanUseItem() function will also check ILR for Henchmen.
+export NWNX_TWEAKS_CANUSEITEM_CHECK_ILR_FOR_HENCHMEN=true
+#
+# Adds an additional bounds check for triggers to fix a trigger detection bug.
+export NWNX_TWEAKS_FIX_TRIGGER_ENTER_DETECTION=true
+#
+# Uncaps the compounded damage flags of EffectDamageResistance.
+export NWNX_TWEAKS_UNCAP_DAMAGE_RESISTANCE_DAMAGE_FLAGS=true
+#
+# Stops damage from being resolved when a special attack misses.
+export NWNX_TWEAKS_FIX_RESOLVE_SPECIAL_ATTACK_DAMAGE=true
+#
+# Stops effects from unlinking when restored from a TURD due to their effect ID changing.
+export NWNX_TWEAKS_FIX_TURD_EFFECT_UNLINKING=true
 
 # NWNX_UTIL
 # Allows you to set a NWScript that runs before the OnModuleLoad event
@@ -398,5 +575,5 @@ LD_PRELOAD=~/nwnx/Binaries/NWNX_Core.so:~/nwnx/Binaries/NWNX_Diagnostics.so \
   -nwsyncurl http://web.site.address/nwsyncdata/ \
   "$@" >> $LOGFILE 2>&1 &
 
-echo $! > ~/.modpid 
-popd 
+echo $! > ~/.modpid
+popd
