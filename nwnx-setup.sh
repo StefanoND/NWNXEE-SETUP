@@ -29,7 +29,7 @@ sudo systemctl restart console-setup.service
 #1. Open VirtualBox
 #2. Right-click your VM, then click Settings
 #3. Go to Shared Folders section
-#4. Add a new shared folder and name it "sharedf" without quotes
+#4. Add a new shared folder and name it "sharedf" without quotes (can't be just "shared")
 #5. On Add Share prompt, select the Folder Path in your host that you want to be accessible inside your VM.
 #6. In the Folder Name field, type shared
 #7. Uncheck Read-only and Auto-mount, and check Make Permanent
@@ -40,6 +40,8 @@ sudo apt update -y && sudo apt upgrade -y
 #
 # Install necessary dependencies
 sudo apt install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
+# Install this too
+sudo apt install -y libxt6 libxmu6 nano
 # Still testing this one
 # sudo apt install virtualbox-guest-x11
 # sudo VBoxClient --clipboard
@@ -60,11 +62,11 @@ sudo su
 ./VBoxLinuxAdditions.run
 #
 # Reboot VM
-shutdown -r now
+reboot now
 # Create "shared" directory in your home
-sudo mkdir ~/shared
+mkdir ~/shared
 # Mount the shared folder from the host to your ~/shared directory
-sudo mount -t vboxsf shared ~/shared
+sudo mount -t vboxsf sharedf ~/shared
 # The host folder should now be accessible inside the VM
 cd ~/shared
 # Make the folder persistent
