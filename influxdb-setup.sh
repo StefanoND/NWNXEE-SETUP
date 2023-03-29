@@ -16,14 +16,18 @@ sudo sysctl -w net.core.rmem_max=26214400
 sudo sysctl -w net.core.rmem_default=26214400
 #
 #Import GPG Key
-curl -sL https://repos.influxdata.com/influxdb.key | sudo apt-key add -
+wget -q https://repos.influxdata.com/influxdata-archive_compat.key
+echo '393e8779c89ac8d958f81f942f9ad7fb82a25e133faddaf92e15b16e6ac9ce4c influxdata-archive_compat.key' | sha256sum -c && cat influxdata-archive_compat.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg > /dev/null
 #
-# Add repo to Ubuntu 20.04
-echo "deb https://repos.influxdata.com/${DISTRIB_ID,,} ${DISTRIB_CODENAME} stable" | sudo tee /etc/apt/sources.list.d/influxdb.list
+# Add repo to Ubuntu 22.04
+echo 'deb [signed-by=/etc/apt/trusted.gpg.d/influxdata-archive_compat.gpg] https://repos.influxdata.com/debian stable main' | sudo tee /etc/apt/sources.list.d/influxdata.list
 #
 # Update apt index and install InfluxDB
 sudo apt update -y && sudo apt upgrade -y
 sudo apt install influxdb -y
+#
+# Reload Daemons
+sudo systemctl daemon-reload
 #
 # Set as system service
 sudo systemctl enable --now influxdb
@@ -63,7 +67,7 @@ curl https://packages.grafana.com/gpg.key | sudo apt-key add -
 sudo add-apt-repository "deb https://packages.grafana.com/oss/deb stable main"
 #
 # Update
-sudo apt update -y
+sudo apt update -y && sudo apt upgrade -y
 #
 # Install Grafana
 sudo apt install grafana -y
@@ -72,10 +76,7 @@ sudo apt install grafana -y
 sudo /bin/systemctl daemon-reload
 #
 # Enable grafana to be run as a service
-sudo /bin/systemctl enable grafana-server
-#
-# Start grafana as service
-sudo /bin/systemctl start grafana-server
+sudo /bin/systemctl enable --now grafana-server
 #
 ####################################################################################
 ## For this part you probably will need a GUI if you don't have a way to acces it ##
