@@ -5,6 +5,9 @@
 # Install nginx
 sudo apt install nginx -y
 #
+# Reload Daemon
+sudo systemctl daemon-reload
+#
 # Make is as a service (and run automatically at boot)
 sudo systemctl enable --now nginx
 #
@@ -38,6 +41,7 @@ sudo nano /etc/nginx/sites-available/nwsync
 #
 #     # CHANGE THE "192.168.1.1" WITH YOUR PUBLIC IP ADDRESS
 #     # GO TO https://www.whatismyip.com/ TO FIND OUT YOUR PUBLIC IP
+#     # You can also use the hostname you setup from noip
 #     server_name 192.168.1.1; 
 #
 #     root /var/www/nwsync;
