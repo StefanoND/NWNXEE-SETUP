@@ -63,6 +63,10 @@ sudo nano /etc/nginx/sites-available/nwsync
 # Make a link of it in .../sites-enabled/
 sudo ln -s /etc/nginx/sites-available/nwsync /etc/nginx/sites-enabled/
 #
+# You can check to see if it's working by putting the ip address you configured in the browser.
+# Example: if you access "http://192.168.1.1", you'll see NGINX saying that you configured it successfully
+# After running nwsync for the first time, you can access it's contents through "http://192.168.1.1/nwsyncdata/"
+#
 # Make directory for nwsync and open it
 mkdir ~/nwsync && cd ~/nwsync
 #
@@ -84,7 +88,8 @@ chmod +x nwsync-update.sh
 #
 # Run ./nwsync-update.sh or nwsync_GUI_update.sh if you want the GUI one
 sudo ./nwsync-update.sh
-# 
+#
 # If need permission use
 chown -R $(logname):$(logname) /path/to/folder
 chown -R 755 /path/to/file
+#
