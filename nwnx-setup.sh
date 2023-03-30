@@ -184,18 +184,29 @@ git config --global user.email = "my@email.com"
 # Set up the Database
 #
 #------------------------------------------------------------------------------
+#
+# If you know how to configure SQLite and/or PostgreSQL let me know so I can update here
+#
 # MYSQL
 # Run mysql (as admin/sudo). The following commands are given in MySQL, not the regular terminal
 sudo mysql
+#
 # We want to configure mysql itself.
 USE mysql;
+#
 # Create a new user for nwserver to use. 'nwn' is username, 'pass' is password, you can change them if you want.
 CREATE USER 'nwn'@'localhost' IDENTIFIED BY 'pass';
+#
 # Give it full access
 GRANT ALL PRIVILEGES ON *.* TO 'nwn'@'localhost';
+#
+# Flush privileges
 FLUSH PRIVILEGES;
+#
 # Create a database for the module to use, typically named same as module, but can be anything.
 CREATE DATABASE mymodulename;
+#
+# Quit
 exit;
 #
 # SQLITE
