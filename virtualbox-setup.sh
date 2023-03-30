@@ -15,7 +15,7 @@ sudo pacman -S virtualbox virtualbox-ext-oracle --noconfirm --needed
 #
 # After installing VirtualBox and its extension pack we can open Virtualbox
 # Once VirtualBox is up click on "File->Tools->Network Manager" in "Host-only Networks" tab click "Create"
-# In "Adapter" tab select "Configure Adapter Automatically" and in "DHCP Server" enable "Enable Server"
+# In "Adapter" tab select "Configure Adapter Manually" and in "DHCP Server" enable "Enable Server"
 # Leave everything else as is, apply and ok everything.
 #
 # Click on "New" to create the VM, choose a name, choose the folder to put it, choose ISO image (I'll cover Ubuntu Server 22.04)
