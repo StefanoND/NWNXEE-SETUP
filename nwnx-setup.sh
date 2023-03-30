@@ -209,6 +209,10 @@ CREATE DATABASE mymodulename;
 # Quit
 exit;
 #
+# Note: If you get an error about "Dubious ownership" just run the below command make sure that it matches your server vault path
+# This usually happens when you're using the shared folder for the servervault instead of a folder "fully" inside the guest vm
+git config --global --add safe.directory ~/shared/nwn/servervault
+#
 # SQLITE
 #
 # WIP
