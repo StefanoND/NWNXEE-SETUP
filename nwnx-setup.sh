@@ -93,6 +93,13 @@ sudo apt install libssl3 libssl-dev -y
 # Install this required lib
 sudo apt install libsndio7.0 libsndio-dev -y
 #
+#------------------------------------------------------------------------------
+# OPTIONAL
+#
+# You may want to install redis if you're going to use it
+sudo apt install redis -y
+#------------------------------------------------------------------------------
+#
 # Reboot the VM and log-in again (also this is a good time to create a snapshot)
 sudo reboot now
 #
