@@ -90,6 +90,6 @@ chmod +x nwsync-update.sh
 sudo ./nwsync-update.sh
 #
 # If need permission use
-chown -R $(logname):$(logname) /path/to/folder
-chown -R 755 /path/to/file
+chown -R $(logname):www-data ~/www
+chown -R 0755 ~/www
 #
