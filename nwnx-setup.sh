@@ -40,17 +40,28 @@ sudo su
 ./VBoxLinuxAdditions.run
 #
 # Reboot VM
-shutdown now
-#
-# Right-click your VM, then click Settings
-# Go to Shared Folders section
-# Click to add a new shared folder
-# Select Folder Path, Folder Name is not necessary
-# Mount point should be some place easy (like /home/USERNAME/shared)
-# Enable "Auto-mount" and click "Ok"
-#
-# Start your VM, once it's started go to "Settings" again and go to "Shared Folders" again
-# Select the Shared Folder you just created and edit it, enable "Make Permanent" and click "Ok" and "Ok"
+reboot now
+# Create "shared" directory in your home
+mkdir ~/shared
+# Mount the shared folder from the host to your ~/shared directory
+sudo mount -t vboxsf sharedf ~/shared
+# The host folder should now be accessible inside the VM
+cd ~/shared
+# Make the folder persistent
+# Edit fstab file in /etc directory
+sudo nano /etc/fstab
+# Add the following line to fstab (sparated by tabs) and press Ctro+O then ENTER to Save and Ctrl+X to leave
+sharedf	/home/<username>/shared	vboxsf	defaults	0	0
+# Edit modules
+sudo nano /etc/modules
+# Add the following line to /etc/modules and press Ctro+O then ENTER to Save and Ctrl+X to leave
+vboxsf
+# Reboot the VM and log-in again
+sudo reboot now
+# Go to your home directory and check to see if the file is highlighted in green.
+cd ~
+ls
+# If it is then congratulations! You successfully linked the directory within your vm with your host folder.
 #
 # Done
 #
