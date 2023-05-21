@@ -10,6 +10,12 @@ sudo apt install -y bash-completion
 reboot now
 #
 #1. Open VirtualBox
+#2. Right-click your VM, then click Settings
+#3. Go to Shared Folders section
+#4. Add a new shared folder and name it "sharedf" without quotes (can't be just "shared")
+#5. On Add Share prompt, select the Folder Path in your host that you want to be accessible inside your VM.
+#6. In the Folder Name field, type shared
+#7. Uncheck Read-only and Auto-mount, and check Make Permanent
 #8. Start your VM
 #9. Once your VM is up and running, go to Devices menu -> Insert Guest Additions CD image menu but don't run it, cancel if it asks
 # Install dependencias for VirtualBox guest additions
