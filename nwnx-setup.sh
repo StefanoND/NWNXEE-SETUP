@@ -1,4 +1,3 @@
-# UPDATE IN PROGRESS
 # NOTE: This is not a runnable file - you need to manually paste the lines one by one
 # Take some time to understand what each command does.
 # These steps were tested on a clean Ubuntu 22.04 Server install:
