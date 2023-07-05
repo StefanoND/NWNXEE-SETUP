@@ -7,9 +7,9 @@ Clone this repo with:
 
 #
 Install order
-1. virtualbox-setup.sh
-2. noip-setup.sh
-3. nwnx-setup.sh
+1. virtualbox-setup.sh (If using virtualbox)
+2. nwnx-setup.sh
+3. noip-setup.sh
 4. nwsync-setup.sh
 5. influxdb-setup.sh
 #
