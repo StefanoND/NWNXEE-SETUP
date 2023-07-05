@@ -1,7 +1,10 @@
+# UPDATE IN PROGRESS
+#------------------------------------------------------------------------------
+# METHOD 1 - LOCAL
+#------------------------------------------------------------------------------
 # NOTE: This is not a runnable file - you need to manually paste the lines one by one
 # Take some time to understand what each command does.
-# These steps were tested on a clean Ubuntu 20.04 Desktop install:
-#------------------------------------------------------------------------------
+# These steps were tested on a clean Ubuntu 22.04 Desktop install:
 # Install nginx
 sudo apt install nginx -y
 #
@@ -93,3 +96,37 @@ sudo ./nwsync-update.sh
 chown -R $(logname):www-data ~/www
 chown -R 0755 ~/www
 #
+#------------------------------------------------------------------------------
+# METHOD 2 - Digita Ocean (Spaces)
+#------------------------------------------------------------------------------
+#
+# Install docker
+# ARCH
+sudo pacman -S docker --noconfirm --needed
+# UBUNTU
+sudo apt install docker -y
+#
+# Enable it
+sudo systemctl enable --now docker
+#
+# Create an account at https://digitalocean.com/
+#
+# Create a new teamnwsync
+#
+# Create a new Spaces, leave everything at default, don't forget to put a name
+# Create Access Key https://cloud.digitalocean.com/account/api/spaces
+#
+# Download DO Space uploader from urothis and make his script executable
+git clone https://github.com/urothis/nwn-nwsync-digitalOcean-uploader.git && cd nwn-nwsync-digitalOcean-uploader
+chmod +x uploadNWSync.sh
+#
+# Edit env.list accordingly
+# Note: The Endpoint must be the link without "https://SPACENAME", like: fra1.digitaloceanspaces.com or nyc3.digitaloceanspaces.com, etc
+#
+# Now run nwsync and copy the "data" folder, "manifests" folder and latest file into nwsync folder in nwn-nwsync-digitalOcean-uploader
+# You can also change the path of nwsync to point straight to it instead
+#
+# After it's done, run the uploadNWSync script
+sudo ./uploadNWSync.sh
+#
+# Grab a coffee, come back later, it might take a LONG time to finish depending on the size of your custom content. 
