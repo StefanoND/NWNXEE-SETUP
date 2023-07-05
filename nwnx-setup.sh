@@ -1,13 +1,14 @@
+# UPDATE IN PROGRESS
 # NOTE: This is not a runnable file - you need to manually paste the lines one by one
 # Take some time to understand what each command does.
-# These steps were tested on a clean Ubuntu 20.04 Server install:
+# These steps were tested on a clean Ubuntu 22.04 Server install:
 #------------------------------------------------------------------------------
 # 
 # I recommend using PuTTY for copy-paste capabilities and better terminal aesthetic
 #
 # Install bash-completion (So you can auto complete with "TAB") and reboot
 sudo apt install -y bash-completion
-reboot now
+shutdown -r now
 #
 #1. Open VirtualBox
 #2. Right-click your VM, then click Settings
@@ -46,7 +47,7 @@ sudo su
 ./VBoxLinuxAdditions.run
 #
 # Reboot VM
-reboot now
+shutdown -r now
 # Create "shared" directory in your home
 mkdir ~/shared
 # Mount the shared folder from the host to your ~/shared directory
@@ -63,7 +64,7 @@ sudo nano /etc/modules
 # Add the following line to /etc/modules and press Ctro+O then ENTER to Save and Ctrl+X to leave
 vboxsf
 # Reboot the VM and log-in again
-sudo reboot now
+shutdown -r now
 # Go to your home directory and check to see if the file is highlighted in green.
 cd ~
 ls
@@ -90,6 +91,14 @@ sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 sudo apt update -y && sudo apt upgrade -y
 # Install tools needed to build NWNX
 sudo apt install g++-12 g++-12-multilib gcc-12 gcc-12-multilib cmake git make unzip -y
+#
+# ----------------------------------------------------------------------------------- #
+# THIS PART IS FOR ARM 64 SYSTEMS                                                     #
+# ----------------------------------------------------------------------------------- #
+# Use this command instead of the above                                               #
+# sudo apt install g++ gcc cmake git make unzip libcapstone-dev pkg-config -y         #
+# cp /usr/lib/aarch64-linux-gnu/pkgconfig/capstone.pc /usr/lib/pkgconfig              #
+# ----------------------------------------------------------------------------------- #
 #
 #------------------------------------------------------------------------------
 # Choose one (or not, you know better)
@@ -118,17 +127,33 @@ sudo apt install redis -y
 #------------------------------------------------------------------------------
 #
 # Reboot the VM and log-in again (also this is a good time to create a snapshot)
-sudo reboot now
+shutdown -r now
 #
 # Download and build NWNX
 #
 # Get latest source from github
 git clone https://github.com/nwnxee/unified.git nwnx
+#
+# ----------------------------------------------------------------------------------- #
+# THIS PART IS FOR ARM 64 SYSTEMS                                                     #
+# ----------------------------------------------------------------------------------- #
+# Use this command instead of the above                                               #
+# git clone -b build8193.36.1 https://github.com/nwnxee/unified.git nwnx              #
+# ----------------------------------------------------------------------------------- #
+#
 # Make a directory where the build system will initialize even though there's already a Build folder (with upper case B)
 mkdir nwnx/build && cd nwnx/build
 # Initialize the build system to use GCC version 11, for 64bit. Build release version of nwnx, with debug info
 # Ignore PostgreSQL, SWIG and HUNSPELL errors, you don't have them and you (probably) don't need them
 CC="gcc-12 -m64" CXX="g++-12 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
+#
+# ----------------------------------------------------------------------------------- #
+# THIS PART IS FOR ARM 64 SYSTEMS                                                     #
+# ----------------------------------------------------------------------------------- #
+# Use this command instead of the above                                               #
+# cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../                                         #
+# ----------------------------------------------------------------------------------- #
+#
 # Build NWNX, in X threads (Where X is your CPU thread count + 1). This will take a while
 make -j5
 #
@@ -142,11 +167,11 @@ make -j5
 # Download NWN dedicated package
 # Make a directory to hold NWN data
 mkdir ~/nwn && cd ~/nwn
-# Fetch the NWN dedicated server package. The version here might be outdated, so replace "8193.34" with current NWN build version
+# Fetch the NWN dedicated server package. The version here might be outdated, so replace "8193.35-40" with current NWN build version
 # You can check the latest STABLE version here: https://forums.beamdog.com/discussion/67157/server-download-packages-and-docker-support
-wget https://nwn.beamdog.net/downloads/nwnee-dedicated-8193.35-36.zip
+wget https://nwn.beamdog.net/downloads/nwnee-dedicated-8193.35-40.zip
 # Unpack the server to current directory - ~/nwn
-unzip nwnee-dedicated-8193.35-36.zip -d .
+unzip nwnee-dedicated-8193.35-40.zip -d .
 #
 #############################################################################################################################################
 ##### THIS PART IS NOT NEEDED IF YOU'RE FOLLOWING THIS TUTORIAL FOR THE FIRST TIME                                                      #####
@@ -163,6 +188,26 @@ unzip nwnee-dedicated-8193.35-36.zip -d .
 # Run it once to create the user directory.
 # nwserver must be run with current directory the same as the executable, so we need to `cd` into it first
 cd bin/linux-x86 && ./nwserver-linux
+#
+# ----------------------------------------------------------------------------------- #
+# THIS PART IS FOR ARM 64 SYSTEMS                                                     #
+# ----------------------------------------------------------------------------------- #
+# Use this command instead of the above                                               #
+# mkdir bin/linux-arm64 && cd bin/linux-arm64                                         #
+#                                                                                     #
+# Now you need .36 nwserver                                                           #
+# On another computer, download NWNEE from steam and enable beta download             #
+#                                                                                     #
+# Now you can copy it to the server from the "linux-arm64" folder                     #
+# scp '/path/to/nwserver-linux' root@xxx.xxx.xxx.xxx:~                                #
+#                                                                                     #
+# If you setup an ssh-key you'll need this command instead                            #
+# scp -i $HOME/.ssh/server_id_rsa  '/path/to/nwserver-linux' root@xxx.xxx.xxx.xxx:~   #
+#                                                                                     #
+# mv ~/nwserver-linux ~/nwn/bin/linux-arm64                                           #
+# ./nwserver-linux                                                                    #
+# ----------------------------------------------------------------------------------- #
+#
 # The user directory path is long and contains spaces, which is hard to type sometimes.
 # So we create a link (shortcut) to it as ~/nwn/userdir so it's easier to access
 ln -s ~/.local/share/Neverwinter\ Nights/ ~/nwn/userdir
