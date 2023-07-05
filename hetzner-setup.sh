@@ -69,6 +69,8 @@ cat $HOME/.ssh/server_id_rsa.pub
 # It'll look like this, where "COMMENT" is what you typed in the comment during the SSH-Key creation
 ssh-rsa RANDOMSTUFFHERE COMMENT
 #
+# You'll be able to login with this command in the terminal
+ssh root@xxx.xxx.xxx.xxx -i $HOME/.ssh/server_id_rsa
 ########################################################################
 #                               FIREWALL                               #
 ########################################################################
