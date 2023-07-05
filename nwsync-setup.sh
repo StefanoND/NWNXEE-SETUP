@@ -129,4 +129,7 @@ chmod +x uploadNWSync.sh
 # After it's done, run the uploadNWSync script
 sudo ./uploadNWSync.sh
 #
-# Grab a coffee, come back later, it might take a LONG time to finish depending on the size of your custom content. 
+# Grab a coffee, come back later, it might take a LONG time to finish depending on the size of your custom content.
+# My custom content size is around 7GB, nwsync size is around 3GB, the script takes around 1 hour to finish
+#
+# WiP TODO
