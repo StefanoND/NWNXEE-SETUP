@@ -32,7 +32,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now noip2
 #
 # Reboot your PC
-sudo reboot now
+sudo shutdown -r now
 #
 # Now you can check if it's working or not, if it is congratulations!
 systemctl status noip2
