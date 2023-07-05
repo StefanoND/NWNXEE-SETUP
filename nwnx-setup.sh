@@ -3,12 +3,36 @@
 # Take some time to understand what each command does.
 # These steps were tested on a clean Ubuntu 22.04 Server install:
 #------------------------------------------------------------------------------
+#
+# If you're using hetzner we'll need to create a new user.
+#
+# First let's open the sudoers file and see if everything's ok
+sudo visudo
+#
+# Look for the following lines, add them if they're not there.
+# Allow members of group sudo to execute any command
+%sudo   ALL=(ALL:ALL) ALL
+#
+# Now let's create a new user, change USERNAME to whatever you like
+# It'll ask for a password, I recommend you to use password (or you can just leave it empty for no password)
+# You can leave everything else empty
+sudo adduser USERNAME
+#
+# Let's add it to the sudo group
+sudo usermod -aG sudo USERNAME
+#
+# To check if it was created and added to the sudoers group use the command below
+id USERNAME
+#
+# Done, you can login with
+ssh USERNAME@xxx.xxx.xxx.xxx
+#------------------------------------------------------------------------------
 # 
 # I recommend using PuTTY for copy-paste capabilities and better terminal aesthetic
 #
 # Install bash-completion (So you can auto complete with "TAB") and reboot
 sudo apt install -y bash-completion
-shutdown -r now
+sudo shutdown -r now
 #
 #1. Open VirtualBox
 #2. Right-click your VM, then click Settings
@@ -47,7 +71,7 @@ sudo su
 ./VBoxLinuxAdditions.run
 #
 # Reboot VM
-shutdown -r now
+sudo shutdown -r now
 # Create "shared" directory in your home
 mkdir ~/shared
 # Mount the shared folder from the host to your ~/shared directory
@@ -64,7 +88,7 @@ sudo nano /etc/modules
 # Add the following line to /etc/modules and press Ctro+O then ENTER to Save and Ctrl+X to leave
 vboxsf
 # Reboot the VM and log-in again
-shutdown -r now
+sudo shutdown -r now
 # Go to your home directory and check to see if the file is highlighted in green.
 cd ~
 ls
@@ -97,7 +121,7 @@ sudo apt install g++-12 g++-12-multilib gcc-12 gcc-12-multilib cmake git make un
 # ----------------------------------------------------------------------------------- #
 # Use this command instead of the above                                               #
 # sudo apt install g++ gcc cmake git make unzip libcapstone-dev pkg-config -y         #
-# cp /usr/lib/aarch64-linux-gnu/pkgconfig/capstone.pc /usr/lib/pkgconfig              #
+# sudo cp /usr/lib/aarch64-linux-gnu/pkgconfig/capstone.pc /usr/lib/pkgconfig         #
 # ----------------------------------------------------------------------------------- #
 #
 #------------------------------------------------------------------------------
@@ -127,7 +151,7 @@ sudo apt install redis -y
 #------------------------------------------------------------------------------
 #
 # Reboot the VM and log-in again (also this is a good time to create a snapshot)
-shutdown -r now
+sudo shutdown -r now
 #
 # Download and build NWNX
 #
@@ -161,7 +185,7 @@ make -j5
 ##### THIS PART IS NOT NEEDED IF YOU'RE FOLLOWING THIS TUTORIAL FOR THE FIRST TIME                                                      #####
 #############################################################################################################################################
 ##### Update nwnx from older version                                                                                                    #####
-##### delete nwnx folder and redo the above steps (from line 136 through 142)                                                           #####
+##### delete nwnx folder and redo the above steps (from line 156 through 182)                                                           #####
 #############################################################################################################################################
 #
 # Download NWN dedicated package
@@ -178,10 +202,10 @@ unzip nwnee-dedicated-8193.35-40.zip -d .
 #############################################################################################################################################
 ##### Update from older version                                                                                                         #####
 ##### cd ~/nwn                                                                                                                          #####
-##### Fetch the NWN dedicated server package. The version here might be outdated, so replace 8193.34 with current NWN build version     #####
-##### wget https://nwnx.io/nwnee-dedicated-8193.35-36.zip                                                                               #####
+##### Fetch the NWN dedicated server package. The version here might be outdated, so replace 8193.35-40 with current NWN build version  #####
+##### wget https://nwnx.io/nwnee-dedicated-8193.35-40.zip                                                                               #####
 ##### Unpack the server to current directory - ~/nwn                                                                                    #####
-##### unzip nwnee-dedicated-8193.35-36.zip -d .                                                                                         #####
+##### unzip nwnee-dedicated-8193.35-40.zip -d .                                                                                         #####
 ##### Press A to overwrite everything                                                                                                   #####
 #############################################################################################################################################
 #
@@ -196,13 +220,13 @@ cd bin/linux-x86 && ./nwserver-linux
 # mkdir bin/linux-arm64 && cd bin/linux-arm64                                         #
 #                                                                                     #
 # Now you need .36 nwserver                                                           #
-# On another computer, download NWNEE from steam and enable beta download             #
+# On another computer, download NWNEE from steam and enable beta development download #
 #                                                                                     #
 # Now you can copy it to the server from the "linux-arm64" folder                     #
-# scp '/path/to/nwserver-linux' root@xxx.xxx.xxx.xxx:~                                #
+# scp '/path/to/nwserver-linux' USERNAME@xxx.xxx.xxx.xxx:~                            #
 #                                                                                     #
 # If you setup an ssh-key you'll need this command instead                            #
-# scp -i $HOME/.ssh/server_id_rsa  '/path/to/nwserver-linux' root@xxx.xxx.xxx.xxx:~   #
+# scp -i ~/.ssh/server_id_rsa '/path/to/nwserver-linux' USERNAME@xxx.xxx.xxx.xxx:~    #
 #                                                                                     #
 # mv ~/nwserver-linux ~/nwn/bin/linux-arm64                                           #
 # ./nwserver-linux                                                                    #
@@ -235,6 +259,9 @@ scp host@192.168.200.200:~/downloads/image.png ~/downloads
 # The same applies if you're trying to use from the vm to the host, if the login of host is: host and the password is: 321, you'll have to input "321"
 # So if you don't know the password of any of the machines you won't be able to run the above commands, unless the owner/administrator of each machine
 # Set up an alternate althentitation that will let you run those commands without problems
+#
+# If you're using an SSH-Key you must add "-i /path/to/id_rsa" after "scp"
+# And the password is the passphrase you used when creating the SSH-Key
 #
 # -------------------------------------------------------------------------------
 # Set up your module:
