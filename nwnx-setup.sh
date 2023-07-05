@@ -46,7 +46,6 @@ sudo shutdown -r now
 # Install dependencias for VirtualBox guest additions
 sudo apt update -y && sudo apt upgrade -y
 #
-#
 # Install necessary dependencies
 sudo apt install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
 # Install this too
@@ -113,6 +112,9 @@ sudo chmod 755 shared
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
 # Redownload manifests for the newly added architecture and repository so we can use them (and upgrade existing ones)
 sudo apt update -y && sudo apt upgrade -y
+# Install necessary dependencies
+sudo apt install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
+#
 # Install tools needed to build NWNX
 sudo apt install g++-12 g++-12-multilib gcc-12 gcc-12-multilib cmake git make unzip -y
 #
@@ -219,8 +221,9 @@ cd bin/linux-x86 && ./nwserver-linux
 # Use this command instead of the above                                               #
 # mkdir bin/linux-arm64 && cd bin/linux-arm64                                         #
 #                                                                                     #
-# Now you need .36 nwserver                                                           #
-# On another computer, download NWNEE from steam and enable beta development download #
+# Now you need .36 arm64 nwserver-linux                                               #
+# On another computer, download NWNEE from steam and enable beta preview              #
+# To enable beta preview type "previewpreview" in the code and check code             #
 #                                                                                     #
 # Now you can copy it to the server from the "linux-arm64" folder                     #
 # scp '/path/to/nwserver-linux' USERNAME@xxx.xxx.xxx.xxx:~                            #
