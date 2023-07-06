@@ -132,4 +132,26 @@ sudo ./uploadNWSync.sh
 # Grab a coffee, come back later, it might take a LONG time to finish depending on the size of your custom content.
 # My custom content size is around 7GB, nwsync size is around 3GB, the script takes around 1 hour and 20 mins to finish
 #
-# WiP TODO
+# While your nwsync stuff is being uploaded you can configure add a domain and activate CDN on it
+#
+# Go to https://www.namecheap.com/ create an account and create a domain name
+# Now that it's created, click on "Manage" then in "Nameservers" select "Custom DNS" and add these links
+ns1.digitalocean.com
+ns2.digitalocean.com
+ns3.digitalocean.com
+#
+# Click the Green Checkmark to save changes
+#
+# Go to https://cloud.digitalocean.com/networking/domains
+# The domain name must be the same as the one you created in namecheap (If you created awesome.nwsync.xyz in namecheap it MUST be awesome.nwsync.xyz in here aswell)
+#
+# Now back to your Spaces, click settings and enable CDN
+# Add custom subdomain, choose the domain you just created and select "Create Subdomain"
+# For simplicity sake I'll name it "download" (which will be appended to awesome.nwsync.xyz so it'll be download.awesome.nwsync.xyz)
+# Name the certificate whatever you want apply and save
+# Now wait for around 30 mins - 1 hour and the link will be online.
+#
+# Now all that's left to do is to add it to your nwsyncurl (Change MODULE name to the name it is in your DO Space)
+-nwsyncurl https://download.awesome.nwsync.xyz/MODULENAME/nwsync
+#
+# Done
