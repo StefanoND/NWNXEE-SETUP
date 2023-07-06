@@ -73,10 +73,10 @@ sudo apt update -y && sudo apt upgrade -y
 sudo apt install grafana -y
 #
 # Reload Daemon
-sudo /bin/systemctl daemon-reload
+sudo systemctl daemon-reload
 #
 # Enable grafana to be run as a service
-sudo /bin/systemctl enable --now grafana-server
+sudo systemctl enable --now grafana-server
 #
 ####################################################################################
 ## For this part you probably will need a GUI if you don't have a way to acces it ##
