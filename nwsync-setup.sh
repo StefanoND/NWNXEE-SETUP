@@ -102,9 +102,9 @@ chown -R 0755 ~/www
 #
 # Install docker
 # ARCH
-sudo pacman -S docker --noconfirm --needed
+sudo pacman -S docker docker-buildx --noconfirm --needed
 # UBUNTU
-sudo apt install docker -y
+sudo apt install docker docker-buildx -y
 #
 # Enable it
 sudo systemctl enable --now docker
@@ -116,8 +116,8 @@ sudo systemctl enable --now docker
 # Create a new Spaces, leave everything at default, don't forget to put a name
 # Create Access Key https://cloud.digitalocean.com/account/api/spaces
 #
-# Download DO Space uploader from urothis and make his script executable
-git clone https://github.com/urothis/nwn-nwsync-digitalOcean-uploader.git && cd nwn-nwsync-digitalOcean-uploader
+# Download DO Space uploader from my fork of urothis' repo and make his script executable
+git clone https://github.com/StefanoND/nwn-nwsync-digitalOcean-uploader.git && cd nwn-nwsync-digitalOcean-uploader
 chmod +x uploadNWSync.sh
 #
 # Edit env.list accordingly
