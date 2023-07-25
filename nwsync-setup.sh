@@ -130,7 +130,9 @@ chmod +x uploadNWSync.sh
 sudo ./uploadNWSync.sh
 #
 # Grab a coffee, come back later, it might take a LONG time to finish depending on the size of your custom content.
-# My custom content size is around 12GiB, nwsync size is around 6GiB, the script took me around 2 hours to finish
+# My custom content size is around 12GiB, nwsync size is around 6GiB.
+# The script took me around 2 hours to finish on the 1st run, and twice as much for updating.
+# So when you're going to update your nwsync to your Space, do it overnight
 #
 # While your nwsync stuff is being uploaded you can configure add a domain and activate CDN on it
 #
