@@ -97,6 +97,7 @@ ls
 # If you have any permission issues you can try
 sudo chown -R $(logname):$(logname) shared
 sudo chmod 755 shared
+#
 #------------------------------------------------------------------------------
 #
 # Install necessary prereqs
@@ -109,13 +110,13 @@ sudo chmod 755 shared
 #
 # We use a new compiler which may not be available by default, so add an extra place to download packages from
 sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+#
 # Redownload manifests for the newly added architecture and repository so we can use them (and upgrade existing ones)
 sudo apt update -y && sudo apt upgrade -y
-# Install necessary dependencies
+# Install necessary dependencies (Not needed if you already installed them above)
 sudo apt install -y dkms build-essential linux-headers-generic linux-headers-$(uname -r)
-#
 # Install tools needed to build NWNX
-sudo apt install g++-12 g++-12-multilib gcc-12 gcc-12-multilib cmake git make unzip -y
+sudo apt install g++-13 g++-13-multilib gcc-13 gcc-13-multilib cmake git make unzip -y
 #
 # ----------------------------------------------------------------------------------- #
 # THIS PART IS FOR ARM 64 SYSTEMS                                                     #
@@ -170,7 +171,7 @@ git clone https://github.com/nwnxee/unified.git nwnx
 mkdir nwnx/build && cd nwnx/build
 # Initialize the build system to use GCC version 11, for 64bit. Build release version of nwnx, with debug info
 # Ignore PostgreSQL, SWIG and HUNSPELL errors, you don't have them and you (probably) don't need them
-CC="gcc-12 -m64" CXX="g++-12 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
+CC="gcc-13 -m64" CXX="g++-13 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
 #
 # ----------------------------------------------------------------------------------- #
 # THIS PART IS FOR ARM 64 SYSTEMS                                                     #
@@ -186,17 +187,17 @@ make -j5
 ##### THIS PART IS NOT NEEDED IF YOU'RE FOLLOWING THIS TUTORIAL FOR THE FIRST TIME                                                      #####
 #############################################################################################################################################
 ##### Update nwnx from older version                                                                                                    #####
-##### delete nwnx folder and redo the above steps (from line 156 through 182)                                                           #####
+##### delete nwnx folder and redo the above steps (from line 161 through 184)                                                           #####
 #############################################################################################################################################
 #
 # Download NWN dedicated package
 # Make a directory to hold NWN data
 mkdir ~/nwn && cd ~/nwn
-# Fetch the NWN dedicated server package. The version here might be outdated, so replace "8193.35-40" with current NWN build version
-# You can check the latest STABLE version here: https://forums.beamdog.com/discussion/67157/server-download-packages-and-docker-support
-wget https://nwn.beamdog.net/downloads/nwnee-dedicated-8193.35-40.zip
+# Fetch the NWN dedicated server package. The version here might be outdated, so replace "8193.36-12" with current NWN build version
+# You can check the latest version here: https://forums.beamdog.com/discussion/67157/server-download-packages-and-docker-support
+wget https://nwn.beamdog.net/downloads/nwnee-dedicated-8193.36-12.zip
 # Unpack the server to current directory - ~/nwn
-unzip nwnee-dedicated-8193.35-40.zip -d .
+unzip nwnee-dedicated-8193.36-12.zip -d .
 #
 #############################################################################################################################################
 ##### THIS PART IS NOT NEEDED IF YOU'RE FOLLOWING THIS TUTORIAL FOR THE FIRST TIME                                                      #####
@@ -236,7 +237,7 @@ cd bin/linux-x86 && ./nwserver-linux
 #
 # The user directory path is long and contains spaces, which is hard to type sometimes.
 # So we create a link (shortcut) to it as ~/nwn/userdir so it's easier to access
-ln -s ~/.local/share/Neverwinter\ Nights/ ~/nwn/userdir
+ln -sv ~/.local/share/Neverwinter\ Nights/ ~/nwn/userdir
 #
 # -------------------------------------------------------------------------------
 #
