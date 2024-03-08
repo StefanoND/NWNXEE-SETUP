@@ -205,7 +205,7 @@ unzip nwnee-dedicated-8193.36-12.zip -d .
 ##### Update from older version                                                                                                         #####
 ##### cd ~/nwn                                                                                                                          #####
 ##### Fetch the NWN dedicated server package. The version here might be outdated, so replace 8193.36-12 with current NWN build version  #####
-##### wget https://nwnx.io/nwnee-dedicated-8193.36-12.zip                                                                               #####
+##### wget https://nwn.beamdog.net/downloads/nwnee-dedicated-8193.36-12.zip                                                             #####
 ##### Unpack the server to current directory - ~/nwn                                                                                    #####
 ##### unzip nwnee-dedicated-8193.36-12.zip -d .                                                                                         #####
 ##### Press A to overwrite everything                                                                                                   #####
