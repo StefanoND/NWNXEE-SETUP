@@ -164,12 +164,12 @@ git clone https://github.com/nwnxee/unified.git nwnx
 # THIS PART IS FOR ARM 64 SYSTEMS                                                     #
 # ----------------------------------------------------------------------------------- #
 # Use this command instead of the above                                               #
-# git clone -b build8193.36.1 https://github.com/nwnxee/unified.git nwnx              #
+# git clone -b build8193.36.12 https://github.com/nwnxee/unified.git nwnx             #
 # ----------------------------------------------------------------------------------- #
 #
 # Make a directory where the build system will initialize even though there's already a Build folder (with upper case B)
 mkdir nwnx/build && cd nwnx/build
-# Initialize the build system to use GCC version 11, for 64bit. Build release version of nwnx, with debug info
+# Initialize the build system to use GCC version 13, for 64bit. Build release version of nwnx, with debug info
 # Ignore PostgreSQL, SWIG and HUNSPELL errors, you don't have them and you (probably) don't need them
 CC="gcc-13 -m64" CXX="g++-13 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../
 #
@@ -205,9 +205,9 @@ unzip nwnee-dedicated-8193.36-12.zip -d .
 ##### Update from older version                                                                                                         #####
 ##### cd ~/nwn                                                                                                                          #####
 ##### Fetch the NWN dedicated server package. The version here might be outdated, so replace 8193.35-40 with current NWN build version  #####
-##### wget https://nwnx.io/nwnee-dedicated-8193.35-40.zip                                                                               #####
+##### wget https://nwnx.io/nwnee-dedicated-8193.36-12.zip                                                                               #####
 ##### Unpack the server to current directory - ~/nwn                                                                                    #####
-##### unzip nwnee-dedicated-8193.35-40.zip -d .                                                                                         #####
+##### unzip nwnee-dedicated-8193.36-12.zip -d .                                                                                         #####
 ##### Press A to overwrite everything                                                                                                   #####
 #############################################################################################################################################
 #
