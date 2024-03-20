@@ -100,11 +100,11 @@ chown -R 0755 ~/www
 # METHOD 2 - Digita Ocean (Spaces)
 #------------------------------------------------------------------------------
 #
-# Install docker
+# Install s3cmd
 # ARCH
-sudo pacman -S docker docker-buildx --noconfirm --needed
+sudo pacman -S s3cmd --noconfirm --needed
 # UBUNTU
-sudo apt install docker docker-buildx -y
+sudo apt install s3cmd -y
 #
 # Enable it
 sudo systemctl enable --now docker
@@ -120,8 +120,7 @@ sudo systemctl enable --now docker
 git clone https://github.com/StefanoND/nwn-nwsync-digitalOcean-uploader.git && cd nwn-nwsync-digitalOcean-uploader
 chmod +x uploadNWSync.sh
 #
-# Edit env.list accordingly
-# Note: The Endpoint must be the link without "https://SPACENAME", like: fra1.digitaloceanspaces.com or nyc3.digitaloceanspaces.com, etc
+# Edit nwsync-update.sh and uploadNWSync.sh accordingly
 #
 # Now run nwsync and copy the "data" folder, "manifests" folder and latest file into nwsync folder in nwn-nwsync-digitalOcean-uploader
 # You can also change the path of nwsync to point straight to it instead
@@ -153,7 +152,7 @@ ns3.digitalocean.com
 # Name the certificate whatever you want apply and save
 # Now wait for around 30 mins - 1 hour and the link will be online.
 #
-# Now all that's left to do is to add it to your nwsyncurl (Change MODULE name to the name it is in your DO Space)
+# Now all that's left to do is to add your nwsyncurl to your server's script (Change MODULENAME to the name it is in your DO Space)
 -nwsyncurl https://download.awesome.nwsync.xyz/MODULENAME/nwsync
 #
 # Done
