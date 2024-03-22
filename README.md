@@ -1,3 +1,7 @@
+# Hints
+
+Check [HINTS.md](https://github.com/StefanoND/NWNXEE-SETUP/blob/main/HINTS.md) for general information about NWN: EE and NWNX: EE (will be updated over time)
+
 # NWNXEE-SETUP
 Tutorial for Ubuntu Server 22.04 LTS
 
