@@ -5,12 +5,12 @@
 https://www.virtualbox.org/wiki/Downloads
 #
 # Direct download for Windows
-https://download.virtualbox.org/virtualbox/7.0.6/VirtualBox-7.0.6-155176-Win.exe
+https://download.virtualbox.org/virtualbox/7.1.6/VirtualBox-7.1.6-167084-Win.exe
 #
 # Direct download of Expansion Pack
-https://download.virtualbox.org/virtualbox/7.0.6/Oracle_VM_VirtualBox_Extension_Pack-7.0.6a-155176.vbox-extpack
+https://download.virtualbox.org/virtualbox/7.1.6/Oracle_VirtualBox_Extension_Pack-7.1.6.vbox-extpack
 #
-# MANJARO
+# ARCH Linux
 sudo pacman -S virtualbox virtualbox-ext-oracle --noconfirm --needed
 #
 # After installing VirtualBox and its extension pack we can open Virtualbox
@@ -18,23 +18,19 @@ sudo pacman -S virtualbox virtualbox-ext-oracle --noconfirm --needed
 # In "Adapter" tab select "Configure Adapter Manually" and in "DHCP Server" enable "Enable Server"
 # Leave everything else as is, apply and ok everything.
 #
-# Click on "New" to create the VM, choose a name, choose the folder to put it, choose ISO image (I'll cover Ubuntu Server 22.04)
+# Click on "New" to create the VM, choose a name, choose the folder to put it, choose ISO image (I'll cover Ubuntu Server 24.04)
 # Type and Version will automatically change to Linux and Ubuntu x64 respectively, if not change them accordingly
 # Check "Skip Unattended Installation"
 #
-# Open "Hardware" dropdown, base memory should be between 2GB-8GB (2GB bare minimum, 4GB for nwnxee, 6GB for huge servers, 8GB for overkill)
+# Open "Hardware" dropdown, base memory should be between 2GB-8GB (2GB bare minimum, 4GB for nwnxee, 6GB for huge servers, 8GB is overkill)
 # Processors: 2 CPU is enough, you can give more if you want, but it's unnecessary
 #
 # Open "Hard Disk" dropdown, choose size. (32GB should be enough, even with huge hakpaks, the OS size is ~6.5GB)
-# Int "Hard Disk Type and Variant" Section, "VDI (VirtualBox Disk Image)" is good enough, enable "Pre-allocate Full Size"
+# In "Hard Disk Type and Variant" Section, "VDI (VirtualBox Disk Image)" is good enough, enable "Pre-allocate Full Size"
 #
 # Click on "Finish"
 #
 # Select the VM and click on "Settings" in "General" click on "Advanced" tab and select "Enabled" in bot "Shared Clipboard" and "Drag'n'Drop" drop down
-#
-# Click on "System" In "Processor" tab enable "Enable PAE/NX"
-#
-# Click on "Display" section and "Video Memory" put max, and enable "Enable 3D Acceleration" in "Extended Features:"
 #
 # Click on "Storage" section and click on "vmname.vdi" and enable "Solid-state Drive"
 #
@@ -45,7 +41,7 @@ sudo pacman -S virtualbox virtualbox-ext-oracle --noconfirm --needed
 #
 # Click on "Shared Folders" section, click on "Add" select the path, "Folder Name:" should be "sharedf", leave everything as is and click "Ok"
 #
-# Now you can start installing the OS, click no "Start"
+# Now you can start installing the OS, click on "Start"
 #
 # In installation select "Try or Install Ubuntu Server"
 # Select your language
