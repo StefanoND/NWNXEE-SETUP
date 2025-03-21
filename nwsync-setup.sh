@@ -1,7 +1,9 @@
 # UPDATE IN PROGRESS
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # METHOD 1 - LOCAL
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
+# INSTALL NGINX
+#
 # NOTE: This is not a runnable file - you need to manually paste the lines one by one
 # Take some time to understand what each command does.
 # These steps were tested on a clean Ubuntu 22.04 Desktop install:
@@ -15,7 +17,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable --now nginx
 #
 # Create a shortcut from /var/www/ to ~/wwww
-ln -s /var/www/ ~/
+ln -svf /var/www/ ~/
 #
 # Create a folder inside /var/www for nwsync
 sudo mkdir /var/www/nwsync
@@ -35,9 +37,9 @@ sudo sysctl -w net.core.somaxconn=4096
 # Edit the nwsync file with your configs:
 sudo nano /etc/nginx/sites-available/nwsync
 #
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 #                                  NOTE
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # server {
 #     listen 80 backlog=4096;
 #     listen [::]:80 backlog=4096;
@@ -45,7 +47,7 @@ sudo nano /etc/nginx/sites-available/nwsync
 #     # CHANGE THE "192.168.1.1" WITH YOUR PUBLIC IP ADDRESS
 #     # GO TO https://www.whatismyip.com/ TO FIND OUT YOUR PUBLIC IP
 #     # You can also use the hostname you setup from noip
-#     server_name 192.168.1.1; 
+#     server_name 192.168.1.1;
 #
 #     root /var/www/nwsync;
 #     index index.html;
@@ -61,44 +63,74 @@ sudo nano /etc/nginx/sites-available/nwsync
 #         try_files $uri $uri/ =404;
 #     }
 # }
-#-----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 #
 # Make a link of it in .../sites-enabled/
-sudo ln -s /etc/nginx/sites-available/nwsync /etc/nginx/sites-enabled/
+sudo ln -svf /etc/nginx/sites-available/nwsync /etc/nginx/sites-enabled/
 #
 # You can check to see if it's working by putting the ip address you configured in the browser.
 # Example: if you access "http://192.168.1.1", you'll see NGINX saying that you configured it successfully
-# After running nwsync for the first time, you can access it's contents through "http://192.168.1.1/nwsyncdata/"
+#
+# ------------------------------------------------------------------------------
+# Install NWSync
 #
 # Make directory for nwsync and open it
 mkdir ~/nwsync && cd ~/nwsync
 #
-# Download nwsync (Version may be different)
-wget https://github.com/Beamdog/nwsync/releases/download/0.4.3/nwsync.linux.amd64.zip
+# Install nim and put it in your path (Be careful when running scripts from the internet)
+curl https://nim-lang.org/choosenim/init.sh -sSf | sh
 #
-# Unzip it
-unzip nwsync.linux.amd64.zip -d .
+# export the new nimble/bin folder to PATH as well as add it to your .bashrc
+export PATH=/home/wosee/.nimble/bin:$PATH
+printf "\nexport PATH=/home/wosee/.nimble/bin:\$PATH\n\n" | tee -a ~/.bashrc
+#
+# Select stable version of choosenim
+choosenim stable
+#
+# Install neverwinter.nim
+nimble install -y neverwinter
+#
+# Create a .bash_aliases if you haven't already
+touch ~/.bash_aliases
+#
+# Create a better alias for nwsync commands
+printf "\nalias nwsync_write='nwn_nwsync_write'\nalias nwsync_prune='nwn_nwsync_prune'\nalias nwsync_print='nwn_nwsync_print'\nalias nwsync_fetch='nwn_nwsync_fetch'\n" | tee -a ~/.bash_aliases
+#
+# Source .bash_aliases so the system recognizes the new aliases
+source ~/.bash_aliases
 #
 # Download the nwsync-update.sh and place it in your home folder
 cp -a ~/NWNXEE-SETUP/nwsync_files/nwsync-update.sh ~/
 #
-# Edit the "PATH=~/nwsync" if necessary
 # Go back to your home folder
 cd ~
+#
+# Change the "MODULENAME" to your module's name including the ".mod" extension
+nano nwsync-update.sh
+#
+# Like so MODULENAME="mycoolmodule.mod"
 #
 # Make it usable
 chmod +x nwsync-update.sh
 #
-# Run ./nwsync-update.sh or nwsync_GUI_update.sh if you want the GUI one
-sudo ./nwsync-update.sh
+# Run ./nwsync-update.sh
+./nwsync-update.sh
+#
+# Depending on how much files/size your haks have, it may take a long time when you first run it
+# When it's done you can check to see if it worked either by checking the nwsyncdata folder
+ls ~/www/nwsync/nwsyncdata
+#
+# You should be able two folders: "data" and "manifests" and a file called "latest"
+# Also you can access its contents through "http://192.168.1.1/nwsyncdata/" this can take a few minutes
+# to update
 #
 # If need permission use
 chown -R $(logname):www-data ~/www
-chown -R 0755 ~/www
+chmod -R 0755 ~/www
 #
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # METHOD 2 - Digita Ocean (Spaces)
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 #
 # Install s3cmd
 # ARCH
