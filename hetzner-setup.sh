@@ -9,7 +9,7 @@
 # I'll choose we'll use Hetzner Cloud
 #
 # Create a Server:
-# 
+#
 # Location: Choose one
 #
 # Image:
@@ -46,7 +46,7 @@
 # WiP you can check their website for a basic cloud-config https://community.hetzner.com/tutorials/basic-cloud-config
 #
 # Name
-# 
+#
 ########################################################################
 #                           CREATING SSH-KEY                           #
 ########################################################################
