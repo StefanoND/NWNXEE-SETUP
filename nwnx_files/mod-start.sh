@@ -105,7 +105,6 @@ PORT=5121
 
 # NWSync
 # Link to nwsync if using it
-# NWSYNCURL='https://download.woseenwsync.xyz/wosee/nwsync'
 NWSYNCURL=''
 
 # -----------------------------------------------------
