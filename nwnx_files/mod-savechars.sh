@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 pushd ~/nwn/userdir/servervault
-git add *
-git commit -m "servervault backup"
+git add .
+git commit -am "servervault-backup-$(date)"
 popd

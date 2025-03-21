@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Set the names for your server/module here
 MODNAME=modname
@@ -8,13 +8,13 @@ PROFILER_ENABLE=true
 
 status=$(./mod-status.sh)
 if [ "$status" -eq "1" ]; then
-    echo "$MODNAME is already running"
-    exit;
+  echo "$MODNAME is already running"
+  exit
 fi
 
 if [ -f /home/nwn/.mod-maintenance ]; then
-    echo "$MODNAME maintenance in progress (.mod-maintenance file exists), not starting"
-    exit;
+  echo "$MODNAME maintenance in progress (.mod-maintenance file exists), not starting"
+  exit
 fi
 
 # Make a backup of all characters each time the server restarts
@@ -265,7 +265,7 @@ export NWNX_OPTIMIZATIONS_LUO_LOOKUP=true
 # Breaks the following NWNX_Player functions: SetObjectVisualTransformOverride,
 # ApplyLoopingVisualEffectToObject, SetPlaceableNameOverride, SetCreatureNameOverride,
 # SetObjectMouseCursorOverride and SetObjectHiliteColorOverride
-# Breaks forcing object to be always visible from NWNX_Visibility 
+# Breaks forcing object to be always visible from NWNX_Visibility
 export NWNX_OPTIMIZATIONS_ALTERNATE_GAME_OBJECT_UPDATE=false
 #
 # Caches all script chunks, improving performance
@@ -316,7 +316,7 @@ export NWNX_REDIS_PUBSUB_CHANNELS=""
 export NWNX_RENAME_ON_MODULE_CHAR_LIST=false
 #
 # Renames the player name on the player list as well.
-export NWNX_RENAME_ON_PLAYER_LIST=true 
+export NWNX_RENAME_ON_PLAYER_LIST=true
 #
 # DM observers will see global or personal overrides as well as being able to have their own name overridden for other observers.
 export NWNX_RENAME_ALLOW_DM=false
@@ -349,7 +349,7 @@ export NWNX_SQL_USERNAME=user
 export NWNX_SQL_PASSWORD=password
 #
 # The database to connect to.
-# The filename of the database when using SQLite, it is stored in the UserDirectory/database folder. 
+# The filename of the database when using SQLite, it is stored in the UserDirectory/database folder.
 export NWNX_SQL_DATABASE=mymodulename
 #
 # Export query execution metrics.
@@ -546,14 +546,14 @@ export NWNX_TWEAKS_FIX_TURD_EFFECT_UNLINKING=true
 #export NWNX_UTIL_PRE_MODULE_START_SCRIPT_CHUNK=""
 
 # Keep all logs in this directory
-LOGFILE=~/logs/mod-`date +%s`.txt
+LOGFILE=~/logs/mod-$(date +%s).txt
 echo "Starting $MODNAME. Log is $LOGFILE"
 
 # Set game options below
 
 export NWNX_CORE_LOAD_PATH=~/nwnx/Binaries
 LD_PRELOAD=~/nwnx/Binaries/NWNX_Core.so:~/nwnx/Binaries/NWNX_Diagnostics.so \
- ./nwserver-linux \
+  ./nwserver-linux \
   -module "$MODNAME" \
   -maxclients 20 \
   -minlevel 1 \
@@ -573,7 +573,7 @@ LD_PRELOAD=~/nwnx/Binaries/NWNX_Core.so:~/nwnx/Binaries/NWNX_Diagnostics.so \
   -reloadwhenempty 0 \
   -port 5121 \
   -nwsyncurl http://web.site.address/nwsyncdata/ \
-  "$@" >> $LOGFILE 2>&1 &
+  "$@" >>$LOGFILE 2>&1 &
 
-echo $! > ~/.modpid
+echo $! >~/.modpid
 popd

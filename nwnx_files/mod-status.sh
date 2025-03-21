@@ -1,13 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-status=0
+STATUS="Server is running"
 
-while read -r line
-do
-    if output=$(ps -p "$line" >/dev/null 2>&1)
-    then
-        status=1
-    fi
-done <  ~/.modpid
+while read -r line; do
+  if output=$(ps -p "$line" >/dev/null 2>&1); then
+    STATUS="Server is not running"
+  fi
+done <~/.modpid
 
-echo $status
+echo "$STATUS"
