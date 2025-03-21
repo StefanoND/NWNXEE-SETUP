@@ -1,31 +1,20 @@
 # Install pre-requisite (if it isn't already)
-sudo apt install make gcc -y
-#
-# Change folder
-cd /usr/local/src
+sudo apt install -y make gcc
 #
 # Download NO-IP
-sudo wget http://www.noip.com/client/linux/noip-duc-linux.tar.gz
+wget -O ~/noip-duc-linux.tar.gz http://www.noip.com/client/linux/noip-duc-linux.tar.gz
 #
 # Unzip it
-sudo tar xf noip-duc-linux.tar.gz
-#
-# Change folder
-cd noip-2.1.9-1
+sudo tar -xf noip-duc-linux.tar.gz -C /usr/local/src
 #
 # Install and configure with your no-ip2 credentials, leave everything at default
-sudo make install
+sudo make install -C /usr/local/src/noip-2.1.9-1
 #
-# Reconfigure it with your no-ip2 credentials and leave everything at default
-# This is needed be cause even though it says it "created" the config file, it's nowhere to be found
-sudo /usr/local/bin/noip2 -C
-#
-# Make it run on boot (You can use other app instead of Nano if you wish)
-# Create this file and copy-paste the following
-sudo touch /etc/systemd/system/noip2.service
+# To make noip run on boot we'll need to create a service for this.
+# Download noip2.service and put it at /etc/systemd/system
 curl https://raw.githubusercontent.com/StefanoND/NWNXEE-SETUP/main/noip_files/noip2.service -o - | sudo tee /etc/systemd/system/noip2.service
 #
-# Reload Systemctl
+# Reload Systemctl so the service is detected
 sudo systemctl daemon-reload
 #
 # Enable NOIP2 service
@@ -36,3 +25,5 @@ sudo shutdown -r now
 #
 # Now you can check if it's working or not, if it is congratulations!
 systemctl status noip2
+#
+# You'll need to configure your Router/Firewall to allow/block connections accordingly
