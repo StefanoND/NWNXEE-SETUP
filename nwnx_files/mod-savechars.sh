@@ -2,5 +2,5 @@
 
 pushd ~/nwn/userdir/servervault
 git add .
-git commit -am "servervault-backup-$(date)"
+git commit -am "servervault-backup-$(date +%s)"
 popd

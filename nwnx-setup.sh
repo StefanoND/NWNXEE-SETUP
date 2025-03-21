@@ -304,7 +304,7 @@ sudo add-apt-repository ppa:ubuntu-toolchain-r/test && sync
 sudo apt update && sudo apt upgrade -y && sync
 #
 # Install necessary dependencies
-sudo apt install -y dkms build-essential linux-headers-generic linux-headers-"$(uname -r)" linux-image-extra-virtual nano && sync
+sudo apt install -y dkms build-essential linux-headers-generic linux-headers-"$(uname -r)" linux-image-extra-virtual binutil binutil-dev nano && sync
 #
 # Install tools needed to build NWNX
 sudo apt install -y g++-14 g++-14-multilib gcc-14 gcc-14-multilib cmake git make unzip && sync
@@ -329,7 +329,16 @@ sudo apt install redis -y
 # Install stuff needed to build/run/use MariaDB
 # Don't forget to improve your MariaDB security
 # https://wiki.archlinux.org/title/MariaDB#Improve_initial_security
-sudo apt install -y mariadb-server libmariadb3 libmariadb-dev && sync
+sudo apt install -y mariadb-server libmariadb3 libmariadb-dev libmariadb-dev-compat && sync
+#
+# Disable its service in case it auto started
+sudo systemctl disable --now mariadb
+#
+# Run this command
+sudo mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+#
+# Now you can enable it
+sudo systemctl enable --now mariadb
 #
 # MYSQL
 # Install stuff needed to build/run/use MySQL
@@ -356,7 +365,7 @@ sudo shutdown -r now
 # ------------------------------------------------------------------------------
 #
 # Get latest source from github, with --depth=1 we don't need all their commits history
-git clone --depth=1 https://github.com/nwnxee/unified.git nwnx && sync
+git clone --depth=1 https://github.com/nwnxee/unified.git ~/nwnx && sync
 #
 # ----------------------------------------------------------------------------------- #
 # THIS PART IS FOR ARM 64 SYSTEMS                                                     #
@@ -367,11 +376,20 @@ git clone --depth=1 https://github.com/nwnxee/unified.git nwnx && sync
 #
 # Make a directory where the build system will initialize
 # even though there's already a Build folder (with upper case B)
-mkdir nwnx/build && sync && cd nwnx/build
+mkdir ~/nwnx/nwnx-build && sync && cd ~/nwnx/nwnx-build
+#
+# -----------------------------------------------------------------------------------
+# If you have liblua.a in your PC (due to neovim or something else) and don't want lua
+# in nwnx, you'll must make it "undetectable" so nwnx doesn't try to compile it and never
+# finish compiling
+# This is only required if you're having problems with /usr/bin/ld errors with liblua.a
+sudo mv /usr/local/lib/liblua.a /usr/local/lib/liblua.a.old
+# -----------------------------------------------------------------------------------
 #
 # Initialize the build system to use GCC version 14, for 64bit.
 # Build release version of nwnx, with debug info
-# Ignore PostgreSQL, SWIG and HUNSPELL errors, you don't have them and you (probably) don't need them
+# Ignore PostgreSQL, Ruby, SWIG and HUNSPELL errors, you don't need them, unless you know what you're
+# doing
 CC="gcc-14 -m64" CXX="g++-14 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../ && sync
 #
 # ----------------------------------------------------------------------------------- #
@@ -383,6 +401,12 @@ CC="gcc-14 -m64" CXX="g++-14 -m64" cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../ &
 #
 # Build NWNX, in X threads (Where X is your CPU thread count + 1). This will take a while
 make -j5 && sync
+#
+# -----------------------------------------------------------------------------------
+# If you renamed your liblua.a above, you must rename it back or you'll have a bad time
+# Again, this is only needed if you renamed it earlier
+sudo mv /usr/local/lib/liblua.a.old /usr/local/lib/liblua.a
+# -----------------------------------------------------------------------------------
 #
 #########################################################################################################
 ##### THIS PART IS NOT NEEDED IF YOU'RE FOLLOWING THIS TUTORIAL FOR THE FIRST TIME                  #####
@@ -417,7 +441,7 @@ unzip nwnee-dedicated-8193.37-15.zip -d . && sync
 #
 # Run it once to create the user directory.
 # nwserver must be run with current directory the same as the executable, so we need to 'cd' into it first
-cd bin/linux-x86 && ./nwserver-linux
+cd ~/nwn/bin/linux-x86 && ./nwserver-linux
 #
 #########################################################################################################
 ##### THIS PART IS FOR ARM 64 SYSTEMS                                                               #####
@@ -485,24 +509,22 @@ git config --global user.email = "my@email.com"
 #                                                             #
 # Run mariadb (as admin/sudo). The following commands are     #
 # given in MariaDB, not the regular terminal                  #
-sudo mariadb                                                  #
+sudo mariadb
 #                                                             #
-# We want to configure mariadb itself.                        #
-USE mariadb;                                                  #
-#                                                             #
-# Skip to "CREATE USER ..." command                           #
+# Skip to "USE mysql;" command                                #
 # ----------------------------------------------------------- #
 # MYSQL                                                       #
 #                                                             #
 # Run mysql (as admin/sudo). The following commands are given #
 # in MySQL, not the regular terminal                          #
-sudo mysql                                                    #
+sudo mysql
 #                                                             #
-# We want to configure mysql/mariadb itself.                  #
-USE mysql;                                                    #
 # ----------------------------------------------------------- #
 #
-# Create a new user for nwserver to use. 'nwn' is username, 'pass' is password, you can change them if you want.
+# We want to configure mysql/mariadb itself.
+USE mysql;
+#
+# Create a new user for nwserver to use. 'nwn' is username, 'pass' is password, change them.
 CREATE USER 'nwn'@'localhost' IDENTIFIED BY 'pass';
 #
 # Give it full access
@@ -551,10 +573,10 @@ git config --global --add safe.directory ~/shared/nwn/servervault
 cd ~/
 #
 # Download all files from this repo with depth=1 since you don't need it's commit history
-git clone --depth=1 https://github.com/StefanoND/NWNXEE-SETUP.git && sync
+git clone --depth=1 https://github.com/StefanoND/NWNXEE-SETUP.git ~/NWNXEE-SETUP && sync
 #
 # Copy them into your /home/ folder
-cp NWNXEE-SETUP/nwnx_files/* ~/
+cp ~/NWNXEE-SETUP/nwnx_files/* ~/
 #
 # The above will copy these scripts to your home directory
 # mod-disable.sh - disables server auto restart

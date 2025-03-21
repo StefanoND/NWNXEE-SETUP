@@ -1,3 +1,65 @@
+# Port forwarding/Firewall
+
+You don't usually need to mess with them, but if you do here, they are.
+
+They're mostly here for fast access of information.
+
+    I don't want to scare you or sound paranoid but messing with this stuff requires one to be
+    properly secured to avoid bad things from happening.
+
+    Be aware that opening ports and allowing them through the firewall means you're literally
+    "opening" them to the outside world.
+    So anyone from the internet "can" (don't mean they will) access your server from that specific port.
+
+    I strongly recommend you to try and see if everything's working first, and still I recommend you
+    learn about these things before fiddling with this.
+
+### IMPORTANT: Pay attention to their protocol (TCP and/or UDP).
+
+### NWN: EE's Server
+
+All NWNEE's Server ports are UDP
+
+You should only forward the port you're using like:
+
+    5121 (UDP)
+
+### SSH
+
+SSH Only needs one port and it's TCP:
+
+    22 (TCP)
+
+### No-ip
+
+IMPORTANT: Port 80 opens the port for Web Servers using HTTP (all of them)
+IMPORTANT: Port 443 opens the port for Web Servers using HTTPS (all of them)
+
+    80 (TCP)
+    443 (TCP)
+
+### Grafana
+
+### InfluxDB
+
+InfluxDB uses other ports but they're used locally and their website explicitly says not to open them
+
+    8086 (TCP and UDP)
+
+### Redis
+
+Even though the default port is 6379 (TCP), it's unencrypted and doesn't require special permissions to use.
+Port 6380 is encrypted and requires special permissions to use (Need to be properly configured)
+
+    6379 (TCP)
+    6380 (TCP)
+
+### MySQL
+
+Only MySQL needs port forwarding
+
+    3306 (TCP)
+
 # Multiple instances for online play
 
 If you have two or more CD-Keys (either from Steam, GOG, Beamdog and/or other places) you can install them through

@@ -110,7 +110,7 @@ NWSYNCURL=''
 # -----------------------------------------------------
 
 # Keep all logs in this directory
-LOGFILE="$HOME/share/logs/mod-$(date +%s).txt"
+LOGFILE="$HOME/logs/mod-$(date +%s).txt"
 
 #######################################################
 # SERVER CONFIGURATION END
