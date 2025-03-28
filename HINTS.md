@@ -1,22 +1,23 @@
 # Index
 
-1. Port forwarding/Firewall/Network
- 1.1 HTTP
- 1.2 HTTPS
- 1.3 NWN: EE's Server
- 1.4 SSH
- 1.5 Grafana
- 1.6 InfluxDB
- 1.7 Redis
- 1.8 MySQL
+1. [Port forwarding/Firewall/Network](#WURK)
+ 1.1 [HTTP](#HTTP)
+ 1.2 [HTTPS](#HTTPS)
+ 1.3 [NWN: EE's Server](#NWNEE_SERVER)
+ 1.4 [SSH](#SSH)
+ 1.5 [Grafana](#GRAFANA)
+ 1.6 [InfluxDB](#INFLUXDB)
+ 1.7 [Redis](#REDIS)
+ 1.8 [MySQL](#MYSQL)
 
-2. Multiple instances for online play
- 2.1 Install NWN: EE on your first launcher (Example: Steam)
- 2.2 Install NWN: EE on your second launcher (Example: GOG through Lutris)
- 2.3 Configure the nwn.ini files
+2. [Multiple instances for online play](#MULTI_INSTANCE)
+ 2.1 [Install NWN: EE on your first launcher (Example: Steam)](#INSTALL_STEAM)
+ 2.2 [Install NWN: EE on your second launcher (Example: GOG through Lutris)](#INSTALL_LUTRIS)
+ 2.3 [Configure the nwn.ini files](#CONFIG_INI)
 
-3. Toolset in Linux
+3. [Toolset in Linux](#toolset_linux)
 
+<a name="WURK"></a>
 ## 1. Port forwarding/Firewall/Network
 
 NOTE: I'll call "WURK" anything related to firewall rules, port forwarding, getting a actual public IP, etc.
@@ -57,18 +58,21 @@ IMPORTANT: You'll only want/need to WURK if you want something in your LAN to be
 
 ### IMPORTANT: Pay attention to their protocol (TCP and/or UDP).
 
+<a name="HTTP"></a>
 ### 1.1 HTTP (No-ip, NWSync)
 
 IMPORTANT: Port 80 opens the port for Web Servers using HTTP (all of them)
 
     80 (TCP)
 
+<a name="HTTPS"></a>
 ### 1.2 HTTPS
 
 IMPORTANT: Port 443 opens the port for Web Servers using HTTPS (all of them)
 
     443 (TCP)
 
+<a name="NWNEE_SERVER"></a>
 ### 1.3 NWN: EE's Server
 
 All NWNEE's Server ports are UDP
@@ -77,18 +81,21 @@ You should only forward the port you're using like:
 
     5121 (UDP)
 
+<a name="SSH"></a>
 ### 1.4 SSH
 
 SSH Only needs one port and it's TCP:
 
     22 (TCP)
 
+<a name="GRAFANA"></a>
 ### 1.5 Grafana
 
 Grafana uses port 3000 for communication
 
     3000 (TCP)
 
+<a name="INFLUXDB"></a>
 ### 1.6 InfluxDB
 
 InfluxDB uses other ports as well but we only need these
@@ -96,6 +103,7 @@ InfluxDB uses other ports as well but we only need these
     8086 (TCP and UDP)
     8089 (UDP)
 
+<a name="REDIS"></a>
 ### 1.7 Redis
 
 Even though the default port is 6379 (TCP), it's unencrypted and doesn't require special permissions to use.
@@ -104,12 +112,14 @@ Port 6380 is encrypted and requires special permissions to use (Need to be prope
     6379 (TCP)
     6380 (TCP)
 
+<a name="MYSQL"></a>
 ### 1.8 MySQL
 
 Only MySQL needs port forwarding
 
     3306 (TCP)
 
+<a name="MULTI_INSTANCE"></a>
 ## 2. Multiple instances for online play
 
 If you have two or more CD-Keys (either from Steam, GOG, Beamdog and/or other places) you can install them through
@@ -127,6 +137,7 @@ instances of the game in the same (Online/LAN) server.
 
 Example for Linux:
 
+<a name="INSTALL_STEAM"></a>
 ### 2.1 Install NWN: EE on your first launcher (Example: Steam)
 
     Run NWN: EE once
@@ -136,6 +147,7 @@ Example for Linux:
     In "General" tab, "Launch Options" section, you'll put
     -userDirectory "/home/USERNAME/.local/share/STEAM_Neverwinter-Nights"
 
+<a name="INSTALL_LUTRIS"></a>
 ### 2.2 Install NWN: EE on your second launcher (Example: GOG through Lutris)
 
     Run NWN: EE once
@@ -149,6 +161,7 @@ Example for Linux:
 
 \*: Example path is "/home/USERNAME/Lutris/gog/neverwinter-nights-enhanced-edition/game/bin/linux-x86/nwmain-linux"
 
+<a name="CONFIG_INI"></a>
 ### 2.3 Configure the nwn.ini files
 
 Since you have two or more different NWN Documents folder, you have two or more different "nwn.ini" files,
@@ -189,6 +202,7 @@ The path to my nwn documents folder is `/mnt/EXTERNALDRIVE/NWN_DOCS` so all my n
     CACHE=/mnt/EXTERNALDRIVE/NWN_DOCS/cache
     MODELCOMPILER=/mnt/EXTERNALDRIVE/NWN_DOCS/modelcompiler
 
+<a name="toolset_linux"></a>
 ## Toolset in Linux
 
 If you're using the toolset in Linux, it'll be using WINE or PROTON and it will create yet another
