@@ -1,3 +1,5 @@
+# You may need to open port 80 (TCP)
+#
 # Install pre-requisite (if it isn't already)
 sudo apt install -y make gcc
 #

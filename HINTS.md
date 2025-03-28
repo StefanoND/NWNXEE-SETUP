@@ -1,8 +1,49 @@
-# Port forwarding/Firewall
+# Index
 
-You don't usually need to mess with them, but if you do here, they are.
+1. Port forwarding/Firewall/Network
+ 1.1 HTTP
+ 1.2 HTTPS
+ 1.3 NWN: EE's Server
+ 1.4 SSH
+ 1.5 Grafana
+ 1.6 InfluxDB
+ 1.7 Redis
+ 1.8 MySQL
 
-They're mostly here for fast access of information.
+2. Multiple instances for online play
+ 2.1 Install NWN: EE on your first launcher (Example: Steam)
+ 2.2 Install NWN: EE on your second launcher (Example: GOG through Lutris)
+ 2.3 Configure the nwn.ini files
+
+3. Toolset in Linux
+
+## 1. Port forwarding/Firewall/Network
+
+NOTE: I'll call "WURK" anything related to firewall rules, port forwarding, getting a actual public IP, etc.
+
+You don't usually need to WURK, but if you do here, they are.
+
+They're here for fast access of information.
+
+NOTE: Two keywords you must know of, LAN (Local Area Network) and WAN (Wide Area Network).
+
+    LAN: Local Area Network. Eveything in your house connected to the modem/router, your/others PC,
+    laptop, phone, smart gadgets, etc. These are all connected to your LAN.
+
+    WAN: Wide Area Network. A way to connect all LANs (so you can access youtube, twitch, google, amazon,
+    etc)
+
+You only need to WURK if you want something from your LAN to be accessible from the LAN.
+
+So if you only want your nwnee server to be accessible, you'll only want to WURK on the nwnee server
+section
+
+If you want your nwnee server and nwsync to be accessible, you'll only want to WURK on the nwnee server
+and nwsync sections
+
+If you're paying a dedicated server, most of these things are already WURKed on.
+
+IMPORTANT: You'll only want/need to WURK if you want something in your LAN to be accessible from the WAN.
 
     I don't want to scare you or sound paranoid but messing with this stuff requires one to be
     properly secured to avoid bad things from happening.
@@ -16,7 +57,19 @@ They're mostly here for fast access of information.
 
 ### IMPORTANT: Pay attention to their protocol (TCP and/or UDP).
 
-### NWN: EE's Server
+### 1.1 HTTP (No-ip, NWSync)
+
+IMPORTANT: Port 80 opens the port for Web Servers using HTTP (all of them)
+
+    80 (TCP)
+
+### 1.2 HTTPS
+
+IMPORTANT: Port 443 opens the port for Web Servers using HTTPS (all of them)
+
+    443 (TCP)
+
+### 1.3 NWN: EE's Server
 
 All NWNEE's Server ports are UDP
 
@@ -24,34 +77,26 @@ You should only forward the port you're using like:
 
     5121 (UDP)
 
-### SSH
+### 1.4 SSH
 
 SSH Only needs one port and it's TCP:
 
     22 (TCP)
 
-### No-ip
-
-IMPORTANT: Port 80 opens the port for Web Servers using HTTP (all of them)
-IMPORTANT: Port 443 opens the port for Web Servers using HTTPS (all of them)
-
-    80 (TCP)
-    443 (TCP)
-
-### Grafana
+### 1.5 Grafana
 
 Grafana uses port 3000 for communication
 
     3000 (TCP)
 
-### InfluxDB
+### 1.6 InfluxDB
 
 InfluxDB uses other ports as well but we only need these
 
     8086 (TCP and UDP)
     8089 (UDP)
 
-### Redis
+### 1.7 Redis
 
 Even though the default port is 6379 (TCP), it's unencrypted and doesn't require special permissions to use.
 Port 6380 is encrypted and requires special permissions to use (Need to be properly configured)
@@ -59,13 +104,13 @@ Port 6380 is encrypted and requires special permissions to use (Need to be prope
     6379 (TCP)
     6380 (TCP)
 
-### MySQL
+### 1.8 MySQL
 
 Only MySQL needs port forwarding
 
     3306 (TCP)
 
-# Multiple instances for online play
+## 2. Multiple instances for online play
 
 If you have two or more CD-Keys (either from Steam, GOG, Beamdog and/or other places) you can install them through
 their respective launcher and assign each of them the `-userDirectory` launch argument followed by nwn's document path.
@@ -82,7 +127,7 @@ instances of the game in the same (Online/LAN) server.
 
 Example for Linux:
 
-### Step 1 - Install NWN: EE on your first launcher (Example: Steam)
+### 2.1 Install NWN: EE on your first launcher (Example: Steam)
 
     Run NWN: EE once
     A new folder will be created at "~/.local/share" called "Neverwinter Nights"
@@ -91,7 +136,7 @@ Example for Linux:
     In "General" tab, "Launch Options" section, you'll put
     -userDirectory "/home/USERNAME/.local/share/STEAM_Neverwinter-Nights"
 
-### Step 2 - Install NWN: EE on your second launcher (Example: GOG through Lutris)
+### 2.2 Install NWN: EE on your second launcher (Example: GOG through Lutris)
 
     Run NWN: EE once
     A new folder will be created at "~/.local/share" called "Neverwinter Nights"
@@ -104,7 +149,7 @@ Example for Linux:
 
 \*: Example path is "/home/USERNAME/Lutris/gog/neverwinter-nights-enhanced-edition/game/bin/linux-x86/nwmain-linux"
 
-### Step 3 - Configure the nwn.ini files
+### 2.3 Configure the nwn.ini files
 
 Since you have two or more different NWN Documents folder, you have two or more different "nwn.ini" files,
 all pointing to their original `~/.local/share/Neverwinter Nights` path.
@@ -144,7 +189,7 @@ The path to my nwn documents folder is `/mnt/EXTERNALDRIVE/NWN_DOCS` so all my n
     CACHE=/mnt/EXTERNALDRIVE/NWN_DOCS/cache
     MODELCOMPILER=/mnt/EXTERNALDRIVE/NWN_DOCS/modelcompiler
 
-# Toolset in Linux
+## Toolset in Linux
 
 If you're using the toolset in Linux, it'll be using WINE or PROTON and it will create yet another
 "Neverwinter Nights" folder.

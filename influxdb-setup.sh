@@ -9,7 +9,7 @@
 # Take some time to understand what each command does.
 # These steps were tested on a clean Ubuntu 24.04 Desktop install:
 #------------------------------------------------------------------------------
-# Open ports 8086(TCP/UDP) 8088(TCP) 8089(UDP) and 3000 (TCP)
+# Open ports 8086(TCP/UDP) and 3000 (TCP) if you're having issues
 #
 # Increase UDP Buffer to 25MB (or higher)
 sudo sysctl -w net.core.rmem_max=26214400
