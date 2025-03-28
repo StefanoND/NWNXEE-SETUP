@@ -40,11 +40,16 @@ IMPORTANT: Port 443 opens the port for Web Servers using HTTPS (all of them)
 
 ### Grafana
 
+Grafana uses port 3000 for communication
+
+    3000 (TCP)
+
 ### InfluxDB
 
-InfluxDB uses other ports but they're used locally and their website explicitly says not to open them
+InfluxDB uses other ports as well but we only need these
 
     8086 (TCP and UDP)
+    8089 (UDP)
 
 ### Redis
 
