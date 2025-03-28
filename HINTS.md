@@ -1,19 +1,19 @@
 # Index
 
 1. [Port forwarding/Firewall/Network](#WURK)
- 1.1 [HTTP](#HTTP)
- 1.2 [HTTPS](#HTTPS)
- 1.3 [NWN: EE's Server](#NWNEE_SERVER)
- 1.4 [SSH](#SSH)
- 1.5 [Grafana](#GRAFANA)
- 1.6 [InfluxDB](#INFLUXDB)
- 1.7 [Redis](#REDIS)
- 1.8 [MySQL](#MYSQL)
+ - [HTTP](#HTTP)
+ - [HTTPS](#HTTPS)
+ - [NWN: EE's Server](#NWNEE_SERVER)
+ - [SSH](#SSH)
+ - [Grafana](#GRAFANA)
+ - [InfluxDB](#INFLUXDB)
+ - [Redis](#REDIS)
+ - [MySQL](#MYSQL)
 
 2. [Multiple instances for online play](#MULTI_INSTANCE)
- 2.1 [Install NWN: EE on your first launcher (Example: Steam)](#INSTALL_STEAM)
- 2.2 [Install NWN: EE on your second launcher (Example: GOG through Lutris)](#INSTALL_LUTRIS)
- 2.3 [Configure the nwn.ini files](#CONFIG_INI)
+ - [Install NWN: EE on your first launcher (Example: Steam)](#INSTALL_STEAM)
+ - [Install NWN: EE on your second launcher (Example: GOG through Lutris)](#INSTALL_LUTRIS)
+ - [Configure the nwn.ini files](#CONFIG_INI)
 
 3. [Toolset in Linux](#toolset_linux)
 
