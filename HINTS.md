@@ -25,6 +25,7 @@ NOTE: I'll call "WURK" anything related to firewall rules, port forwarding, gett
 You don't usually need to WURK, but if you do here, they are.
 
 They're here for fast access of information.
+#
 
 NOTE: Two keywords you must know of, LAN (Local Area Network) and WAN (Wide Area Network).
 
@@ -33,8 +34,11 @@ NOTE: Two keywords you must know of, LAN (Local Area Network) and WAN (Wide Area
 
     WAN: Wide Area Network. A way to connect all LANs (so you can access youtube, twitch, google, amazon,
     etc)
+#
 
-You only need to WURK if you want something from your LAN to be accessible from the LAN.
+### Important
+
+You only want/need to WURK if you want something from your LAN to be accessible from the LAN.
 
 So if you only want your nwnee server to be accessible, you'll only want to WURK on the nwnee server
 section
@@ -43,8 +47,7 @@ If you want your nwnee server and nwsync to be accessible, you'll only want to W
 and nwsync sections
 
 If you're paying a dedicated server, most of these things are already WURKed on.
-
-IMPORTANT: You'll only want/need to WURK if you want something in your LAN to be accessible from the WAN.
+#
 
     I don't want to scare you or sound paranoid but messing with this stuff requires one to be
     properly secured to avoid bad things from happening.
@@ -57,9 +60,11 @@ IMPORTANT: You'll only want/need to WURK if you want something in your LAN to be
     learn about these things before fiddling with this.
 
 ### IMPORTANT: Pay attention to their protocol (TCP and/or UDP).
+#
 
 <a name="HTTP"></a>
 ### 1.1 HTTP (No-ip, NWSync)
+#
 
 IMPORTANT: Port 80 opens the port for Web Servers using HTTP (all of them)
 
@@ -67,6 +72,7 @@ IMPORTANT: Port 80 opens the port for Web Servers using HTTP (all of them)
 
 <a name="HTTPS"></a>
 ### 1.2 HTTPS
+#
 
 IMPORTANT: Port 443 opens the port for Web Servers using HTTPS (all of them)
 
@@ -74,6 +80,7 @@ IMPORTANT: Port 443 opens the port for Web Servers using HTTPS (all of them)
 
 <a name="NWNEE_SERVER"></a>
 ### 1.3 NWN: EE's Server
+#
 
 All NWNEE's Server ports are UDP
 
@@ -83,6 +90,7 @@ You should only forward the port you're using like:
 
 <a name="SSH"></a>
 ### 1.4 SSH
+#
 
 SSH Only needs one port and it's TCP:
 
@@ -90,6 +98,7 @@ SSH Only needs one port and it's TCP:
 
 <a name="GRAFANA"></a>
 ### 1.5 Grafana
+#
 
 Grafana uses port 3000 for communication
 
@@ -97,6 +106,7 @@ Grafana uses port 3000 for communication
 
 <a name="INFLUXDB"></a>
 ### 1.6 InfluxDB
+#
 
 InfluxDB uses other ports as well but we only need these
 
@@ -105,6 +115,7 @@ InfluxDB uses other ports as well but we only need these
 
 <a name="REDIS"></a>
 ### 1.7 Redis
+#
 
 Even though the default port is 6379 (TCP), it's unencrypted and doesn't require special permissions to use.
 Port 6380 is encrypted and requires special permissions to use (Need to be properly configured)
@@ -114,6 +125,7 @@ Port 6380 is encrypted and requires special permissions to use (Need to be prope
 
 <a name="MYSQL"></a>
 ### 1.8 MySQL
+#
 
 Only MySQL needs port forwarding
 
@@ -129,16 +141,19 @@ This is useful if you're a module builder and/or server owner and need to test y
 instances of the game in the same (Online/LAN) server.
 
 ### Windows users
+#
 
     The My Documents path is at "C:\Users\USERNAME\Documents".
-    Instead of using Lutris, you can use GOG/Beamdogs/etc's own launcher(s).
+    Instead of using Steam, you can use GOG/Beamdogs/etc's own launcher(s).
 
 ### The most important thing is that you have two or more separate "cdkey.ini" files, each with a different CD-Key and each in their respective NWN Document folder.
 
-Example for Linux:
+### Linux users
+#
 
 <a name="INSTALL_STEAM"></a>
 ### 2.1 Install NWN: EE on your first launcher (Example: Steam)
+#
 
     Run NWN: EE once
     A new folder will be created at "~/.local/share" called "Neverwinter Nights"
@@ -149,6 +164,7 @@ Example for Linux:
 
 <a name="INSTALL_LUTRIS"></a>
 ### 2.2 Install NWN: EE on your second launcher (Example: GOG through Lutris)
+#
 
     Run NWN: EE once
     A new folder will be created at "~/.local/share" called "Neverwinter Nights"
@@ -163,6 +179,7 @@ Example for Linux:
 
 <a name="CONFIG_INI"></a>
 ### 2.3 Configure the nwn.ini files
+#
 
 Since you have two or more different NWN Documents folder, you have two or more different "nwn.ini" files,
 all pointing to their original `~/.local/share/Neverwinter Nights` path.
@@ -224,41 +241,40 @@ PROTON's nwn.ini will be pointing to `C:\users\steamuser\Documents\Neverwinter N
 
 If you have the "correct" nwn documents folder in another place, you'll have to change it.
 
-To access paths "outside" WINE/PROTON, you'll need to put the path to WINE/PROTON's dosdevices like:
+To access paths "outside" WINE/PROTON, you'll need to put the drive letter that's pointing outside
+WINE/PROTON like:
 
-    WINE: `\path\to\.wine\dosdevices` (with backslash)
-    PROTON: `\path\to\steamapps\compatdata\XXXX\pfx\dosdevices` (with backslash)
+    `Z:` (with backslash)
 
-and then from there, the path to the "correct" nwn documents like `z:\mnt\EXTERNALDRIVE\NWN_DOCS` like this:
+and then from there, the path to the "correct" nwn documents like
 
-    WINE: \home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS
-    PROTON: `\path\to\steamapps\compatdata\XXXX\pfx\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS
+    `Z:\mnt\EXTERNALDRIVE\NWN_DOCS`
 
-So in your nwn.ini, it'll look like this (Adjust accordingly for PROTON):
+So in your nwn.ini, it'll look like this (Adjust accordingly for both WINE/PROTON):
 
     [Alias]
-    HD0=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS
-    MODULES=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\modules
-    SAVES=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\saves
-    OVERRIDE=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\override
-    HAK=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\hak
-    SCREENSHOTS=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\screenshots
-    CURRENTGAME=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\currentgame
-    LOGS=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\logs
-    TEMP=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\temp
-    TEMPCLIENT=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\tempclient
-    LOCALVAULT=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\localvault
-    DMVAULT=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\dmvault
-    SERVERVAULT=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\servervault
-    DATABASE=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\database
-    PORTRAITS=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\portraits
-    AMBIENT=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\ambient
-    MOVIES=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\movies
-    MUSIC=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\music
-    TLK=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\tlk
-    DEVELOPMENT=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\development
-    PATCH=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\patch
-    OLDSERVERVAULT=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\oldservervault
-    NWSYNC=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\nwsync
-    CACHE=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\cache
-    MODELCOMPILER=home\USERNAME\.wine\dosdevices\z:\mnt\EXTERNALDRIVE\NWN_DOCS\modelcompiler
+    HD0=Z:\mnt\EXTERNALDRIVE\NWN_DOCS
+    MODULES=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\modules
+    SAVES=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\saves
+    OVERRIDE=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\override
+    HAK=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\hak
+    SCREENSHOTS=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\screenshots
+    CURRENTGAME=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\currentgame
+    LOGS=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\logs
+    TEMP=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\temp
+    TEMPCLIENT=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\tempclient
+    LOCALVAULT=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\localvault
+    DMVAULT=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\dmvault
+    SERVERVAULT=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\servervault
+    DATABASE=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\database
+    PORTRAITS=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\portraits
+    AMBIENT=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\ambient
+    MOVIES=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\movies
+    MUSIC=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\music
+    TLK=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\tlk
+    DEVELOPMENT=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\development
+    PATCH=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\patch
+    OLDSERVERVAULT=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\oldservervault
+    NWSYNC=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\nwsync
+    CACHE=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\cache
+    MODELCOMPILER=Z:\mnt\EXTERNALDRIVE\NWN_DOCS\modelcompiler
