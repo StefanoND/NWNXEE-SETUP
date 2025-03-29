@@ -1,19 +1,21 @@
 # This is not a runnable file
 #
-# Info:
-# NWServer only uses 1 (ONE) CPU Core/Thread, having more than 1 core/thread in your system will only be beneficial if the OS itself is using too much CPU
-# 2GB-4GB of RAM is enough for (almost) all servers (specially if single servers) (Unless you have multiple very populated servers)
-# 20 GB is more than enough for most servers (Unless you have really HUGE hakpaks or installing non-minimal server OSes)
+# Check: https://nwn.wiki/display/NWN1/NWServer+Recommendations
+# OS: Linux (with NWNX)
+# CPU: Fast CPU speed, with 2 or more cores
+# RAM: 4GB minimum to 16GB maximum (heavily OS and module / hakpack size dependant, make sure to test!)
+# Disk: Fast SSD with enough space for uploading new versions of files (eg 30GB OS + nwserver base + 10GB hakpacks means you need around 60GB minimum for having 2 copies of the hakpacks at once).
+# Network: Dedicated IP address with sufficient bandwidth and appropriate UDP firewall ports open
 #
 # With that out of the way, I chose hetzner be cause offer alot for cheap
-# I'll choose we'll use Hetzner Cloud
+# I'll choose Hetzner Cloud
 #
 # Create a Server:
 #
 # Location: Choose one
 #
 # Image:
-# OS images: Ubuntu 22.04
+# OS images: Ubuntu 24.04
 #
 # Type
 # Shared vCPU: Arm64 (Ampere) (Even though NWNEE doesn't CURRENTLY support ARM64, it will in patch .36)
@@ -30,9 +32,6 @@
 #
 # Volumes
 # Not needed
-#
-# Firewalls (Check the end of this file on how to create the Firewall Rules)
-# Select the one you created
 #
 # Backups
 # It's up to you, you'll be charged 20% of the server's price (So the 4.05 one will cost 4,86. The 7,37 one will cost 8,84, etc)
@@ -71,45 +70,3 @@ ssh-rsa RANDOMSTUFFHERE COMMENT
 #
 # You'll be able to login with this command in the terminal
 ssh root@xxx.xxx.xxx.xxx -i $HOME/.ssh/server_id_rsa
-########################################################################
-#                               FIREWALL                               #
-########################################################################
-#
-# The following are the ports required to open for each platform
-#
-# Don't forget to forward the port you're gonna host the server (Usually within the 5120-5300 range 5121 being the most common one, UDP and both inbound and outbound)
-# Note: The ports 3074 and 5121 ports are used on more than one platform so no need do add them twice or three times in the firewall rules
-#
-# Inbound Rules
-#
-#   Global:
-#     TCP: 22 (SSH)
-#     UDP: 80 (WWW)
-#
-#   Docker:
-#     TCP: N/A
-#     UDP: 53778
-#   PC:
-#     TCP: N/A
-#     UDP: 5112
-#
-#   PS4:
-#     TCP: 1935, 3478-3480
-#     UDP: 3074, 3478-3479, 5121
-#
-#   Steam
-#     TCP: 27015-27030, 27036-27037
-#     UDP: 4380, 5121, 27000-27031, 27036
-#
-#   Nintendo Switch
-#     TCP: 6667, 12400, 28910, 29900, 29901, 29920
-#     UDP: 1-65535 (NOT RECOMMENDED)
-#
-#   XBox One
-#     TCP: 3074
-#     UDP: 88, 500, 3074, 3544, 4500, 5121
-#
-# Outbound Rules
-#
-# Global
-#   UDP: Only the Server's port (Usually 5121)
