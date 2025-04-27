@@ -218,7 +218,7 @@ sudo chmod 755 shared
 # -------------------------------------------------------------------------------
 #
 # Install SSH if you haven't already
-sudo apt install -y shh
+sudo apt install -y ssh
 #
 # Enable and start it
 sudo systemctl enable --now ssh.service
