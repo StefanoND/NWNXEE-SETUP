@@ -193,9 +193,9 @@ export MY_COOL_EVENT_DOUBLE_XP=0
 # AssignCommand(GetModule(), ActionSpeakString(sMessageToShout, TALKVOLUME_SHOUT));
 export MY_COOL_EVENT_DOUBLE_XP_MESSAGE="We're running double XP, enjoy!"
 
-export MY_SPOOKY_WARNING_WARNING=1
+export MY_SPOOKY_WARNING=1
 
-export MY_SPOOKY_WARNING_WARNING_MESSAGE="Don't give your personal info, we'll never ask for it!"
+export MY_SPOOKY_WARNING_MESSAGE="Don't give your personal info, we'll never ask for it!"
 
 # For "true/false" bools you can create a function that "converts" them to 1/0
 # That can be used as a boolean that nwscript understands
@@ -242,7 +242,6 @@ export NWNX_FEEDBACK_SKIP=1
 export NWNX_HTTPCLIENT_SKIP=1
 export NWNX_ITEM_SKIP=1
 export NWNX_ITEMPROPERTY_SKIP=1
-export NWNX_LUA_SKIP=1
 export NWNX_MAXLEVEL_SKIP=1
 export NWNX_METRICS_INFLUXDB_SKIP=1
 export NWNX_NWSQLITEEXTENSIONS_SKIP=1
@@ -261,7 +260,6 @@ export NWNX_RUBY_SKIP=1
 export NWNX_SWIG_SKIP=1
 export NWNX_SERVERLOGREDIRECTOR_SKIP=1
 export NWNX_SKILLRANKS_SKIP=1
-export NWNX_SPELLCHECKER_SKIP=1
 export NWNX_STORE_SKIP=1
 export NWNX_THREADWATCHDOG_SKIP=1
 export NWNX_TILESET_SKIP=1
@@ -269,6 +267,7 @@ export NWNX_TRACKING_SKIP=1
 export NWNX_TWEAKS_SKIP=1
 export NWNX_UTIL_SKIP=1
 export NWNX_VISIBILITY_SKIP=1
+export NWNX_WATCHCAT_SKIP=1
 export NWNX_WEAPON_SKIP=1
 export NWNX_WEBHOOK_SKIP=1
 
@@ -365,8 +364,8 @@ export NWNX_COMPILER_CONTINUE_ON_ERROR=false
 # After completing compilation, shuts down the server.
 export NWNX_COMPILER_EXIT_ON_COMPLETE=true
 #
-# CScriptCompiler->SetCompileDebugLevel()
-export NWNX_COMPILER_DEBUG_LEVEL=0
+# CScriptCompiler->SetGenerateDebuggerOutput()
+export NWNX_COMPILER_GENERATE_DEBUGGER_OUTPUT=0
 #
 # CScriptCompiler->SetOptimizationFlags()
 export NWNX_COMPILER_OPTIMIZATION_FLAGS=0xFFFFFFFF
@@ -450,6 +449,9 @@ export NWNX_EXPERIMENTAL_IGNORE_MODULE_VERSION=false
 #
 # Combat rounds end immediately after spell cast, making it possible to cast another spell right after
 export NWNX_EXPERIMENTAL_END_COMBATROUND_AFTER_SPELLCAST=false
+#
+# Attemps to resolve a server hang in CNetLayerWindow::UnpacketizeFullMessages.
+export NWNX_EXPERIMENTAL_UFM_HOTFIX=false
 # -----------------------------------------------------
 
 # -----------------------------------------------------
@@ -467,16 +469,6 @@ export NWNX_FEAT_SHOW_EFFECT_ICON=false
 #
 # HTTP requrest timeout (in milliseconds)
 export NWNX_HTTPCLIENT_REQUEST_TIMEOUT=2000
-# -----------------------------------------------------
-
-# -----------------------------------------------------
-# NWNX_LUA
-#
-# export PRELOAD_SCRIPT="USERDIR/lua/preload.lua"
-# export TOKEN_FUNCTION="CallToken"
-# export EVENT_FUNCTION="RunEvent"
-# export OBJSELF_FUNCTION=""
-# export RUNSCRIPT_TRABLE=""
 # -----------------------------------------------------
 
 # -----------------------------------------------------
@@ -553,7 +545,7 @@ export NWNX_NOSTACK_ATTACKBONUS=0
 # 9-20: Custom
 #
 # Assigns all spells effects to desired type
-export NWNX_NOSTACK_SPELL_DEFAULT_TYPE=0
+export NWNX_NOSTACK_SPELL_DEFAULT_TYPE=1
 #
 # Assigns all items effects to desired type
 export NWNX_NOSTACK_ITEM_DEFAULT_TYPE=0
@@ -773,23 +765,6 @@ export NWNX_SQL_CHARACTER_SET=utf8
 # -----------------------------------------------------
 
 # -----------------------------------------------------
-# NWNX_SERVERLOGREDIRECTOR
-#
-# When true, "*** ValidateGFFResource sent by user." messages are not written to the NWNX log
-# export NWNX_SERVERLOGREDIRECTOR_HIDE_VALIDATEGFFRESOURCE_MESSAGES=false
-# -----------------------------------------------------
-
-# -----------------------------------------------------
-# NWNX_SPELLCHECKER
-#
-# Path to the aff file
-#export NWNX_SPELL_PATH_AFF=/usr/share/hunspell/en_US.aff
-#
-# Path to the dic file
-#export NWNX_SPELL_PATH_DIC=/usr/share/hunspell/en_US.dic
-# -----------------------------------------------------
-
-# -----------------------------------------------------
 # NWNX_THREADWATCHDOG
 #
 # Set the period at which the watchdog fires, in seconds
@@ -854,6 +829,12 @@ export NWNX_TWEAKS_PRESERVE_ACTIONS_ON_DM_POSSESS=true
 #
 # Fix GS Bug
 export NWNX_TWEAKS_FIX_GREATER_SANCTUARY_BUG=true
+#
+# Finding a free spot for an item in a store, container or inventory is
+# quadratic in the number of items. With this tweak it is linear, and items
+# land in the same cells. Calls from scripts, and a repository with no room
+# (Lost Items handling), still run the game's own code.
+export NWNX_TWEAKS_FAST_ITEM_REPOSITORY_FIND_POSITION=true
 #
 # 1 = Same price at 50 charges. Charges over 50 won't affect item's cost.
 # 2 = Increase price after 50 charges, doubling at 250 charges
@@ -986,6 +967,10 @@ export NWNX_TWEAKS_RESIST_ENERGY_STACKS_WITH_EPIC_ENERGY_RESISTANCE=false
 #
 # Allows special abilities to be used on target types other than creatures.
 export NWNX_TWEAKS_UNHARDCODE_SPECIAL_ABILITY_TARGET_TYPE=false
+#
+# Servervault characters will be sorted by last time played date, instead of
+# character name in the character list
+export NWNX_TWEAKS_CHARLIST_SORT_BY_LAST_PLAYED_DATE=true
 # -----------------------------------------------------
 
 # -----------------------------------------------------
@@ -996,6 +981,31 @@ export NWNX_UTIL_PRE_MODULE_START_SCRIPT=""
 #
 # Allows you to set a NWScript Chunk that runs before the OnModuleLoad event
 export NWNX_UTIL_PRE_MODULE_START_SCRIPT_CHUNK=""
+# -----------------------------------------------------
+
+# -----------------------------------------------------
+# NWNX_WATCHCAT
+#
+# Do not engage watchcat until this many msec have passed after plugin load.
+# Default: 5000ms (5 seconds)
+export NWNX_WATCHCAT_WARMUP_MSEC=5000
+#
+# If the mainloop stalls for this many msec, we start sampling callstacks.
+# Default: 1000ms (1 second)
+export NWNX_WATCHCAT_STALL_MSEC=1000
+#
+# While stalling, sample stacks at this rate.
+# Default: 16 stacks
+export NWNX_WATCHCAT_STALL_SAMPLE_RATE_MSEC=16
+#
+# Kill server with a FATAL message when a stall lasts longer than this
+# many msec. This assumes the thing is thoroughly wedged with no hope of recovery.
+# Default: 120000ms (120 seconds/2 minutes)
+export NWNX_WATCHCAT_KILL_MSEC=120000
+#
+# Turn this on to stall the server every 100 ticks for 5 seconds (for debugging Watchcat).
+# Default: false
+export NWNX_WATCHCAT_TEST_MODE=false
 # -----------------------------------------------------
 
 #######################################################

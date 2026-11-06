@@ -11,7 +11,7 @@ Clone this repo with:
 
 #
 Install order
-1. virtualbox-setup.sh/hetzner-setup.sh
+1. vm-setup.md/hetzner-setup.md
 2. nwnx-setup.sh
 3. noip-setup.sh
 4. nwsync-setup.sh
